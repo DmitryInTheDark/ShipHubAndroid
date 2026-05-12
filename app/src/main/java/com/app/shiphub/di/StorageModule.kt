@@ -11,7 +11,6 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 abstract class StorageModule {
-
     @Binds
     @Singleton
     abstract fun bindTokenStorage(tokenStorageImpl: TokenStorageImpl): TokenStorage

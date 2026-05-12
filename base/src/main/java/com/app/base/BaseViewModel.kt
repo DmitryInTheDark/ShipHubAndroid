@@ -5,20 +5,20 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 
-abstract class BaseViewModel<S : BaseState>(initialState: S) : ViewModel() {
+abstract class BaseViewModel<S : BaseState> : ViewModel() {
 
-    protected val _state = MutableStateFlow(initialState)
+    protected val _state: MutableStateFlow<BaseState> = MutableStateFlow(SimpleStates.Init())
     val state = _state
 
-    protected fun setState(state: S){
+    protected fun setState(state: SimpleStates){
         viewModelScope.launch {
             _state.emit(state)
         }
     }
 
-    protected fun updateState(state: BaseState) {
+    protected fun updateState(state: SimpleStates) {
         viewModelScope.launch {
-            (state as? S)?.let { _state.emit(it) }
+            _state.emit(state)
         }
     }
 

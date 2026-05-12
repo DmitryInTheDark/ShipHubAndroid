@@ -27,5 +27,14 @@
     <!--  Email Fragment  -->
     <string name="approve_email">Подтвердить почту</string>
     <string name="code_send_on_email">Код пришёл на email: %1$s</string>
+    <string name="my_claims">Мои заявки</string>
+    <string name="to_documents">К документам</string>
+    <string name="main">Главная</string>
+    <string name="claims">Заявки</string>
+    <string name="documents">Документы</string>
+    <string name="info">Инфо</string>
+    <string name="profile">Профиль</string>
+    <string name="main_icon">главная иконка</string>
+    <string name="create_claim">Создать заявку</string>
 
 </resources>

@@ -1,6 +1,6 @@
 plugins {
     alias(libs.plugins.android.library)
-    id 'org.jetbrains.kotlin.plugin.serialization' version '2.3.20'
+    id 'org.jetbrains.kotlin.plugin.serialization' version '2.3.21'
     id 'com.google.devtools.ksp'
     id 'com.google.dagger.hilt.android'
 }
@@ -8,9 +8,7 @@ plugins {
 android {
     namespace 'com.app.base'
     compileSdk {
-        version = release(36) {
-            minorApiLevel = 1
-        }
+        version = release(37)
     }
 
     defaultConfig {

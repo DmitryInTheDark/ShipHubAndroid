@@ -11,24 +11,4 @@
         android:label="HomeFragment"
         tools:layout="@layout/fragment_home" />
 
-    <fragment
-        android:id="@+id/applicationsFragment"
-        android:name="androidx.fragment.app.Fragment"
-        android:label="ApplicationsFragment" />
-
-    <fragment
-        android:id="@+id/documentsFragment"
-        android:name="androidx.fragment.app.Fragment"
-        android:label="DocumentsFragment" />
-
-    <fragment
-        android:id="@+id/infoFragment"
-        android:name="androidx.fragment.app.Fragment"
-        android:label="InfoFragment" />
-
-    <fragment
-        android:id="@+id/profileFragment"
-        android:name="androidx.fragment.app.Fragment"
-        android:label="ProfileFragment" />
-
 </navigation>

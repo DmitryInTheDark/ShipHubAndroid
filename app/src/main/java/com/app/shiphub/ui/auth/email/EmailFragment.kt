@@ -4,17 +4,20 @@ import android.text.Editable
 import android.text.TextWatcher
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.navArgs
 import com.app.base.BaseFragment
-import com.app.base.BaseState
+import com.app.base.SimpleStates
 import com.app.shiphub.R
 import com.app.shiphub.databinding.FragmentEmailBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class EmailFragment : BaseFragment<BaseState, EmailViewModel, FragmentEmailBinding>() {
+class EmailFragment : BaseFragment<EmailUIState, EmailViewModel, FragmentEmailBinding>() {
 
     override val viewModel: EmailViewModel by viewModels()
 
@@ -23,9 +26,18 @@ class EmailFragment : BaseFragment<BaseState, EmailViewModel, FragmentEmailBindi
     override fun initializeBinding() = FragmentEmailBinding.inflate(layoutInflater)
 
     override fun setupObservers() {
-        lifecycleScope.launchWhenStarted {
-            viewModel.verifySuccess.collectLatest {
-                navigate(EmailFragmentDirections.actionGlobalMainContainerFragment())
+        lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED){
+                viewModel.state.collectLatest {
+                    when(it){
+                        is SimpleStates.Loading -> {
+
+                        }
+                        is EmailUIState.EmailVerified -> {
+
+                        }
+                    }
+                }
             }
         }
     }
@@ -62,10 +74,8 @@ class EmailFragment : BaseFragment<BaseState, EmailViewModel, FragmentEmailBindi
         }
 
         btnConfirm.setOnClickListener {
-            val code = etOtp1.text.toString() + etOtp2.text.toString() + etOtp3.text.toString() + etOtp4.text.toString()
-            viewModel.verifyCode(args.registrationRequest.email, code)
+//            val code = etOtp1.text.toString() + etOtp2.text.toString() + etOtp3.text.toString() + etOtp4.text.toString()
         }
-        tvResendCode.setOnClickListener { viewModel.resendCode(args.registrationRequest) }
     }
 
     private fun validateCode() {

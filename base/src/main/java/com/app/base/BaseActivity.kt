@@ -1,16 +1,14 @@
 package com.app.base
 
 import android.os.Bundle
-import android.os.PersistableBundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.viewbinding.ViewBinding
 
-abstract class BaseActivity<S : BaseState, VM : BaseViewModel<S>, VB : ViewBinding>: AppCompatActivity() {
+abstract class BaseActivity<S : SimpleStates, VM : BaseViewModel<S>, VB : ViewBinding>: AppCompatActivity() {
 
     protected abstract val viewModel: VM
     private var _binding: VB? = null
@@ -21,8 +19,14 @@ abstract class BaseActivity<S : BaseState, VM : BaseViewModel<S>, VB : ViewBindi
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
         _binding = initializeBinding()
         setContentView(binding.root)
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(binding.root.id)) { v, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            insets
+        }
         setupUI()
         setupListeners()
         setupObservers()

@@ -2,7 +2,7 @@ package com.app.shiphub.ui.main.home
 
 import androidx.fragment.app.viewModels
 import com.app.base.BaseFragment
-import com.app.base.BaseState
+import com.app.base.SimpleStates
 import com.app.base.BaseViewModel
 import com.app.shiphub.databinding.FragmentHomeBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -10,10 +10,10 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeViewModel @Inject constructor() : BaseViewModel<BaseState>(BaseState.Init())
+class HomeViewModel @Inject constructor() : BaseViewModel<SimpleStates>()
 
 @AndroidEntryPoint
-class HomeFragment : BaseFragment<BaseState, HomeViewModel, FragmentHomeBinding>() {
+class HomeFragment : BaseFragment<SimpleStates, HomeViewModel, FragmentHomeBinding>() {
 
     override val viewModel: HomeViewModel by viewModels()
 

@@ -3,21 +3,21 @@
     <item
         android:id="@+id/homeFragment"
         android:icon="@android:drawable/ic_menu_today"
-        android:title="Главная" />
+        android:title="@string/main" />
     <item
         android:id="@+id/applicationsFragment"
         android:icon="@android:drawable/ic_menu_edit"
-        android:title="Заявки" />
+        android:title="@string/claims" />
     <item
         android:id="@+id/documentsFragment"
         android:icon="@android:drawable/ic_menu_agenda"
-        android:title="Документы" />
+        android:title="@string/documents" />
     <item
         android:id="@+id/infoFragment"
         android:icon="@android:drawable/ic_menu_info_details"
-        android:title="Инфо" />
+        android:title="@string/info" />
     <item
         android:id="@+id/profileFragment"
         android:icon="@android:drawable/ic_menu_myplaces"
-        android:title="Профиль" />
+        android:title="@string/profile" />
 </menu>

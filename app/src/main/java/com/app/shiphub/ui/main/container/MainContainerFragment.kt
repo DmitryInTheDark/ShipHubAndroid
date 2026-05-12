@@ -6,7 +6,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.app.base.BaseFragment
-import com.app.base.BaseState
+import com.app.base.SimpleStates
 import com.app.base.BaseViewModel
 import com.app.shiphub.R
 import com.app.shiphub.databinding.FragmentMainContainerBinding
@@ -15,10 +15,10 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class MainContainerViewModel @Inject constructor() : BaseViewModel<BaseState>(BaseState.Init())
+class MainContainerViewModel @Inject constructor() : BaseViewModel<SimpleStates>()
 
 @AndroidEntryPoint
-class MainContainerFragment : BaseFragment<BaseState, MainContainerViewModel, FragmentMainContainerBinding>() {
+class MainContainerFragment : BaseFragment<SimpleStates, MainContainerViewModel, FragmentMainContainerBinding>() {
 
     override val viewModel: MainContainerViewModel by viewModels()
 
