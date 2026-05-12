@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/graph_auth"
+    app:startDestination="@id/authFragment">
+    <fragment
+        android:id="@+id/authFragment"
+        android:name="com.app.shiphub.ui.auth.AuthFragment"
+        android:label="AuthFragment" >
+        <action
+            android:id="@+id/action_authFragment_to_registrationFragment"
+            app:destination="@id/registrationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/registrationFragment"
+        android:name="com.app.shiphub.ui.auth.registration.RegistrationFragment"
+        android:label="RegistrationFragment" >
+        <action
+            android:id="@+id/action_registrationFragment_to_emailFragment"
+            app:destination="@id/emailFragment" >
+            <argument
+                android:name="registrationRequest"
+                app:argType="com.app.base.models.auth.RegistrationRequestDTO" />
+        </action>
+    </fragment>
+    <fragment
+        android:id="@+id/emailFragment"
+        android:name="com.app.shiphub.ui.auth.email.EmailFragment"
+        android:label="EmailFragment">
+        <argument
+            android:name="registrationRequest"
+            app:argType="com.app.base.models.auth.RegistrationRequestDTO" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/mainContainerFragment"
+        android:name="com.app.shiphub.ui.main.container.MainContainerFragment"
+        android:label="MainContainerFragment" />
+
+    <action
+        android:id="@+id/action_global_mainContainerFragment"
+        app:destination="@id/mainContainerFragment"
+        app:popUpTo="@id/graph_auth"
+        app:popUpToInclusive="true" />
+</navigation>

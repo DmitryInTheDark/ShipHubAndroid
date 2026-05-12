@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">ShipHub</string>
+
+    <!--  Auth Fragment  -->
+    <string name="auth_in_app">Вход в кабинет</string>
+    <string name="login">Логин</string>
+    <string name="password">Пароль</string>
+    <string name="remember_password">Забыли пароль?</string>
+    <string name="auth">Войти</string>
+    <string name="registration">Зарегистрироваться</string>
+
+    <!-- Registration Fragment -->
+    <string name="legal">Юр. лицо</string>
+    <string name="physical">Физ. лицо</string>
+    <string name="registration_title">Регистрация</string>
+    <string name="org_name">Наименование организации</string>
+    <string name="inn">ИНН</string>
+    <string name="kpp">КПП</string>
+    <string name="legal_address">Юр.адрес</string>
+    <string name="authorized_person">ФИО уполномоченного</string>
+    <string name="phone">Телефон</string>
+    <string name="email">Email</string>
+    <string name="address">адрес</string>
+    <string name="fio">ФИО</string>
+    <string name="living_address">Адрес проживания</string>
+
+    <!--  Email Fragment  -->
+    <string name="approve_email">Подтвердить почту</string>
+    <string name="code_send_on_email">Код пришёл на email: %1$s</string>
+
+</resources>
