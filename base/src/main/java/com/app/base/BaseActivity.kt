@@ -1,8 +1,6 @@
 package com.app.base
 
 import android.os.Bundle
-import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -19,7 +17,6 @@ abstract class BaseActivity<S : SimpleStates, VM : BaseViewModel<S>, VB : ViewBi
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         _binding = initializeBinding()
         setContentView(binding.root)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(binding.root.id)) { v, insets ->
@@ -36,6 +33,6 @@ abstract class BaseActivity<S : SimpleStates, VM : BaseViewModel<S>, VB : ViewBi
     abstract fun setupListeners()
     abstract fun setupUI()
 
-    protected fun showToast(message: String) = Toast.makeText(baseContext, message, Toast.LENGTH_SHORT)
-    protected fun showToast(stringId: Int) = Toast.makeText(baseContext, stringId, Toast.LENGTH_SHORT)
+//    protected fun showToast(message: String) = Toast.makeText(baseContext, message, Toast.LENGTH_SHORT)
+//    protected fun showToast(stringId: Int) = Toast.makeText(baseContext, stringId, Toast.LENGTH_SHORT)
 }

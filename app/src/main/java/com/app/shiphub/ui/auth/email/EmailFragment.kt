@@ -7,10 +7,8 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import androidx.navigation.fragment.navArgs
 import com.app.base.BaseFragment
 import com.app.base.SimpleStates
-import com.app.shiphub.R
 import com.app.shiphub.databinding.FragmentEmailBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -20,8 +18,6 @@ import kotlinx.coroutines.launch
 class EmailFragment : BaseFragment<EmailUIState, EmailViewModel, FragmentEmailBinding>() {
 
     override val viewModel: EmailViewModel by viewModels()
-
-    private val args: EmailFragmentArgs by navArgs()
 
     override fun initializeBinding() = FragmentEmailBinding.inflate(layoutInflater)
 
@@ -86,7 +82,11 @@ class EmailFragment : BaseFragment<EmailUIState, EmailViewModel, FragmentEmailBi
     }
 
     override fun setupUI() = with(binding){
-        tvTitle.text = context?.getString(R.string.code_send_on_email, args.registrationRequest.email)
+
+    }
+
+    override fun handleState(state: EmailUIState) {
+
     }
 
 }

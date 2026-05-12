@@ -31,7 +31,8 @@ class MainActivity : BaseActivity<SimpleStates, MainViewModel, ActivityMainBindi
         super.onCreate(savedInstanceState)
         WindowInsetsControllerCompat(window, window.decorView)
             .isAppearanceLightStatusBars = false
-//        window.statusBarColor = baseContext.getColor(R.color.black)
+        @Suppress("DEPRECATION")
+        window.statusBarColor = baseContext.getColor(R.color.black)
     }
 
 }

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="TransparentDialogStyle" parent="MaterialAlertDialog.Material3">
+        <!-- Основное: делаем фон полностью прозрачным -->
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:fillViewport">true</item>
+        <item name="android:layout_gravity">center</item>
+    </style>
+
+</resources>

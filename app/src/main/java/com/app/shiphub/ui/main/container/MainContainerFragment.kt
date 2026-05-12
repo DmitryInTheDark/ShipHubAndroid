@@ -7,15 +7,9 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.app.base.BaseFragment
 import com.app.base.SimpleStates
-import com.app.base.BaseViewModel
 import com.app.shiphub.R
 import com.app.shiphub.databinding.FragmentMainContainerBinding
 import dagger.hilt.android.AndroidEntryPoint
-import dagger.hilt.android.lifecycle.HiltViewModel
-import javax.inject.Inject
-
-@HiltViewModel
-class MainContainerViewModel @Inject constructor() : BaseViewModel<SimpleStates>()
 
 @AndroidEntryPoint
 class MainContainerFragment : BaseFragment<SimpleStates, MainContainerViewModel, FragmentMainContainerBinding>() {
@@ -38,4 +32,7 @@ class MainContainerFragment : BaseFragment<SimpleStates, MainContainerViewModel,
     override fun setupObservers() {}
     override fun setupListeners() {}
     override fun setupUI() {}
+    override fun handleState(state: SimpleStates) {
+
+    }
 }
