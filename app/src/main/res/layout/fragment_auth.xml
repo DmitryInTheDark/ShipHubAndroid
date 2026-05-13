@@ -66,11 +66,14 @@
                 style="@style/DefaultStyle"/>
 
                 <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilPassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:padding="0dp"
-                    style="@style/TextInputStyle">
+                    style="@style/TextInputStyle"
+                    app:endIconMode="custom"
+                    app:endIconDrawable="@drawable/password_is_visible">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etPassword"
@@ -80,7 +83,7 @@
                         android:layout_margin="0dp"
                         android:inputType="textPassword"
                         android:background="@drawable/text_input_default_background"
-                        android:textColor="@color/black"/>
+                        android:textColor="@color/black" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 

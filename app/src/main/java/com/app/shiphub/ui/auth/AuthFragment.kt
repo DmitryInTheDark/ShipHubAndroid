@@ -1,7 +1,10 @@
 package com.app.shiphub.ui.auth
 
+import android.text.method.PasswordTransformationMethod
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.fragment.app.viewModels
 import com.app.base.BaseFragment
+import com.app.shiphub.R
 import com.app.shiphub.databinding.FragmentAuthBinding
 import com.app.shiphub.util.BaseValidator
 import dagger.hilt.android.AndroidEntryPoint
@@ -28,6 +31,27 @@ class AuthFragment : BaseFragment<AuthUIState, AuthViewModel, FragmentAuthBindin
         }
         tvRegistration.setOnClickListener {
             navigate(AuthFragmentDirections.actionAuthFragmentToRegistrationFragment())
+        }
+        tilPassword.setEndIconOnClickListener {
+
+            val passwordIsVisible =
+                etPassword.transformationMethod == null
+
+            etPassword.transformationMethod =
+                if (passwordIsVisible) PasswordTransformationMethod.getInstance()
+                else null
+
+            val endIcon = AppCompatResources.getDrawable(
+                requireContext(),
+                if (passwordIsVisible) {
+                    R.drawable.password_is_visible
+                } else {
+                    R.drawable.password_not_visible
+                }
+            )
+            tilPassword.endIconDrawable = endIcon
+
+            etPassword.setSelection(etPassword.text?.length ?: 0)
         }
     }
 
