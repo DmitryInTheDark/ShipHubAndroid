@@ -27,4 +27,3 @@ rootProject.name = "ShipHub"
 include ':app'
 include ':base'
 include ':data'
-include ':domain'

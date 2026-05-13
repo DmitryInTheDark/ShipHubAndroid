@@ -4,7 +4,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import com.app.base.BaseFragment
 import com.app.base.SimpleStates
-import com.app.domain.UserType
+import com.app.data.models.enums.UserType
 import com.app.shiphub.databinding.FragmentRegistrationBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -33,19 +33,14 @@ class RegistrationFragment: BaseFragment<SimpleStates, RegistrationViewModel, Fr
                     }
                 }
             }
-
             override fun onTabUnselected(tab: com.google.android.material.tabs.TabLayout.Tab?) {}
             override fun onTabReselected(tab: com.google.android.material.tabs.TabLayout.Tab?) {}
         })
         tvAuth.setOnClickListener { navigateBack() }
-        btnRegister.setOnClickListener {
-        }
+        btnRegister.setOnClickListener {}
     }
 
-    override fun setupUI() {
-    }
+    override fun setupUI() {}
 
-    override fun handleState(state: SimpleStates) {
-
-    }
+    override fun handleState(state: SimpleStates) {}
 }

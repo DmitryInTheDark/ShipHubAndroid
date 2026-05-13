@@ -27,6 +27,13 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+        emulator{
+            buildConfigField "String", "BASE_URL", base_local_url
+            signingConfig signingConfigs.debug
+        }
+        debug {
+            buildConfigField "String", "BASE_URL", base_url
+        }
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_11
@@ -34,13 +41,13 @@ android {
     }
     buildFeatures{
         viewBinding true
+        buildConfig true
     }
 }
 
 dependencies {
     implementation(project(":base"))
     implementation(project(":data"))
-    implementation(project(":domain"))
     //Hilt
     implementation libs.hilt.android
     ksp libs.hilt.compiler

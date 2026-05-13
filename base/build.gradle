@@ -27,6 +27,9 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+        emulator{
+
+        }
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_11
@@ -35,7 +38,6 @@ android {
 }
 
 dependencies {
-    api(project(":domain"))
     //Retrofit
     api libs.retrofit
     api libs.converter.gson

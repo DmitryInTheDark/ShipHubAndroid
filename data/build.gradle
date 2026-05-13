@@ -23,6 +23,7 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+        emulator{}
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_11
@@ -31,6 +32,9 @@ android {
 }
 
 dependencies {
+
+    implementation(project(":base"))
+
     //Hilt
     implementation libs.hilt.android
     ksp libs.hilt.compiler
