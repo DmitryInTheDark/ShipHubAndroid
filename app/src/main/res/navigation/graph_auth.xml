@@ -26,14 +26,5 @@
         android:label="EmailFragment">
     </fragment>
 
-    <fragment
-        android:id="@+id/mainContainerFragment"
-        android:name="com.app.shiphub.ui.main.container.MainContainerFragment"
-        android:label="MainContainerFragment" />
-
-    <action
-        android:id="@+id/action_global_mainContainerFragment"
-        app:destination="@id/mainContainerFragment"
-        app:popUpTo="@id/graph_auth"
-        app:popUpToInclusive="true" />
+    <include app:graph="@navigation/graph_main_container" />
 </navigation>

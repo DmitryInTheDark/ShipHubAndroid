@@ -19,7 +19,7 @@ class AuthViewModel @Inject constructor(
                 authUseCase.login(email, password)
             }
             result.onSuccess {
-
+                _state.value = AuthUIState.SuccessLogin()
             }.onFailure {
                 _state.value = SimpleStates.Error(it.handleError())
             }

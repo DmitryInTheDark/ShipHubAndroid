@@ -145,7 +145,8 @@
                         android:hint="@string/phone"
                         android:paddingVertical="12dp"
                         android:paddingHorizontal="12dp"
-                        android:inputType="phone"/>
+                        android:digits="1234567890+-() "
+                        android:inputType="number" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout

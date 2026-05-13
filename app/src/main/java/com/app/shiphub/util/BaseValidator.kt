@@ -45,4 +45,50 @@ object BaseValidator {
         return errors
     }
 
+    fun validateInn(inn: String): List<String>{
+        val errors = mutableListOf<String>()
+        val innRegex = Regex("^\\d+$")
+
+        if (!innRegex.matches(inn)) errors.add("ИНН должен содержать только цифры")
+        if (inn.length != 10) errors.add("ИНН должен содержать 10 цифр")
+        return errors
+    }
+
+    fun validateKpp(kpp: String): List<String>{
+        val errors = mutableListOf<String>()
+        val kppRegex = Regex("^\\d+$")
+
+        if (!kppRegex.matches(kpp)) errors.add("ИНН должен содержать только цифры")
+        if (kpp.length != 10) errors.add("ИНН должен содержать 10 цифр")
+        return errors
+    }
+
+    fun validateOrgName(orgName: String): List<String>{
+        val errors = mutableListOf<String>()
+        if (orgName.isBlank()) errors.add("Название организации не может быть пустым")
+        if (orgName.length < 3) errors.add("Название организации должно быть не менее трёх символов в длину")
+        return errors
+    }
+
+    fun validateAddress(address: String): List<String>{
+        val errors = mutableListOf<String>()
+        if (address.isBlank()) errors.add("Название организации не может быть пустым")
+        if (address.length < 3) errors.add("Название организации должно быть не менее трёх символов в длину")
+        return errors
+    }
+
+    fun validateFio(fio: String): List<String>{
+        val errors = mutableListOf<String>()
+        if (fio.isBlank()) errors.add("ФИО не может быть пустым")
+        return errors
+    }
+
+    fun validatePhone(phone: String): List<String>{
+        val errors = mutableListOf<String>()
+        if (phone.isBlank()) errors.add("телефон не может быть пустым")
+        val regex = Regex("^\\+7 \\(\\d{3}\\) \\d{3}-\\d{2}-\\d{2}$")
+        if (!regex.matches(phone)) errors.add("Телефон содержит недопустимые символы")
+        return errors
+    }
+
 }

@@ -4,4 +4,6 @@ import com.app.base.BaseState
 
 sealed class AuthUIState: BaseState() {
 
+    class SuccessLogin(): AuthUIState()
+
 }

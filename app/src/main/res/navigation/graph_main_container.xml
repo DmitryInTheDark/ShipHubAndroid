@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/graph_main_container"
+    app:startDestination="@id/mainContainerFragment2">
+
+    <fragment
+        android:id="@+id/mainContainerFragment2"
+        android:name="com.app.shiphub.ui.main.container.MainContainerFragment"
+        android:label="MainContainerFragment" />
+</navigation>

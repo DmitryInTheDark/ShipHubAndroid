@@ -3,6 +3,7 @@ package com.app.shiphub.ui.auth
 import android.text.method.PasswordTransformationMethod
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.app.base.BaseFragment
 import com.app.shiphub.R
 import com.app.shiphub.databinding.FragmentAuthBinding
@@ -60,7 +61,9 @@ class AuthFragment : BaseFragment<AuthUIState, AuthViewModel, FragmentAuthBindin
     }
 
     override fun handleState(state: AuthUIState) {
-
+        when(state){
+            is AuthUIState.SuccessLogin -> findNavController().setGraph(R.navigation.graph_main_container)
+        }
     }
 
 }
