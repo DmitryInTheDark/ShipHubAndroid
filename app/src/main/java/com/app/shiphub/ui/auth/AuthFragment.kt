@@ -63,6 +63,7 @@ class AuthFragment : BaseFragment<AuthUIState, AuthViewModel, FragmentAuthBindin
     override fun handleState(state: AuthUIState) {
         when(state){
             is AuthUIState.SuccessLogin -> findNavController().setGraph(R.navigation.graph_main_container)
+            is AuthUIState.InitScreen -> {}
         }
     }
 

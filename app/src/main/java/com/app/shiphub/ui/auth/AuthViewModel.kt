@@ -11,7 +11,7 @@ import javax.inject.Inject
 @HiltViewModel
 class AuthViewModel @Inject constructor(
     private val authUseCase: AuthUseCase,
-) : BaseViewModel<AuthUIState>(){
+) : BaseViewModel<AuthUIState>(AuthUIState.InitScreen()){
 
     fun login(email: String, password: String){
         withLoading {
@@ -21,7 +21,7 @@ class AuthViewModel @Inject constructor(
             result.onSuccess {
                 _state.value = AuthUIState.SuccessLogin()
             }.onFailure {
-                _state.value = SimpleStates.Error(it.handleError())
+                emitSimpleState(SimpleStates.Error(it.handleError()))
             }
         }
     }

@@ -18,7 +18,13 @@ class UserRepository @Inject constructor(
     }
 
     fun isUserAuthorized(): Boolean{
-        return userPreferences.getUser().id != -1
+        return userPreferences.getUser().id != -1L
     }
+
+    fun getJwt(): String{
+        return userPreferences.jwt()
+    }
+
+    fun getUser(): User = userPreferences.getUser()
 
 }

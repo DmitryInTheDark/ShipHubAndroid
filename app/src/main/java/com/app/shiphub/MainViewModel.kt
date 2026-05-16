@@ -8,7 +8,7 @@ import javax.inject.Inject
 @HiltViewModel
 class MainViewModel @Inject constructor(
     userRepository: UserRepository
-): BaseViewModel<MainUIState>() {
+): BaseViewModel<MainUIState>(MainUIState.InitScreen()) {
 
     init {
         if (userRepository.isUserAuthorized()) _state.value = MainUIState.SkipLogin()

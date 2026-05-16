@@ -16,9 +16,9 @@ class UserPreferences(
     private var jwt: String
         get() = sharedPref.getString("jwt", null) ?: ""
         set(value) = sharedPref.edit { putString("jwt", value) }
-    private var id: Int
-        get() = sharedPref.getInt("id", -1)
-        set(value) = sharedPref.edit { putInt("id", value) }
+    private var id: Long
+        get() = sharedPref.getLong("id", -1L)
+        set(value) = sharedPref.edit { putLong("id", value) }
     private var username: String
         get() = sharedPref.getString("username", null) ?: ""
         set(value) = sharedPref.edit { putString("username", value) }
@@ -53,6 +53,8 @@ class UserPreferences(
     fun updateJwt(jwt: String){
         this.jwt = jwt
     }
+
+    fun jwt() = jwt
 
     companion object{
         private const val USER_STORAGE = "user_storage"

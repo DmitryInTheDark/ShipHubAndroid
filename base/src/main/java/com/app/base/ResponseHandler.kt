@@ -1,5 +1,6 @@
 package com.app.base
 
+import android.util.Log
 import com.app.base.models.BaseResponse
 import com.google.gson.Gson
 import okio.IOException
@@ -17,35 +18,30 @@ inline fun <T> safeCall(action: () -> T): Result<T> {
 
 fun Throwable.handleError(): String {
     return when (this) {
-
         is UnknownHostException,
         is SocketTimeoutException -> {
             "Ошибка сети"
         }
-
         is IOException -> {
             message ?: "Ошибка ввода/вывода"
         }
-
         is HttpException -> {
             try {
                 val errorBody = response()?.errorBody()?.string()
-
                 if (!errorBody.isNullOrBlank()) {
                     val response =
                         Gson().fromJson(errorBody, BaseResponse::class.java)
-
                     response.message ?: "Ошибка сервера"
                 } else {
                     "Ошибка сервера"
                 }
-
             } catch (_: Exception) {
                 "Ошибка обработки ответа"
             }
         }
-
         else -> {
+            Log.i("TAG", this.javaClass.name)
+            Log.i("TAG", this.message.toString())
             "Неизвестная ошибка"
         }
     }

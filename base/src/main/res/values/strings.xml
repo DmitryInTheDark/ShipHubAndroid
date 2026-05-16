@@ -2,5 +2,7 @@
 <resources>
 
     <string name="unknown_error">Неизвестная ошибка</string>
+    <string name="error">Ошибка</string>
+    <string name="continue_text">Продолжить</string>
 
 </resources>

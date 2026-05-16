@@ -16,8 +16,10 @@ object UseCaseModule {
 
     @Provides
     @Singleton
-    fun provideUserUseCase(): UserUseCase{
-        return UserUseCase()
+    fun provideUserUseCase(
+        userRepository: UserRepository
+    ): UserUseCase{
+        return UserUseCase(userRepository)
     }
 
     @Provides

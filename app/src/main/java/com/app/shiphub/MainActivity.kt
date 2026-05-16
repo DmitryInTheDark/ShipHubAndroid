@@ -40,6 +40,7 @@ class MainActivity : BaseActivity<MainUIState, MainViewModel, ActivityMainBindin
             is MainUIState.ShowLoginScreen -> {
                 navController.setGraph(R.navigation.graph_auth)
             }
+            is MainUIState.InitScreen -> {}
         }
     }
 

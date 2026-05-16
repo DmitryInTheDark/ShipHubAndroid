@@ -5,8 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.annotation.StringRes
-import androidx.core.content.ContextCompat
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -16,7 +16,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.viewbinding.ViewBinding
 import com.app.base.ViewUtils.requireLoadingDialog
 import kotlinx.coroutines.launch
-import kotlin.getValue
 
 abstract class BaseFragment<S : BaseState, VM : BaseViewModel<S>, VB : ViewBinding>: Fragment() {
 
@@ -38,9 +37,6 @@ abstract class BaseFragment<S : BaseState, VM : BaseViewModel<S>, VB : ViewBindi
         savedInstanceState: Bundle?
     ): View? {
         _binding = initializeBinding()
-        binding.root.setBackgroundColor(
-            ContextCompat.getColor(requireContext(), R.color.white)
-        )
         return binding.root
     }
 
@@ -49,19 +45,16 @@ abstract class BaseFragment<S : BaseState, VM : BaseViewModel<S>, VB : ViewBindi
     }
 
     protected open fun setupObservers(){
-        lifecycleScope.launch {
+        viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED){
-                viewModel.state.collect { state ->
-                    when(state){
-                        is SimpleStates -> handleSimpleState(state)
-                        else -> {
-                            try {
-                                @Suppress("UNCHECKED_CAST")
-                                handleState(state as S)
-                            }catch (e : ClassCastException){
-                                showToast(R.string.unknown_error)
-                            }
-                        }
+                launch {
+                    viewModel.simpleState.collect { state ->
+                        handleSimpleState(state)
+                    }
+                }
+                launch {
+                    viewModel.state.collect { state ->
+                        handleState(state)
                     }
                 }
             }
@@ -77,25 +70,33 @@ abstract class BaseFragment<S : BaseState, VM : BaseViewModel<S>, VB : ViewBindi
         when(state){
             is SimpleStates.Init -> setupUI()
             is SimpleStates.Loading ->  setLoadingState(state.isLoading)
-            is SimpleStates.Error -> showToast(state.message)
+            is SimpleStates.Error -> setErrorState(state.message)
         }
+    }
+    protected open fun setErrorState(message: String) {
+        AlertDialog.Builder(requireContext())
+            .setIcon(AppCompatResources.getDrawable(requireContext(), R.drawable.error))
+            .setTitle(R.string.error)
+            .setMessage(message)
+            .setPositiveButton(R.string.continue_text) { p0, _ -> p0?.dismiss() }
+            .show()
     }
 
     abstract fun handleState(state: S)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupObservers()
         setupUI()
         setupListeners()
-        setupObservers()
     }
 
     protected fun showToast(message: String) = Toast
         .makeText(requireContext(), message, Toast.LENGTH_SHORT)
         .show()
-    protected fun showToast(@StringRes stringId: Int) = Toast.makeText(requireContext(), stringId, Toast.LENGTH_SHORT).show()
+//    protected fun showToast(@StringRes stringId: Int) = Toast.makeText(requireContext(), stringId, Toast.LENGTH_SHORT).show()
 
-//    protected fun navigate(destination: Int) = findNavController().navigate(destination)
+    //    protected fun navigate(destination: Int) = findNavController().navigate(destination)
     protected fun navigate(direction: NavDirections) = findNavController().navigate(direction)
     protected fun navigateBack() = findNavController().navigateUp()
 }

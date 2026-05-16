@@ -2,6 +2,9 @@ package com.app.shiphub.util
 
 object BaseValidator {
 
+    val codeRegex = Regex("^[A-Z0-9]+$")
+    val digitRegex = Regex("^\\d$")
+
     fun validateEmail(email: String?): List<String> {
         val errors = mutableListOf<String>()
         val isBlank = email.isNullOrBlank()
@@ -58,8 +61,8 @@ object BaseValidator {
         val errors = mutableListOf<String>()
         val kppRegex = Regex("^\\d+$")
 
-        if (!kppRegex.matches(kpp)) errors.add("ИНН должен содержать только цифры")
-        if (kpp.length != 10) errors.add("ИНН должен содержать 10 цифр")
+        if (!kppRegex.matches(kpp)) errors.add("КПП должен содержать только цифры")
+        if (kpp.length != 9) errors.add("КПП должен содержать 9 цифр")
         return errors
     }
 
@@ -88,6 +91,14 @@ object BaseValidator {
         if (phone.isBlank()) errors.add("телефон не может быть пустым")
         val regex = Regex("^\\+7 \\(\\d{3}\\) \\d{3}-\\d{2}-\\d{2}$")
         if (!regex.matches(phone)) errors.add("Телефон содержит недопустимые символы")
+        return errors
+    }
+
+    fun validateEmailCode(code: String): List<String>{
+        val errors = mutableListOf<String>()
+        if (code.length < 5) errors.add("Код должен состоять из 5 символов")
+        if (code.toCharArray().filter { !digitRegex.matches(it.toString()) }.any{ !it.isUpperCase() }) errors.add("Код должен быть только из символов заглавного регистра")
+        if (!codeRegex.matches(code)) errors.add("Код содержит недопустимые символы")
         return errors
     }
 

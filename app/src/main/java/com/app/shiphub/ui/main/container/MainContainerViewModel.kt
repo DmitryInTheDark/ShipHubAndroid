@@ -6,4 +6,4 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class MainContainerViewModel @Inject constructor() : BaseViewModel<SimpleStates>()
+class MainContainerViewModel @Inject constructor() : BaseViewModel<SimpleStates>(SimpleStates.Init())

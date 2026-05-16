@@ -36,5 +36,20 @@
     <string name="profile">Профиль</string>
     <string name="main_icon">главная иконка</string>
     <string name="create_claim">Создать заявку</string>
+    <string name="send_code_again">Отправить код повторно</string>
+
+    <!-- HomeFragment -->
+    <string name="welcome">Добро пожаловать, %1$s</string>
+    <string name="actual_now">Актуально сейчас</string>
+    <string name="create_your_first_claim">Создайте свою первую заявку</string>
+    <string name="notifications">Уведомления</string>
+    <string name="notifications_is_empty">Уведомлений пока нет</string>
+    <string name="claims_get_error">Ошибка получения заявок</string>
+
+    <!--  Claims  -->
+    <string name="claim_number">Номер заявки: №%d</string>
+    <string name="service_type">Тип услуги: %s</string>
+    <string name="status_type">статус: %s</string>
+    <string name="last_update">Последнее обновление: %s</string>
 
 </resources>

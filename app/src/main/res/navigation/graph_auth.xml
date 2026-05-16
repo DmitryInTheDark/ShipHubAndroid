@@ -18,12 +18,25 @@
         <action
             android:id="@+id/action_registrationFragment_to_emailFragment"
             app:destination="@id/emailFragment" >
+            <argument
+                app:nullable="false"
+                app:argType="string"
+                android:name="email"
+                android:defaultValue=""/>
         </action>
     </fragment>
     <fragment
         android:id="@+id/emailFragment"
         android:name="com.app.shiphub.ui.auth.email.EmailFragment"
         android:label="EmailFragment">
+        <argument
+            app:nullable="false"
+            app:argType="string"
+            android:name="email"
+            android:defaultValue=""/>
+        <action
+            android:id="@+id/action_emailFragment_to_graph_main_container"
+            app:destination="@id/graph_main_container" />
     </fragment>
 
     <include app:graph="@navigation/graph_main_container" />

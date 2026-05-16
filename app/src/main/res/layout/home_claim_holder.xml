@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_marginEnd="10dp"
+    android:layout_marginStart="20dp"
+    android:paddingHorizontal="20dp"
+    android:paddingVertical="15dp"
+    android:background="@color/white">
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvClaimNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="@string/claim_number"
+        style="@style/TitleTextView"
+        android:textSize="16sp"
+        android:layout_marginBottom="15dp"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvServiceType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="@string/service_type"
+        android:textSize="16sp"
+        android:layout_marginBottom="2dp"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="@string/status_type"
+        android:textSize="16sp"
+        android:layout_marginBottom="2dp"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvLastUpdate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="@string/last_update"
+        android:textSize="16sp" />
+
+</LinearLayout>

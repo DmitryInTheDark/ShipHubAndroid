@@ -11,7 +11,7 @@ coroutines = "1.11.0"
 loggingInterceptor = "5.3.2"
 serializationJson = "1.11.0"
 lifecycleViewmodelNavigation3 = "2.11.0-beta01"
-material = "1.13.0"
+material = "1.14.0"
 activity = "1.13.0"
 constraintlayout = "2.2.1"
 retrofit = "3.0.0"
@@ -20,6 +20,7 @@ jetbrainsKotlinJvm = "2.3.21"
 room = "2.8.4"
 timber = "5.0.1"
 viewModel="2.10.0"
+swiperefreshlayout = "1.2.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -49,6 +50,7 @@ androidx-activity = { group = "androidx.activity", name = "activity", version.re
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
 timber = { module = "com.jakewharton.timber:timber", version.ref = "timber" }
+androidx-swiperefreshlayout = { group = "androidx.swiperefreshlayout", name = "swiperefreshlayout", version.ref = "swiperefreshlayout" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

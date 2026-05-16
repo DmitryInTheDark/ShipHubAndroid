@@ -22,18 +22,22 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    flavorDimensions "default"
+    productFlavors{
+        emulator{
+            buildConfigField "String", "BASE_URL", base_local_url
+        }
+        dev{
+            buildConfigField "String", "BASE_URL", base_url
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
-        emulator{
-            buildConfigField "String", "BASE_URL", base_local_url
-            signingConfig signingConfigs.debug
-        }
-        debug {
-            buildConfigField "String", "BASE_URL", base_url
-        }
+        debug {}
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_11
@@ -76,6 +80,7 @@ dependencies {
     //Timber
     implementation libs.timber
     //Base
+    implementation libs.androidx.swiperefreshlayout
     implementation libs.androidx.core.ktx
     implementation libs.androidx.appcompat
     implementation libs.material

@@ -1,4 +1,4 @@
-package com.app.data.models
+package com.app.data.models.request
 
 data class AuthRequest(
     val email: String,

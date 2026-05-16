@@ -4,7 +4,9 @@ import android.view.KeyEvent
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import com.app.base.BaseFragment
-import com.app.base.SimpleStates
+import com.app.data.models.domain.LegalInfo
+import com.app.data.models.domain.PhysicalInfo
+import com.app.data.models.domain.BaseUserInfo
 import com.app.data.models.enums.UserType
 import com.app.shiphub.databinding.FragmentRegistrationBinding
 import com.app.shiphub.util.BaseValidator
@@ -14,19 +16,21 @@ import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
 @AndroidEntryPoint
-class RegistrationFragment: BaseFragment<SimpleStates, RegistrationViewModel, FragmentRegistrationBinding>() {
+class RegistrationFragment: BaseFragment<RegistrationUIState, RegistrationViewModel, FragmentRegistrationBinding>() {
 
     override val viewModel: RegistrationViewModel by viewModels()
     override fun initializeBinding() = FragmentRegistrationBinding.inflate(layoutInflater)
     private var currentUserType = UserType.LEGAL
-    private val legalErrors: List<String>
+    private val legalErrors
         get() = with(binding) {
-            listOf(etOrgName.error.toString(), etInn.error.toString(),
-                etKpp.error.toString(), etLegalAddress.error.toString(),
-                etFio.error.toString(), etPhone.error.toString(),
-                etEmailLegal.error.toString(), etPasswordLegal.error.toString()
-            )
-        }
+            listOf(etOrgName.error, etInn.error,
+                etKpp.error, etLegalAddress.error,
+                etAuthorizedPerson.error, etPhone.error,
+                etEmailLegal.error, etPasswordLegal.error) }
+    private val physicalErrors
+        get() = with(binding) {
+            listOf(etFio.error, etLivingAddress.error,
+                etEmailPhysical.error, etPasswordPhysical.error) }
 
     override fun setupListeners() = with(binding) {
         tvAuth.setOnClickListener { navigateBack() }
@@ -38,23 +42,72 @@ class RegistrationFragment: BaseFragment<SimpleStates, RegistrationViewModel, Fr
 
     private fun validateFields() = with(binding){
         if (currentUserType == UserType.LEGAL){
-            etOrgName.error = BaseValidator.validateOrgName(etOrgName.text.toString()).first()
-            etInn.error = BaseValidator.validateInn(etInn.text.toString()).first()
-            etKpp.error = BaseValidator.validateKpp(etKpp.text.toString()).first()
-            etLegalAddress.error = BaseValidator.validateAddress(etLegalAddress.text.toString()).first()
-            etFio.error = BaseValidator.validateFio(etAuthorizedPerson.text.toString()).first()
-            etPhone.error = BaseValidator.validatePhone(etPhone.text.toString()).first()
-            etEmailLegal.error =BaseValidator.validateEmail(etEmailLegal.text.toString()).first()
-            etPasswordLegal.error = BaseValidator.validatePassword(etPasswordLegal.text.toString()).first()
-            if (legalErrors.none { it.isBlank() }){
+            BaseValidator.validateOrgName(etOrgName.text.toString()).apply {
+                etOrgName.error = if (isNotEmpty()) first() else null
+            }
+            BaseValidator.validateInn(etInn.text.toString()).apply {
+                etInn.error = if (isNotEmpty()) first() else null
+            }
+            BaseValidator.validateKpp(etKpp.text.toString()).apply {
+                etKpp.error = if (isNotEmpty()) first() else null
+            }
+            BaseValidator.validateAddress(etLegalAddress.text.toString()).apply {
+                etLegalAddress.error = if (isNotEmpty()) first() else null
+            }
+            BaseValidator.validateFio(etAuthorizedPerson.text.toString()).apply {
+                etAuthorizedPerson.error = if (isNotEmpty()) first() else null
+            }
+            BaseValidator.validatePhone(etPhone.text.toString()).apply {
+                etPhone.error = if (isNotEmpty()) first() else null
+            }
+            BaseValidator.validateEmail(etEmailLegal.text.toString()).apply {
+                etEmailLegal.error = if (isNotEmpty()) first() else null
+            }
+            BaseValidator.validatePassword(etPasswordLegal.text.toString()).apply {
+                etPasswordLegal.error = if (isNotEmpty()) first() else null
+            }
+            if (legalErrors.all { it.isNullOrBlank() }){
                 viewModel.registerLegal(
-//                    LegalInfo(
-//                        etOrgName.text.toString(),
-//                        etInn.text.toString(),
-//                        etKpp.text.toString(),
-//                        etLegalAddress.text.toString(),
-//                        etPhone.text.toString()
-//                    )
+                    BaseUserInfo(
+                        etAuthorizedPerson.text.toString(),
+                        etEmailLegal.text.toString(),
+                        UserType.LEGAL,
+                        etPasswordLegal.text.toString()
+                    ),
+                    LegalInfo(
+                        etOrgName.text.toString(),
+                        etInn.text.toString(),
+                        etKpp.text.toString(),
+                        etLegalAddress.text.toString(),
+                        etPhone.text.toString()
+                    )
+                )
+            }
+        }
+        if (currentUserType == UserType.PHYSICAL){
+            BaseValidator.validateFio(etFio.text.toString()).apply {
+                etFio.error = if (isNotEmpty()) first() else null
+            }
+            BaseValidator.validateAddress(etLivingAddress.text.toString()).apply {
+                etLivingAddress.error = if (isNotEmpty()) first() else null
+            }
+            BaseValidator.validateEmail(etEmailPhysical.text.toString()).apply {
+                etEmailPhysical.error = if (isNotEmpty()) first() else null
+            }
+            BaseValidator.validatePassword(etPasswordPhysical.text.toString()).apply {
+                etPasswordPhysical.error = if (isNotEmpty()) first() else null
+            }
+            if (physicalErrors.all { it.isNullOrBlank() }){
+                viewModel.registerPhysical(
+                    BaseUserInfo(
+                        etFio.text.toString(),
+                        etEmailPhysical.text.toString(),
+                        UserType.PHYSICAL,
+                        etPasswordPhysical.text.toString()
+                    ),
+                    PhysicalInfo(
+                        etLivingAddress.text.toString()
+                    )
                 )
             }
         }
@@ -100,5 +153,12 @@ class RegistrationFragment: BaseFragment<SimpleStates, RegistrationViewModel, Fr
 
     }
 
-    override fun handleState(state: SimpleStates) {}
+    override fun handleState(state: RegistrationUIState) {
+        when(state){
+            is RegistrationUIState.SuccessRegistration -> navigate(
+                RegistrationFragmentDirections.actionRegistrationFragmentToEmailFragment(state.email)
+            )
+            is RegistrationUIState.InitScreen -> {}
+        }
+    }
 }
