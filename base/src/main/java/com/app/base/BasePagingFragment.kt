@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 import kotlinx.coroutines.launch
 
-abstract class BasePagingFragment<T, M: BaseHolderModel, VH: BaseViewHolder, S : BaseState, VM : BasePagingViewModel<T, S, M>, VB: ViewBinding> : BaseFragment<S, VM, VB>() {
+abstract class BasePagingFragment<VB: ViewBinding, T, M: BaseHolderModel, VH: BaseViewHolder, S : BaseState, VM : BasePagingViewModel<T, S, M>> : BaseFragment<VB, S, VM>() {
 
     private lateinit var _adapter: BaseAdapter<M, VH>
     private lateinit var _recyclerView: RecyclerView

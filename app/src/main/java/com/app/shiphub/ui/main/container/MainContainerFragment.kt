@@ -12,7 +12,7 @@ import com.app.shiphub.databinding.FragmentMainContainerBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainContainerFragment : BaseFragment<SimpleStates, MainContainerViewModel, FragmentMainContainerBinding>() {
+class MainContainerFragment : BaseFragment<FragmentMainContainerBinding, SimpleStates, MainContainerViewModel>() {
 
     override val viewModel: MainContainerViewModel by viewModels()
 

@@ -6,7 +6,7 @@ import com.app.shiphub.databinding.FragmentInfoBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class DocumentsFragment: BaseFragment<DocumentsState, DocumentsViewModel, FragmentInfoBinding>() {
+class DocumentsFragment: BaseFragment<FragmentInfoBinding, DocumentsState, DocumentsViewModel>() {
 
     override val viewModel: DocumentsViewModel by viewModels()
 

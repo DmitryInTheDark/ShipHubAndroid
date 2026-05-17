@@ -16,7 +16,7 @@ import com.google.android.material.chip.Chip
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class ClaimsFragment: BasePagingFragment<Claim, ClaimsHolderModel, ClaimViewHolder, ClaimsUIState, ClaimsViewModel, FragmentClaimsBinding>() {
+class ClaimsFragment: BasePagingFragment<FragmentClaimsBinding, Claim, ClaimsHolderModel, ClaimViewHolder, ClaimsUIState, ClaimsViewModel>() {
 
     override fun initAdapterAndRecyclerView()
     : Pair<BaseAdapter<ClaimsHolderModel, ClaimViewHolder>, RecyclerView> = ClaimsAdapter() to binding.rvClaims
@@ -48,18 +48,6 @@ class ClaimsFragment: BasePagingFragment<Claim, ClaimsHolderModel, ClaimViewHold
     }
 
     override fun setupUI() = with(binding){
-//        tlTypes.removeAllTabs()
-//        ClaimStatus.entries.forEach { status ->
-//            val tab = tlTypes.newTab().setText(status.displayName)
-//            tlTypes.addTab(tab)
-//        }
-//        val tabStrip = tlTypes.getChildAt(0) as ViewGroup
-//        for (i in 0 until tabStrip.childCount) {
-//            val tabView = tabStrip.getChildAt(i)
-//            val params = tabView.layoutParams as ViewGroup.MarginLayoutParams
-//            params.marginEnd = 8.dpToPx()
-//            tabView.layoutParams = params
-//        }
         ClaimStatus.entries.forEach { status ->
             val chip = Chip(root.context).apply {
                 text = status.displayName

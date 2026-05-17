@@ -6,7 +6,7 @@ import com.app.shiphub.databinding.FragmentInfoBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class ProfileFragment: BaseFragment<ProfileState, ProfileViewModel, FragmentInfoBinding>() {
+class ProfileFragment: BaseFragment<FragmentInfoBinding, ProfileState, ProfileViewModel>() {
 
     override val viewModel: ProfileViewModel by viewModels()
 

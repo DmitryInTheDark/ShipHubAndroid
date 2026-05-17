@@ -17,7 +17,7 @@ import androidx.viewbinding.ViewBinding
 import com.app.base.ViewUtils.requireLoadingDialog
 import kotlinx.coroutines.launch
 
-abstract class BaseFragment<S : BaseState, VM : BaseViewModel<S>, VB : ViewBinding>: Fragment() {
+abstract class BaseFragment<VB : ViewBinding, S : BaseState, VM : BaseViewModel<S>>: Fragment() {
 
     protected abstract val viewModel: VM
     private var _binding: VB? = null

@@ -6,7 +6,7 @@ import com.app.shiphub.databinding.FragmentInfoBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class InfoFragment: BaseFragment<InfoState, InfoViewModel, FragmentInfoBinding>() {
+class InfoFragment: BaseFragment<FragmentInfoBinding, InfoState, InfoViewModel>() {
 
     override val viewModel: InfoViewModel by viewModels()
 

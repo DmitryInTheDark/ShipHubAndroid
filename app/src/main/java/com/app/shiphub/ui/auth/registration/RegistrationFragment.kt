@@ -16,7 +16,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
 @AndroidEntryPoint
-class RegistrationFragment: BaseFragment<RegistrationUIState, RegistrationViewModel, FragmentRegistrationBinding>() {
+class RegistrationFragment: BaseFragment<FragmentRegistrationBinding, RegistrationUIState, RegistrationViewModel>() {
 
     override val viewModel: RegistrationViewModel by viewModels()
     override fun initializeBinding() = FragmentRegistrationBinding.inflate(layoutInflater)

@@ -11,7 +11,7 @@ import com.app.shiphub.util.BaseValidator
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class AuthFragment : BaseFragment<AuthUIState, AuthViewModel, FragmentAuthBinding>() {
+class AuthFragment : BaseFragment<FragmentAuthBinding, AuthUIState, AuthViewModel>() {
 
     override val viewModel: AuthViewModel by viewModels()
 

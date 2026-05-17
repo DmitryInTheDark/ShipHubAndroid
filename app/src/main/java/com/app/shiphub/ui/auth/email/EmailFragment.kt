@@ -14,7 +14,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlin.getValue
 
 @AndroidEntryPoint
-class EmailFragment : BaseFragment<EmailUIState, EmailViewModel, FragmentEmailBinding>() {
+class EmailFragment : BaseFragment<FragmentEmailBinding, EmailUIState, EmailViewModel>() {
 
     override val viewModel: EmailViewModel by viewModels()
 

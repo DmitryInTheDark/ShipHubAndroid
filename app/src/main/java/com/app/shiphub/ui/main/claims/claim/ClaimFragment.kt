@@ -6,7 +6,7 @@ import com.app.shiphub.databinding.FragmentInfoBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class ClaimFragment: BaseFragment<ClaimState, ClaimViewModel, FragmentInfoBinding>() {
+class ClaimFragment: BaseFragment<FragmentInfoBinding, ClaimState, ClaimViewModel>() {
 
     override val viewModel: ClaimViewModel by viewModels()
 

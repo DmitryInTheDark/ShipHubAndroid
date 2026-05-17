@@ -18,7 +18,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlin.math.abs
 
 @AndroidEntryPoint
-class HomeFragment : BasePagingFragment<Claim, HomeClaimHolderModel, HomeClaimViewHolder, HomeUIState, HomeViewModel, FragmentHomeBinding>() {
+class HomeFragment : BasePagingFragment<FragmentHomeBinding, Claim, HomeClaimHolderModel, HomeClaimViewHolder, HomeUIState, HomeViewModel>() {
 
     override val viewModel: HomeViewModel by viewModels()
 
