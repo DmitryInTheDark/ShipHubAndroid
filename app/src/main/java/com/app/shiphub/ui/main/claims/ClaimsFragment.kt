@@ -1,32 +1,32 @@
 package com.app.shiphub.ui.main.claims
 
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.RecyclerView
 import com.app.base.BaseAdapter
 import com.app.base.BasePagingFragment
+import com.app.base.BaseViewHolder
 import com.app.data.models.domain.Claim
 import com.app.data.models.enums.ClaimStatus
-import com.app.shiphub.R
 import com.app.shiphub.databinding.FragmentClaimsBinding
-import com.app.shiphub.ui.main.claims.adapter.ClaimViewHolder
+import com.app.shiphub.ui.main.claims.adapter.ClaimHolders
 import com.app.shiphub.ui.main.claims.adapter.ClaimsAdapter
-import com.app.shiphub.ui.main.claims.adapter.ClaimsHolderModel
-import com.google.android.material.chip.Chip
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class ClaimsFragment: BasePagingFragment<FragmentClaimsBinding, Claim, ClaimsHolderModel, ClaimViewHolder, ClaimsUIState, ClaimsViewModel>() {
+class ClaimsFragment: BasePagingFragment<FragmentClaimsBinding, Claim, ClaimHolders, BaseViewHolder, ClaimsUIState, ClaimsViewModel>(),
+ClaimsAdapter.ClaimsAdapterCallback{
+
+    private var scrollX: Int? = null
 
     override fun initAdapterAndRecyclerView()
-    : Pair<BaseAdapter<ClaimsHolderModel, ClaimViewHolder>, RecyclerView> = ClaimsAdapter() to binding.rvClaims
+    : Pair<BaseAdapter<ClaimHolders, BaseViewHolder>, RecyclerView> = ClaimsAdapter(this) to binding.rvClaims
 
     override fun setLightLoading(isLoading: Boolean) {
         binding.srlClaims.isRefreshing = isLoading
     }
 
     override fun showEmptyPlaceholder() {
-
+        setupList(emptyList())
     }
 
     override fun setErrorPlaceholder(error: String) {
@@ -38,40 +38,32 @@ class ClaimsFragment: BasePagingFragment<FragmentClaimsBinding, Claim, ClaimsHol
     override fun initializeBinding() = FragmentClaimsBinding.inflate(layoutInflater)
 
     override fun setupListeners() = with(binding){
-        cgStatuses.setOnCheckedStateChangeListener { _, checkedIds ->
-            if (checkedIds.isEmpty()){
-                viewModel.loadFirstPage()
-            }else{
-                viewModel.filterClaimsByStatus(ClaimStatus.entries[checkedIds.first()-1])
-            }
-        }
+
+    }
+
+    override fun setupList(items: List<ClaimHolders>) {
+        val itemsWithHeader = mutableListOf<ClaimHolders>(
+            ClaimHolders.ClaimsHeaderHolderModel(viewModel.getCurrentStatus(), scrollX)
+        )
+        itemsWithHeader.addAll(items)
+        adapter.submitList(itemsWithHeader)
     }
 
     override fun setupUI() = with(binding){
-        ClaimStatus.entries.forEach { status ->
-            val chip = Chip(root.context).apply {
-                text = status.displayName
-                chipStrokeWidth = 1.dpToPx().toFloat()
-                chipStrokeColor = ContextCompat.getColorStateList(
-                    requireContext(), R.color.chip_stroke_color_selector
-                )
-                isCheckable = true
-                isClickable = true
-                chipBackgroundColor = ContextCompat.getColorStateList(
-                    requireContext(), R.color.chip_background_selector
-                )
-                setTextColor(
-                    ContextCompat.getColorStateList(
-                        requireContext(), R.color.chip_text_selector
-                    )
-                )
 
-            }
-            cgStatuses.addView(chip)
-        }
     }
 
     override fun handleState(state: ClaimsUIState) {
 
+    }
+
+    override fun onStatusChange(status: ClaimStatus?) {
+        viewModel.filterClaimsByStatus(status)
+        val currentItems = adapter.currentList.filterIsInstance<ClaimHolders.ClaimsHolderModel>()
+        setupList(currentItems)
+    }
+
+    override fun onScroll(scrollX: Int) {
+        this.scrollX = scrollX
     }
 }

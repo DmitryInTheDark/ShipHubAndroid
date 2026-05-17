@@ -13,4 +13,6 @@
     <color name="divider_background">#1E1B17</color>
     <color name="orange">#FD672F</color>
     <color name="stroke_color">#E6ECF5</color>
+    <color name="second_text_color">#611E1B17</color>
+    <color name="claim_button_stroke_color">#D1D1D1</color>"
 </resources>

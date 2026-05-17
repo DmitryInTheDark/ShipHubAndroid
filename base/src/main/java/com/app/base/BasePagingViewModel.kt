@@ -36,6 +36,8 @@ abstract class BasePagingViewModel<T, S : BaseState, M : BaseHolderModel>(initia
             }else{
                 emitPagingState(BasePagingState.OnItemsLoad(currentItems.map { map(it) }))
             }
+        }catch (e: Exception){
+            emitSimpleState(SimpleStates.Error(e.handleError()))
         }finally {
             isLoading = false
         }

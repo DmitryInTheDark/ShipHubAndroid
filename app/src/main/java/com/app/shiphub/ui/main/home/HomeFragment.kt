@@ -37,7 +37,7 @@ class HomeFragment : BasePagingFragment<FragmentHomeBinding, Claim, HomeClaimHol
                 viewModel.loadFirstPage()
             }
             rvClaims.apply {
-                addItemDecoration(HorizontalSpaceItemDecoration(16.dpToPx()))
+                addItemDecoration(HorizontalSpaceItemDecoration(16.dpToPx().toInt()))
                 addOnScrollListener(object : RecyclerView.OnScrollListener(){
                     override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                         (layoutManager as LinearLayoutManager).let {

@@ -100,8 +100,8 @@ abstract class BaseFragment<VB : ViewBinding, S : BaseState, VM : BaseViewModel<
     protected fun navigate(direction: NavDirections) = findNavController().navigate(direction)
     protected fun navigateBack() = findNavController().navigateUp()
 
-    fun Int.dpToPx(): Int{
+    fun Int.dpToPx(): Float{
         val scale = resources.displayMetrics.density
-        return (this*scale + 0.5f).toInt()
+        return this*scale + 0.5f
     }
 }

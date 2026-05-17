@@ -1,63 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/main_background"
     android:id="@+id/srlClaims"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <com.google.android.material.textview.MaterialTextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/claims"
-            android:layout_marginTop="20dp"
-            style="@style/TitleTextView"
-            android:textSize="25sp"
-            android:gravity="center"/>
-
-<!--        <com.google.android.material.tabs.TabLayout-->
-<!--            android:id="@+id/tlTypes"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="30dp"-->
-<!--            app:tabMode="auto"-->
-<!--            app:tabGravity="center"-->
-<!--            app:tabIndicator="@null"-->
-<!--            app:tabIndicatorAnimationMode="elastic"-->
-<!--            app:tabRippleColor="@android:color/transparent"-->
-<!--            app:tabBackground="@drawable/tab_chip_selector"-->
-<!--            app:tabSelectedTextColor="@android:color/white"-->
-<!--            app:tabTextColor="@color/black"-->
-<!--            app:tabPaddingTop="0dp"-->
-<!--            app:tabPaddingBottom="0dp"-->
-<!--            app:tabContentStart="0dp"-->
-<!--            app:tabPaddingStart="4dp"-->
-<!--            app:tabPaddingEnd="4dp"-->
-<!--            app:tabMinWidth="0dp"/>-->
-
-        <HorizontalScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:scrollbars="none">
-
-            <com.google.android.material.chip.ChipGroup
-                android:id="@+id/cgStatuses"
-                app:singleLine="true"
-                app:singleSelection="true"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-
-        </HorizontalScrollView>
-
-
-    </LinearLayout>
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvClaims"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:orientation="vertical"
+        android:background="@color/transparent"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="wrap_content"
+        android:clipChildren="false"
+        android:clipToPadding="false" />
 
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

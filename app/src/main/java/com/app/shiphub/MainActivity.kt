@@ -2,7 +2,6 @@ package com.app.shiphub
 
 import android.os.Bundle
 import androidx.activity.viewModels
-import androidx.core.view.WindowInsetsControllerCompat
 import androidx.navigation.findNavController
 import com.app.base.BaseActivity
 import com.app.shiphub.databinding.ActivityMainBinding
@@ -26,10 +25,6 @@ class MainActivity : BaseActivity<MainUIState, MainViewModel, ActivityMainBindin
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        WindowInsetsControllerCompat(window, window.decorView)
-            .isAppearanceLightStatusBars = false
-        @Suppress("DEPRECATION")
-        window.statusBarColor = baseContext.getColor(R.color.black)
     }
 
     override fun handleState(state: MainUIState) {

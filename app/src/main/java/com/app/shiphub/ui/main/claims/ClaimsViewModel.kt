@@ -5,23 +5,34 @@ import com.app.base.models.BaseListResponse
 import com.app.data.models.domain.Claim
 import com.app.data.models.enums.ClaimStatus
 import com.app.data.use_cases.ClaimsUseCase
-import com.app.shiphub.ui.main.claims.adapter.ClaimsHolderModel
+import com.app.shiphub.ui.main.claims.adapter.ClaimHolders
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
 class ClaimsViewModel @Inject constructor(
     private val claimsUseCase: ClaimsUseCase,
-): BasePagingViewModel<Claim, ClaimsUIState, ClaimsHolderModel>(ClaimsUIState.InitScreen()) {
+): BasePagingViewModel<Claim, ClaimsUIState, ClaimHolders>(ClaimsUIState.InitScreen()) {
 
-    override suspend fun getPage(page: Int): BaseListResponse<Claim> =
-        claimsUseCase.getClaims(page)
+    private var currentStatus: ClaimStatus? = null
 
-    override fun map(domain: Claim): ClaimsHolderModel = with(domain){
-        return ClaimsHolderModel(id)
+    override suspend fun getPage(page: Int): BaseListResponse<Claim> {
+        return if (currentStatus == null){
+            claimsUseCase.getClaims(page)
+        }else{
+            claimsUseCase.getClaimsByStatus(page, status = currentStatus!!)
+        }
     }
 
-    fun filterClaimsByStatus(status: ClaimStatus) {
-
+    override fun map(domain: Claim): ClaimHolders.ClaimsHolderModel = with(domain){
+        return ClaimHolders.ClaimsHolderModel(id, testType.displayName, equipment.name, status.displayName, lastUpdate ?: "")
     }
+
+    fun filterClaimsByStatus(status: ClaimStatus?) {
+        currentStatus = status
+        loadFirstPage()
+    }
+
+    fun getCurrentStatus(): ClaimStatus? = currentStatus
+
 }

@@ -49,8 +49,13 @@
     <!--  Claims  -->
     <string name="claim_number">Номер заявки: №%d</string>
     <string name="service_type">Тип услуги: %s</string>
-    <string name="status_type">статус: %s</string>
+    <string name="status_type">Статус: %s</string>
     <string name="last_update">Последнее обновление: %s</string>
+    <string name="equipment_name">Оборудование: %s</string>
     <string name="all">Все</string>
+    <string name="claims_search">По № или названию</string>
+    <string name="open">Открыть</string>
+    <string name="chat">Чат</string>
+    <string name="available">Доступны</string>
 
 </resources>

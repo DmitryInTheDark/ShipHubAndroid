@@ -25,6 +25,7 @@
         android:layout_height="wrap_content"
         tools:text="@string/service_type"
         android:textSize="16sp"
+        style="@style/NormalTextView"
         android:layout_marginBottom="2dp"/>
 
     <com.google.android.material.textview.MaterialTextView
@@ -32,12 +33,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         tools:text="@string/status_type"
+        style="@style/NormalTextView"
         android:textSize="16sp"
         android:layout_marginBottom="2dp"/>
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tvLastUpdate"
         android:layout_width="wrap_content"
+        style="@style/NormalTextView"
         android:layout_height="wrap_content"
         tools:text="@string/last_update"
         android:textSize="16sp" />
