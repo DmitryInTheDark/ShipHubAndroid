@@ -68,7 +68,7 @@ abstract class BaseFragment<S : BaseState, VM : BaseViewModel<S>, VB : ViewBindi
 
     protected open fun handleSimpleState(state: SimpleStates){
         when(state){
-            is SimpleStates.Init -> setupUI()
+            is SimpleStates.Init -> {}
             is SimpleStates.Loading ->  setLoadingState(state.isLoading)
             is SimpleStates.Error -> setErrorState(state.message)
         }
@@ -99,4 +99,9 @@ abstract class BaseFragment<S : BaseState, VM : BaseViewModel<S>, VB : ViewBindi
     //    protected fun navigate(destination: Int) = findNavController().navigate(destination)
     protected fun navigate(direction: NavDirections) = findNavController().navigate(direction)
     protected fun navigateBack() = findNavController().navigateUp()
+
+    fun Int.dpToPx(): Int{
+        val scale = resources.displayMetrics.density
+        return (this*scale + 0.5f).toInt()
+    }
 }

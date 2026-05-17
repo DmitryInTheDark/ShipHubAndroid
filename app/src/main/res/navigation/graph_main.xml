@@ -10,5 +10,18 @@
         android:name="com.app.shiphub.ui.main.home.HomeFragment"
         android:label="HomeFragment"
         tools:layout="@layout/fragment_home" />
+    <include app:graph="@navigation/graph_claims" />
+    <fragment
+        android:id="@+id/infoFragment"
+        android:name="com.app.shiphub.ui.main.info.InfoFragment"
+        android:label="InfoFragment" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.app.shiphub.ui.main.profile.ProfileFragment"
+        android:label="ProfileFragment" />
+    <fragment
+        android:id="@+id/documentsFragment"
+        android:name="com.app.shiphub.ui.main.documents.DocumentsFragment"
+        android:label="DocumentsFragment" />
 
 </navigation>

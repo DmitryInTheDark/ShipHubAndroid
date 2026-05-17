@@ -12,4 +12,5 @@
     <color name="toolbar_color">#111111</color>
     <color name="divider_background">#1E1B17</color>
     <color name="orange">#FD672F</color>
+    <color name="stroke_color">#E6ECF5</color>
 </resources>

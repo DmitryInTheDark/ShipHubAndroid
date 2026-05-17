@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="7dp"
+    app:cardBackgroundColor="@color/white"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tvStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="В работе"
+        app:fontFamily="@font/inter_semi_bold"
+        android:textSize="15sp"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="6dp"/>
+
+</com.google.android.material.card.MaterialCardView>

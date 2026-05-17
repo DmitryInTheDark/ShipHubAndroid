@@ -51,5 +51,6 @@
     <string name="service_type">Тип услуги: %s</string>
     <string name="status_type">статус: %s</string>
     <string name="last_update">Последнее обновление: %s</string>
+    <string name="all">Все</string>
 
 </resources>

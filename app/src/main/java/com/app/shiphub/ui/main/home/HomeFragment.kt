@@ -13,6 +13,7 @@ import com.app.shiphub.databinding.HolderHomeNotificationBinding
 import com.app.shiphub.ui.main.home.adapters.HomeClaimHolderModel
 import com.app.shiphub.ui.main.home.adapters.HomeClaimViewHolder
 import com.app.shiphub.ui.main.home.adapters.HomeClaimsAdapter
+import com.app.shiphub.util.HorizontalSpaceItemDecoration
 import dagger.hilt.android.AndroidEntryPoint
 import kotlin.math.abs
 
@@ -36,6 +37,7 @@ class HomeFragment : BasePagingFragment<Claim, HomeClaimHolderModel, HomeClaimVi
                 viewModel.loadFirstPage()
             }
             rvClaims.apply {
+                addItemDecoration(HorizontalSpaceItemDecoration(16.dpToPx()))
                 addOnScrollListener(object : RecyclerView.OnScrollListener(){
                     override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                         (layoutManager as LinearLayoutManager).let {

@@ -9,6 +9,11 @@ class ClaimsUseCase @Inject constructor(
     private val claimsApi: ClaimsApi
 ) {
 
+    suspend fun getClaims(
+        pageNumber: Int,
+        pageSize: Int = 20
+    ): BaseListResponse<Claim> = claimsApi.getClaims()
+
     suspend fun getActiveClaims(
         pageNumber: Int,
         pageSize: Int = 20

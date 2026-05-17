@@ -2,10 +2,10 @@ package com.app.data.models.enums
 
 enum class ClaimStatus(val displayName: String) {
 
-    CREATED("создана"),
-    APPROVED("принята"),
-    IN_PROGRESS("в работе"),
-    TESTS_COMPLETED("тесты завершены"),
-    DOCUMENTS_DELIVERED("документы доставлены")
+    CREATED("Создана"),
+    APPROVED("Принята"),
+    IN_PROGRESS("В работе"),
+    TESTS_COMPLETED("Тесты завершены"),
+    DOCUMENTS_DELIVERED("Документы доставлены")
 
 }

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/graph_claims"
+    app:startDestination="@id/claimsFragment">
+
+    <fragment
+        android:id="@+id/claimsFragment"
+        android:name="com.app.shiphub.ui.main.claims.ClaimsFragment"
+        android:label="ClaimsFragment" />
+</navigation>
