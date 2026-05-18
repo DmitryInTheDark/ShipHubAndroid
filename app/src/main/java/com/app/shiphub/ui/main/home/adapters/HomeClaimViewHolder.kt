@@ -10,7 +10,7 @@ class HomeClaimViewHolder(
 ): BaseViewHolder(binding) {
 
     fun bind(holder: HomeClaimHolderModel) = with(binding){
-        tvClaimNumber.text = context.getString(R.string.claim_number, holder.id)
+        tvClaimNumber.text = context.getString(R.string.number_of_claim, holder.id)
         tvServiceType.text = context.getString(R.string.service_type, holder.testType)
         tvStatus.text = context.getString(R.string.status_type, holder.status)
         tvLastUpdate.apply {

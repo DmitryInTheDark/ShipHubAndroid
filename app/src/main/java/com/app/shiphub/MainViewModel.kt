@@ -11,8 +11,10 @@ class MainViewModel @Inject constructor(
 ): BaseViewModel<MainUIState>(MainUIState.InitScreen()) {
 
     init {
-        if (userRepository.isUserAuthorized()) _state.value = MainUIState.SkipLogin()
-        else _state.value = MainUIState.ShowLoginScreen()
+        withLoading {
+            if (userRepository.isUserAuthorized()) emitState(MainUIState.SkipLogin())
+            else emitState(MainUIState.ShowLoginScreen())
+        }
     }
 
 }

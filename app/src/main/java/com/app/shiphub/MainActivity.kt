@@ -1,8 +1,7 @@
 package com.app.shiphub
 
-import android.os.Bundle
 import androidx.activity.viewModels
-import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
 import com.app.base.BaseActivity
 import com.app.shiphub.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -11,7 +10,10 @@ import dagger.hilt.android.AndroidEntryPoint
 class MainActivity : BaseActivity<MainUIState, MainViewModel, ActivityMainBinding>() {
 
     override val viewModel: MainViewModel by viewModels()
-    private val navController by lazy { findNavController(binding.main.id) }
+    private val navController by lazy {
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.main) as NavHostFragment
+        navHostFragment.navController
+    }
 
     override fun initializeBinding() = ActivityMainBinding.inflate(layoutInflater)
 
@@ -21,10 +23,6 @@ class MainActivity : BaseActivity<MainUIState, MainViewModel, ActivityMainBindin
 
     override fun setupUI() {
 
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
     }
 
     override fun handleState(state: MainUIState) {

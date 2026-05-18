@@ -54,7 +54,9 @@ ClaimsAdapter.ClaimsAdapterCallback{
     }
 
     override fun handleState(state: ClaimsUIState) {
-
+        when(state){
+            is ClaimsUIState.InitScreen -> {}
+        }
     }
 
     override fun onStatusChange(status: ClaimStatus?) {
@@ -66,4 +68,11 @@ ClaimsAdapter.ClaimsAdapterCallback{
     override fun onScroll(scrollX: Int) {
         this.scrollX = scrollX
     }
+
+    override fun onOpenClaimClicked(claimId: Long) {
+        navigate(
+            ClaimsFragmentDirections.actionClaimsFragmentToClaimFragment(claimId)
+        )
+    }
+
 }

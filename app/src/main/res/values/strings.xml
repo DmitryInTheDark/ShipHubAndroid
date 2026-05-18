@@ -47,7 +47,7 @@
     <string name="claims_get_error">Ошибка получения заявок</string>
 
     <!--  Claims  -->
-    <string name="claim_number">Номер заявки: №%d</string>
+    <string name="number_of_claim">Номер заявки: №%d</string>
     <string name="service_type">Тип услуги: %s</string>
     <string name="status_type">Статус: %s</string>
     <string name="last_update">Последнее обновление: %s</string>
@@ -57,5 +57,22 @@
     <string name="open">Открыть</string>
     <string name="chat">Чат</string>
     <string name="available">Доступны</string>
+
+    <!--  Claim info  -->
+    <string name="claim_number">Номер заявки №%d</string>
+    <string name="claim_is_create">Заявка создана</string>
+    <string name="manager_approve">Подтверждена менеджером</string>
+    <string name="in_work">Находится в работе</string>
+    <string name="tests_completed">Испытания завершены, документы оформлены</string>
+    <string name="documents_delivered">Документы получены клиентом</string>
+    <string name="last_updates">Последние обновления</string>
+    <string name="claim_details">Детализация заказа</string>
+    <string name="equipment">Оборудование</string>
+    <string name="equipment_type">Тип: %s</string>
+    <string name="model_type">Модель: %s</string>
+    <string name="serial_number">Серийный номер: %s</string>
+    <string name="selected_services">Выбранная услуга</string>
+    <string name="chat_with_manager">Чат с менеджером</string>
+    <string name="go_to_documents">Перейти в документы</string>
 
 </resources>

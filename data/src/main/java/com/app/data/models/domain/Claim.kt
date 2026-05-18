@@ -1,8 +1,11 @@
 package com.app.data.models.domain
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 import com.app.data.models.enums.ClaimStatus
 import com.app.data.models.enums.TestType
 
+@Parcelize
 data class Claim(
     val id: Long,
     val dateCreate: String,
@@ -20,4 +23,4 @@ data class Claim(
     val status: ClaimStatus,
     val lastUpdate: String?,
     val documentsIds: List<Long> = emptyList()
-)
+): Parcelable

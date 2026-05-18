@@ -26,4 +26,7 @@ class ClaimsUseCase @Inject constructor(
         status: ClaimStatus
     ): BaseListResponse<Claim> = claimsApi.getClaimWithStatus(pageNumber, pageSize, status)
 
+    suspend fun getClaimById(
+        claimId: Long
+    ): Claim = claimsApi.getClaimById(claimId)
 }

@@ -17,6 +17,7 @@ class ClaimsAdapter(
     interface ClaimsAdapterCallback{
         fun onStatusChange(status: ClaimStatus?)
         fun onScroll(scrollX: Int)
+        fun onOpenClaimClicked(claimId: Long)
     }
 
     override fun getItemViewType(position: Int): Int {
@@ -32,7 +33,7 @@ class ClaimsAdapter(
             ClaimsHolderTypes.HEADER.ordinal -> ClaimsHeaderViewHolder(HolderClaimsHeaderBinding.inflate(
                 LayoutInflater.from(parent.context), parent, false), callback)
             ClaimsHolderTypes.CLAIM.ordinal -> ClaimViewHolder(HolderClaimBinding.inflate(
-                LayoutInflater.from(parent.context), parent, false))
+                LayoutInflater.from(parent.context), parent, false), callback)
             else -> throw IllegalArgumentException("Unknown view type: $viewType")
         }
     }

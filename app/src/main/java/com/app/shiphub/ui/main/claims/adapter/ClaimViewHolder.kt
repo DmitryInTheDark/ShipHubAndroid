@@ -6,11 +6,12 @@ import com.app.shiphub.R
 import com.app.shiphub.databinding.HolderClaimBinding
 
 class ClaimViewHolder(
-    private val binding: HolderClaimBinding
+    private val binding: HolderClaimBinding,
+    private val callback: ClaimsAdapter.ClaimsAdapterCallback
 ): BaseViewHolder(binding) {
 
     fun bind(holder: ClaimHolders.ClaimsHolderModel) = with(binding){
-        tvClaimNumber.text = context.getString(R.string.claim_number, holder.id)
+        tvClaimNumber.text = context.getString(R.string.number_of_claim, holder.id)
         tvTestType.text = context.getString(R.string.service_type, holder.testType)
         tvStatus.text = context.getString(R.string.status_type, holder.status)
         tvEquipmentName.text = context.getString(R.string.equipment_name, holder.equipment)
@@ -18,6 +19,7 @@ class ClaimViewHolder(
             isVisible = holder.lastUpdate.isNotBlank()
             text = context.getString(R.string.last_update, holder.lastUpdate)
         }
+        bOpenClaim.setOnClickListener { callback.onOpenClaimClicked(holder.id) }
     }
 
 }

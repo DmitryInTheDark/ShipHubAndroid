@@ -14,5 +14,8 @@
     <color name="orange">#FD672F</color>
     <color name="stroke_color">#E6ECF5</color>
     <color name="second_text_color">#611E1B17</color>
-    <color name="claim_button_stroke_color">#D1D1D1</color>"
+    <color name="claim_button_stroke_color">#D1D1D1</color>
+    <color name="green">#16A34A</color>
+    <color name="turquoise">#14B8A6</color>
+    <color name="purple">#7C3AED</color>
 </resources>

@@ -4,6 +4,7 @@ import com.app.base.models.BaseListResponse
 import com.app.data.models.domain.Claim
 import com.app.data.models.enums.ClaimStatus
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface ClaimsApi {
@@ -26,5 +27,8 @@ interface ClaimsApi {
         @Query("page_size") pageSize: Int = 20,
         @Query("status") status: ClaimStatus
     ): BaseListResponse<Claim>
+
+    @GET("/claims/{claimId}")
+    suspend fun getClaimById(@Path("claimId") claimId: Long): Claim
 
 }
