@@ -1,6 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:cardBackgroundColor="@color/white"
+    app:cardCornerRadius="8dp"
+    app:contentPadding="3dp"
+    android:layout_marginStart="20dp"
+    android:layout_marginBottom="20dp"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginStart="3dp"
+        android:gravity="center_vertical"
+        android:padding="5dp">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvDocumentName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                style="@style/NormalTextView"
+                tools:text="Договор_1042.pdf"
+                android:textSize="18sp"
+                android:layout_weight="1"/>
+
+            <ImageButton
+                android:id="@+id/ibDownload"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:backgroundTint="@color/transparent"
+                android:importantForAccessibility="no"
+                android:src="@drawable/ic_download"
+                android:layout_marginEnd="10dp"/>
+
+            <ImageButton
+                android:id="@+id/ibShow"
+                android:layout_width="40dp"
+                android:layout_height="30dp"
+                android:backgroundTint="@color/transparent"
+                android:importantForAccessibility="no"
+                android:src="@drawable/ic_show"
+                android:layout_marginEnd="10dp"/>
+
+    </LinearLayout>
 
 </com.google.android.material.card.MaterialCardView>

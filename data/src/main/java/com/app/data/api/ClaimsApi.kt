@@ -2,6 +2,7 @@ package com.app.data.api
 
 import com.app.base.models.BaseListResponse
 import com.app.data.models.domain.Claim
+import com.app.data.models.domain.Document
 import com.app.data.models.enums.ClaimStatus
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -30,5 +31,13 @@ interface ClaimsApi {
 
     @GET("/claims/{claimId}")
     suspend fun getClaimById(@Path("claimId") claimId: Long): Claim
+
+    @GET("/claims/documents")
+    suspend fun getClaimDocuments(
+        @Query("claim_id") claimId: Long
+    ): BaseListResponse<Document>
+
+    @GET("/claims")
+    suspend fun getAllClaims(): BaseListResponse<Claim>
 
 }

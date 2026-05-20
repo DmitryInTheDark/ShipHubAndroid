@@ -75,4 +75,13 @@
     <string name="chat_with_manager">Чат с менеджером</string>
     <string name="go_to_documents">Перейти в документы</string>
 
+    <!--  Documents  -->
+    <string name="claim">Заявка</string>
+    <string name="contracts">Договоры</string>
+    <string name="acts">Акты</string>
+    <string name="checks">Счета</string>
+    <string name="number">№ %d</string>
+    <string name="documents_not_found">Документы не найдены</string>
+    <string name="documents_and_claims_not_found">Документы и заявки не найдены</string>
+
 </resources>

@@ -2,8 +2,174 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/main_background">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/main_background"
+    android:paddingTop="20dp">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/TitleTextView"
+            android:text="@string/documents"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="20dp"/>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cvClaims"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="8dp"
+            app:contentPadding="3dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginBottom="20dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginStart="3dp"
+                android:gravity="center_vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginStart="3dp"
+                android:gravity="center_vertical">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/NormalTextView"
+                    android:text="@string/claim"
+                    android:textSize="18sp"/>
+
+                <ImageView
+                    android:id="@+id/ivExpand"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:importantForAccessibility="no"
+                    android:src="@drawable/arrow_left"
+                    tools:src="@drawable/arrow_down"/>
+
+            </LinearLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvClaimsIds"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:listitem="@layout/holder_text"
+                    tools:itemCount="3"
+                    android:visibility="gone"
+                    tools:visibility="visible"/>
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/black"
+            android:layout_marginBottom="20dp"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvContracts"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/TitleTextView"
+            android:text="@string/contracts"
+            android:layout_marginStart="20dp"
+            android:layout_marginBottom="20dp"/>
+
+        <LinearLayout
+            android:id="@+id/llContracts"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:orientation="vertical"
+            android:layout_marginBottom="20dp"/>
+
+        <View
+            android:id="@+id/vContracts"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/black"
+            android:layout_marginBottom="20dp"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvActs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/TitleTextView"
+            android:text="@string/acts"
+            android:layout_marginBottom="20dp"
+            android:layout_marginStart="20dp"/>
+
+        <LinearLayout
+            android:id="@+id/llActs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:orientation="vertical"
+            android:layout_marginBottom="20dp"/>
+
+        <View
+            android:id="@+id/vActs"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/black"
+            android:layout_marginBottom="20dp"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvChecks"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/TitleTextView"
+            android:text="@string/checks"
+            android:layout_marginBottom="20dp"
+            android:layout_marginStart="20dp"/>
+
+        <LinearLayout
+            android:id="@+id/llChecks"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:orientation="vertical"
+            android:layout_marginBottom="20dp"/>
+
+        <View
+            android:id="@+id/vChecks"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/black"
+            android:layout_marginBottom="20dp"/>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvDocumentsNotFound"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/documents_not_found"
+            style="@style/TitleTextView"
+            android:gravity="center"
+            android:visibility="gone" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvDocumentsAndClaimsNotFound"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/documents_not_found"
+            style="@style/TitleTextView"
+            android:gravity="center"
+            android:visibility="gone" />
+
+    </LinearLayout>
 
 </ScrollView>
