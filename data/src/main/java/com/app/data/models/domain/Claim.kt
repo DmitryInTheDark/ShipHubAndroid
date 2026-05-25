@@ -22,5 +22,5 @@ data class Claim(
     val additionalInfo: String?,
     val status: ClaimStatus,
     val lastUpdate: String?,
-    val documentsIds: List<Long> = emptyList()
+    val documentsIds: List<Long> = emptyList(),
 ): Parcelable

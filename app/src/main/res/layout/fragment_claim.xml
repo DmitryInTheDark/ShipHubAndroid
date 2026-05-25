@@ -393,6 +393,61 @@
         </com.google.android.material.card.MaterialCardView>
 
         <LinearLayout
+            android:id="@+id/photosContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="20dp"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvPhotosTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/TitleTextView"
+                android:text="@string/photos"
+                android:textSize="16sp"
+                android:layout_marginBottom="16dp"/>
+
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:columnCount="3"
+                android:rowCount="1">
+
+                <ImageView
+                    android:id="@+id/ivPhoto1"
+                    android:layout_width="0dp"
+                    android:layout_height="120dp"
+                    android:layout_columnWeight="1"
+                    android:layout_margin="4dp"
+                    android:scaleType="centerCrop"
+                    android:contentDescription="@string/photo"/>
+
+                <ImageView
+                    android:id="@+id/ivPhoto2"
+                    android:layout_width="0dp"
+                    android:layout_height="120dp"
+                    android:layout_columnWeight="1"
+                    android:layout_margin="4dp"
+                    android:scaleType="centerCrop"
+                    android:contentDescription="@string/photo"/>
+
+                <ImageView
+                    android:id="@+id/ivPhoto3"
+                    android:layout_width="0dp"
+                    android:layout_height="120dp"
+                    android:layout_columnWeight="1"
+                    android:layout_margin="4dp"
+                    android:scaleType="centerCrop"
+                    android:contentDescription="@string/photo"/>
+
+            </GridLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">

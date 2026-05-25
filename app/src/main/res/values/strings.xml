@@ -162,4 +162,6 @@
     <string name="serial_number_on_create">Серийный номер</string>
     <string name="select_equipment_type">Выберите тип оборудования</string>
     <string name="equipment_type_on_create">Тип оборудования</string>
+    <string name="photos">Фотографии</string>
+    <string name="photo">Фото</string>
 </resources>
