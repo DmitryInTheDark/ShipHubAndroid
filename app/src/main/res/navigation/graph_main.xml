@@ -23,5 +23,10 @@
         android:id="@+id/documentsFragment"
         android:name="com.app.shiphub.ui.main.documents.DocumentsFragment"
         android:label="DocumentsFragment" />
+    <fragment
+        android:id="@+id/createClaimFragment"
+        android:name="com.app.shiphub.ui.main.create_claim.CreateClaimFragment"
+        android:label="CreateClaimFragment"
+        tools:layout="@layout/fragment_create_claim" />
 
 </navigation>

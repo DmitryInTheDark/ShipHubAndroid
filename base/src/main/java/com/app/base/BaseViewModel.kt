@@ -52,7 +52,13 @@ abstract class BaseViewModel<S : BaseState>(
         onFailure { _simpleState.value = SimpleStates.Error(it.handleError()) }
     }
 
+//    protected inline fun <T> Result<T>.handleResponse(errorAction: () -> Unit, action: (T) -> Unit){
+//        onSuccess { action.invoke(it) }
+//        onFailure { errorAction.invoke() }
+//    }
+
     fun cancelAction(){
         currentJob?.cancel()
     }
+
 }

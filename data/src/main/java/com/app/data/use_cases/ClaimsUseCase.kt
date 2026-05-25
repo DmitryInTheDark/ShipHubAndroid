@@ -5,6 +5,7 @@ import com.app.data.api.ClaimsApi
 import com.app.data.models.domain.Claim
 import com.app.data.models.domain.Document
 import com.app.data.models.enums.ClaimStatus
+import okhttp3.MultipartBody
 import javax.inject.Inject
 
 class ClaimsUseCase @Inject constructor(
@@ -37,5 +38,21 @@ class ClaimsUseCase @Inject constructor(
 
     suspend fun getAllClaims(): BaseListResponse<Claim> {
         return claimsApi.getAllClaims()
+    }
+
+    suspend fun createClaimWithPhotos(
+        claimPart: MultipartBody.Part,
+        photoParts: List<MultipartBody.Part>,
+        documentParts: List<MultipartBody.Part>,
+        docTypes: List<String?>
+    ): Claim {
+        return claimsApi.createClaimWithPhotos(
+            claim = claimPart,
+            photos = photoParts,
+            documents = documentParts,
+            documentType1 = docTypes.getOrNull(0),
+            documentType2 = docTypes.getOrNull(1),
+            documentType3 = docTypes.getOrNull(2)
+        )
     }
 }

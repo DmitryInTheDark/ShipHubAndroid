@@ -44,6 +44,10 @@ class LegalInfoPreferences(
         phone = legalInfo?.phone ?: ""
     }
 
+    fun clearData() {
+        sharedPref.edit { clear() }
+    }
+
     companion object{
         private const val LEGAL_INFO_STORAGE = "legal_info_storage"
     }

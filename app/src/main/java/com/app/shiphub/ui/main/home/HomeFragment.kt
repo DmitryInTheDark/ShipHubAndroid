@@ -2,11 +2,13 @@ package com.app.shiphub.ui.main.home
 
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.app.base.BaseAdapter
 import com.app.base.BasePagingFragment
 import com.app.data.models.domain.Claim
+import com.app.shiphub.MainActivity
 import com.app.shiphub.R
 import com.app.shiphub.databinding.FragmentHomeBinding
 import com.app.shiphub.databinding.HolderHomeNotificationBinding
@@ -32,9 +34,17 @@ class HomeFragment : BasePagingFragment<FragmentHomeBinding, Claim, HomeClaimHol
 
     override fun setupListeners() {
         with(binding){
-            btnCreateClaimFirst.setOnClickListener {}
+            btnCreateClaimFirst.setOnClickListener {
+                findNavController().navigate(R.id.createClaimFragment)
+            }
+            btnCreateClaimSecond.setOnClickListener {
+                findNavController().navigate(R.id.createClaimFragment)
+            }
             srlHome.setOnRefreshListener{
                 viewModel.loadFirstPage()
+            }
+            btnMyRequests.setOnClickListener {
+                (requireActivity() as MainActivity)
             }
             rvClaims.apply {
                 addItemDecoration(HorizontalSpaceItemDecoration(16.dpToPx().toInt()))

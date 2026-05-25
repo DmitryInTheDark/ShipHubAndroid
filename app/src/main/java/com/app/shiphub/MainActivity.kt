@@ -21,8 +21,10 @@ class MainActivity : BaseActivity<MainUIState, MainViewModel, ActivityMainBindin
 
     }
 
-    override fun setupUI() {
+    override fun setupUI() {}
 
+    fun exit(){
+        navController.setGraph(R.navigation.graph_auth)
     }
 
     override fun handleState(state: MainUIState) {

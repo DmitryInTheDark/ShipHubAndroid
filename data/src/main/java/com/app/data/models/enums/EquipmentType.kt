@@ -1,5 +1,8 @@
 package com.app.data.models.enums
 
+import kotlinx.serialization.Serializable
+
+@Serializable
 enum class EquipmentType(val displayName: String) {
 
     ELECTRO_TOOLS("Электрообуродование"),

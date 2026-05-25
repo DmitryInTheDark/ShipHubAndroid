@@ -24,6 +24,10 @@ class PhysicalInfoPreferences(
         address = physicalInfo?.address ?: ""
     }
 
+    fun clearData() {
+        sharedPref.edit{ clear() }
+    }
+
 
     companion object{
         private const val PHYSICAL_INFO_STORAGE = "physical_info_storage"

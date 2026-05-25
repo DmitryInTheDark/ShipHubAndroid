@@ -55,6 +55,11 @@ class UserPreferences(
     }
 
     fun jwt() = jwt
+    fun clearData() {
+        sharedPref.edit { clear() }
+        legalInfoPreferences.clearData()
+        physicalInfoPreferences.clearData()
+    }
 
     companion object{
         private const val USER_STORAGE = "user_storage"

@@ -77,11 +77,89 @@
 
     <!--  Documents  -->
     <string name="claim">Заявка</string>
+    <string name="claim_not_found">Заявка не найдена</string>
+    <string name="claim_of_number">Заявка №%d</string>
     <string name="contracts">Договоры</string>
     <string name="acts">Акты</string>
     <string name="checks">Счета</string>
+    <string name="info_docs">Информационные документы</string>
     <string name="number">№ %d</string>
     <string name="documents_not_found">Документы не найдены</string>
     <string name="documents_and_claims_not_found">Документы и заявки не найдены</string>
 
+    <!--  Info  -->
+    <string name="info_title">Часто задаваемые вопросы</string>
+    <string name="question_1">Как работает наша организация с заявками?</string>
+    <string name="response_1">Вы создаете заявку в приложении, затем менеджер проверяет комплектность. При необходимости вопросы уточняются в чате. После выполнения работ документы оформляются и после подтверждения менеджером становятся доступными в разделе "Документы".</string>
+
+    <string name="question_2">Что делать, если по оборудованию не хватает данных?</string>
+    <string name="response_2">Напишите менеджеру в чате и приложите то, что есть: фото маркировки, серийный номер (если найден), модель. Менеджер подскажет, какие сведения требуются для выбранных услуг.</string>
+
+    <string name="question_3">Какие документы обычно нужны для подготовки к испытаниям/анализу?</string>
+    <string name="response_3">Обычно нужны исходные сведения об оборудовании (тип, модель, производитель, серийный номер) и фото/документы по маркировке. По конкретной задаче менеджер уточнит перечень в чат.</string>
+
+    <string name="question_4">Какие могут быть уточняющие вопросы по условиям эксплуатации?</string>
+    <string name="response_4">Менеджер часто уточняет: место и режим эксплуатации, требования к условиям окружающей среды, особенности применения оборудования, а также наличие ограничений/регламентов у заказчика.</string>
+
+    <string name="question_5">Чем отличаются услуги ПТЭЭП и ЭМС (когда выбрать какую)?</string>
+    <string name="response_5">ПТЭЭП обычно связан с безопасностью/электробезопасностью, а ЭМС — с электромагнитной совместимостью. Конкретный выбор зависит от типа оборудования и цели подтверждения. Менеджер поможет определить набор услуг по описанию в заявке.</string>
+
+    <string name="question_6">Что означает статус \"в работе\"?</string>
+    <string name="response_6">Обычно это означает, что оборудование принято в работу по заявке и начаты необходимые шаги (испытания/анализ/подготовка документов). Детали фиксируются в истории этапов.</string>
+
+    <string name="question_7">Когда статус \"готово\" означает, что документы уже можно получать?</string>
+    <string name="response_7">Как правило, \"готово\" — это когда документы оформлены. Доступ к итоговым файлам клиенту появляется после подтверждения менеджером/утверждения в процессе.</string>
+
+    <string name="question_8">Почему менеджер может запросить фото оборудования еще раз?</string>
+    <string name="response_8">Для корректной идентификации (модель, маркировка, серийный номер), а также для подтверждения исходных данных, необходимых для корректного проведения работ по выбранным услугам.</string>
+
+    <string name="question_9">Какие вопросы стоит задать менеджеру, чтобы быстрее согласовать результат?</string>
+    <string name="response_9">Можно обсудить: точный состав итоговых документов, сроки подготовки, требования к входным данным, необходимость дополнительных файлов, а также формат выдачи (PDF, набор документов по этапам).</string>
+
+    <string name="question_10">Сколько обычно времени занимает оформление итоговых документов?</string>
+    <string name="response_10">Срок зависит от перечня услуг, типа оборудования и полноты исходных данных. Менеджер ориентирует по срокам после проверки комплектности и согласования уточнений в чате.</string>
+
+    <string name="question_11">Можно ли загрузить дополнительные документы после отправки заявки?</string>
+    <string name="response_11">Да, через карточку заявки/в интерфейсе документов. Если текущий этап допускает загрузку, файл будет добавлен к материалам заявки и учтен в подготовке итоговых документов.</string>
+
+    <string name="question_12">Какие уточнения можно обсудить, чтобы корректно подготовить сертификацию (РСТ/ТР ТС)?</string>
+    <string name="response_12">Удобно обсудить с менеджером: точное назначение оборудования, соответствующие технические характеристики, наличие обязательной документации/маркировки, а также требования по применимости схем подтверждения (если они определяются в процессе).</string>
+
+    <!--  Profile  -->
+    <string name="contacts_title">Контакты «ООО ЮК ШиП»</string>
+    <string name="phone_label">Телефон</string>
+    <string name="phone_value">7 961 277–47–52</string>
+    <string name="address_label">Адрес</string>
+    <string name="address_value">344091, Ростовская область, г. о. город Ростов-на-Дону, г. Ростов-на-Дону, ул. 2-я Краснодарская, зд. 145А, офис 69</string>
+    <string name="profile_title">Профиль</string>
+    <string name="if_physical">Если физ.лицо</string>
+    <string name="if_legal_representative">Если юр.лицо - добавляется секция Представитель</string>
+    <string name="representative_title">Представитель</string>
+    <string name="representative_fio">ФИО представителя</string>
+    <string name="save_changes">Сохранить изменения</string>
+    <string name="full_legal_address">Юридический адрес</string>
+    <string name="phone_hint">+7 (XXX) XXX-XX-XX</string>
+    <string name="exit">Выйти из аккаунта</string>
+    <string name="allow_exit_title">Подтверждение выхода</string>
+    <string name="allow_exit">Вы уверены?</string>
+    <string name="empty_field">Пустое поле</string>
+    <string name="success_save">Изменения успешно сохранены</string>
+
+    <!-- Create Claim -->
+    <string name="create_claim_title">Создание заявки</string>
+    <string name="client_name">Имя клиента</string>
+    <string name="test_type">Тип испытаний</string>
+    <string name="is_custom_type">Другой тип</string>
+    <string name="custom_test_name">Название типа испытаний</string>
+    <string name="additional_info">Дополнительная информация</string>
+    <string name="equipment_info">Информация об оборудовании</string>
+    <string name="attach_photos">Прикрепить фото (макс. 3)</string>
+    <string name="attach_documents">Прикрепить документы</string>
+    <string name="send_claim">Отправить заявку</string>
+    <string name="select_test_type">Выберите тип испытаний</string>
+    <string name="manufacturer">Производитель</string>
+    <string name="count">Количество</string>
+    <string name="serial_number_on_create">Серийный номер</string>
+    <string name="select_equipment_type">Выберите тип оборудования</string>
+    <string name="equipment_type_on_create">Тип оборудования</string>
 </resources>

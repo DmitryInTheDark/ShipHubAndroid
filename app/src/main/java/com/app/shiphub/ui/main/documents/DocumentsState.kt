@@ -7,5 +7,4 @@ sealed class DocumentsState : BaseState(){
     class InitScreen(): DocumentsState()
     class SetupDocumentsAndClaims(val claimsIds: List<Long>, val currentDocuments: List<Document>): DocumentsState()
     class SetupDocumentByCurrentClaim(val documents: List<Document>): DocumentsState()
-    class SetupEmptyState(): DocumentsState()
 }

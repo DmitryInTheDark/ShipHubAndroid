@@ -22,7 +22,7 @@ class EmailFragment : BaseFragment<FragmentEmailBinding, EmailUIState, EmailView
 
     private val args: EmailFragmentArgs by navArgs()
     private val ets
-        get() = with(binding){listOf(etOtp1, etOtp2, etOtp3, etOtp4, etOtp5)}
+        get() = with(binding){listOf(etOtp1, etOtp2, etOtp3, etOtp4)}
     private val code
         get() = ets.joinToString("") { it.text.toString() }
 

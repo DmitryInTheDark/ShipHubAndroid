@@ -2,6 +2,7 @@ package com.app.shiphub.di
 
 import com.app.data.UserRepository
 import com.app.data.api.AuthApi
+import com.app.data.api.UserApi
 import com.app.data.use_cases.AuthUseCase
 import com.app.data.use_cases.UserUseCase
 import dagger.Module
@@ -17,9 +18,10 @@ object UseCaseModule {
     @Provides
     @Singleton
     fun provideUserUseCase(
-        userRepository: UserRepository
+        userRepository: UserRepository,
+        userApi: UserApi
     ): UserUseCase{
-        return UserUseCase(userRepository)
+        return UserUseCase(userRepository, userApi)
     }
 
     @Provides

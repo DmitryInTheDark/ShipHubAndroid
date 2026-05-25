@@ -12,7 +12,7 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val claimsUseCase: ClaimsUseCase,
-    private val userUseCase: UserUseCase
+    userUseCase: UserUseCase
 ) : BasePagingViewModel<Claim, HomeUIState, HomeClaimHolderModel>(
     HomeUIState.InitUserInfo(userUseCase.getUser(), emptyList())
 ){
@@ -23,6 +23,9 @@ class HomeViewModel @Inject constructor(
 
     override fun loadPage(page: Int) {
         super.loadPage(page)
+    }
+
+    override suspend fun onLoadError(e: Exception) {
     }
 
     override fun map(domain: Claim): HomeClaimHolderModel {

@@ -1,5 +1,5 @@
 [versions]
-agp = "9.1.1"
+agp = "9.2.1"
 coreKtx = "1.18.0"
 hilt = "2.59.2"
 inputMaskAndroid = "7.2.4"
@@ -10,7 +10,7 @@ appcompat = "1.7.1"
 coroutines = "1.11.0"
 loggingInterceptor = "5.3.2"
 serializationJson = "1.11.0"
-lifecycleViewmodelNavigation3 = "2.11.0-beta01"
+lifecycleViewmodelNavigation3 = "2.11.0-beta02"
 material = "1.14.0"
 activity = "1.13.0"
 constraintlayout = "2.2.1"
@@ -21,6 +21,8 @@ room = "2.8.4"
 timber = "5.0.1"
 viewModel="2.10.0"
 swiperefreshlayout = "1.2.0"
+core = "1.18.0"
+coil = "2.7.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -51,6 +53,8 @@ androidx-constraintlayout = { group = "androidx.constraintlayout", name = "const
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
 timber = { module = "com.jakewharton.timber:timber", version.ref = "timber" }
 androidx-swiperefreshlayout = { group = "androidx.swiperefreshlayout", name = "swiperefreshlayout", version.ref = "swiperefreshlayout" }
+androidx-core = { group = "androidx.core", name = "core", version.ref = "core" }
+coil = { module = "io.coil-kt:coil", version.ref = "coil" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

@@ -41,32 +41,30 @@ class DocumentsFragment: BaseFragment<FragmentDocumentsBinding, DocumentsState, 
         rvClaimsIds.adapter = adapter
     }
 
-    private fun setupClaimsAndDocuments(claimsIds: List<Long>, documents: List<Document>) {
+    private fun setupClaimsAndDocuments(claimsIds: List<Long>, documents: List<Document>)  = with(binding){
         adapter.submitList(claimsIds.map { ClaimIdHolderModel(it) })
-        binding.tvDocumentsAndClaimsNotFound.isVisible = false
         setupDocuments(documents)
+        binding.tvDocumentsAndClaimsNotFound.isVisible = claimsIds.isEmpty() && documents.isEmpty()
     }
 
     private fun setupDocumentSection(documents: List<Document>, ll: LinearLayout){
         ll.removeAllViews()
-        ll.apply {
-            isVisible = documents.isNotEmpty()
-            if (documents.isNotEmpty()){
-                documents.forEach { document ->
-                    addView(HolderDocumentBinding.inflate(layoutInflater, this, false).apply {
-                        tvDocumentName.text = document.name
-                        ibDownload.setOnClickListener { Timber.i("Download ${document.id}") }
-                        ibShow.setOnClickListener { Timber.i("Show ${document.id}") }
-                    }.root)
-                }
-            }
+        ll.isVisible = documents.isNotEmpty()
+        documents.forEach { document ->
+            ll.addView(HolderDocumentBinding.inflate(layoutInflater, ll, false).apply {
+                tvDocumentName.text = document.name
+                ibDownload.setOnClickListener { Timber.i("Download ${document.id}") }
+                ibShow.setOnClickListener { Timber.i("Show ${document.id}") }
+            }.root)
         }
     }
 
     private fun setupDocuments(documents: List<Document>) = with(binding){
-        val contracts = documents.filter { it.type == DocumentType.AGREEMENT }
-        val acts = documents.filter { it.type == DocumentType.ACT }
-        val checks = documents.filter { it.type == DocumentType.CHECK }
+        val groups = documents.groupBy { it.type }
+        val contracts = groups[DocumentType.AGREEMENT].orEmpty()
+        val acts = groups[DocumentType.ACT].orEmpty()
+        val checks = groups[DocumentType.CHECK].orEmpty()
+        val info = groups[DocumentType.INFO].orEmpty()
         tvContracts.isVisible = contracts.isNotEmpty()
         vContracts.isVisible = contracts.isNotEmpty()
         setupDocumentSection(contracts, llContracts)
@@ -76,17 +74,26 @@ class DocumentsFragment: BaseFragment<FragmentDocumentsBinding, DocumentsState, 
         tvChecks.isVisible = checks.isNotEmpty()
         vChecks.isVisible = checks.isNotEmpty()
         setupDocumentSection(checks, llChecks)
-        tvDocumentsNotFound.isVisible = contracts.isEmpty() && acts.isEmpty() && checks.isEmpty()
+        tvInfo.isVisible = info.isNotEmpty()
+        vInfo.isVisible = info.isNotEmpty()
+        setupDocumentSection(info, llInfo)
+        binding.tvDocumentsNotFound.isVisible = documents.isEmpty()
     }
 
     override fun handleState(state: DocumentsState) {
         when(state){
             is DocumentsState.InitScreen -> {}
-            is DocumentsState.SetupDocumentsAndClaims -> setupClaimsAndDocuments(state.claimsIds, state.currentDocuments)
-            is DocumentsState.SetupDocumentByCurrentClaim -> setupDocuments(state.documents)
-            is DocumentsState.SetupEmptyState -> {
-                setupDocuments(emptyList())
-                binding.tvDocumentsAndClaimsNotFound.isVisible = true
+            is DocumentsState.SetupDocumentsAndClaims -> {
+                if (state.claimsIds.isNotEmpty()) binding.tvCurrentClaim.text = getString(R.string.claim_of_number, viewModel.getCurrentClaimId())
+                else binding.tvCurrentClaim.text = getString(R.string.claim_not_found)
+                setupClaimsAndDocuments(state.claimsIds, state.currentDocuments)
+            }
+            is DocumentsState.SetupDocumentByCurrentClaim -> {
+                viewModel.getCurrentClaimId().let {
+                    if (it == null) binding.tvCurrentClaim.text = getString(R.string.claim_not_found)
+                    else binding.tvCurrentClaim.text = getString(R.string.claim_of_number, it)
+                }
+                setupDocuments(state.documents)
             }
         }
     }

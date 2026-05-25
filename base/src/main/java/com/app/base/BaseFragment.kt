@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.content.res.AppCompatResources
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -15,6 +14,7 @@ import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import androidx.viewbinding.ViewBinding
 import com.app.base.ViewUtils.requireLoadingDialog
+import com.app.base.databinding.DialogBinding
 import kotlinx.coroutines.launch
 
 abstract class BaseFragment<VB : ViewBinding, S : BaseState, VM : BaseViewModel<S>>: Fragment() {
@@ -74,12 +74,47 @@ abstract class BaseFragment<VB : ViewBinding, S : BaseState, VM : BaseViewModel<
         }
     }
     protected open fun setErrorState(message: String) {
-        AlertDialog.Builder(requireContext())
-            .setIcon(AppCompatResources.getDrawable(requireContext(), R.drawable.error))
-            .setTitle(R.string.error)
-            .setMessage(message)
-            .setPositiveButton(R.string.continue_text) { p0, _ -> p0?.dismiss() }
-            .show()
+        createBaseDialog(
+            getString(R.string.error),
+            message
+        ).show()
+    }
+
+    private fun createBaseDialog(
+        title: String,
+        message: String,
+        onBtnAction: (() -> Unit)? = null
+    ): AlertDialog {
+
+        val dialogBinding = DialogBinding.inflate(layoutInflater)
+
+        dialogBinding.tvTitle.text = title
+        dialogBinding.tvMessage.text = message
+
+        val dialog = AlertDialog.Builder(requireContext())
+            .setView(dialogBinding.root)
+            .create()
+
+        dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
+
+        dialogBinding.btnAction.setOnClickListener {
+            onBtnAction?.invoke()
+            dialog.dismiss()
+        }
+
+        return dialog
+    }
+
+    protected open fun showDialog(
+        title: String,
+        message: String,
+        onBtnAction: () -> Unit
+    ) {
+        createBaseDialog(
+            title,
+            message,
+            onBtnAction
+        ).show()
     }
 
     abstract fun handleState(state: S)

@@ -10,31 +10,40 @@ import javax.inject.Inject
 class DocumentsViewModel @Inject constructor(
     private val claimsUseCase: ClaimsUseCase
 ): BaseViewModel<DocumentsState>(DocumentsState.InitScreen()) {
+
+    private var currentClaimId: Long? = null
     fun getDocuments(claimId: Long) = withLoading {
+        currentClaimId = claimId
         safeCall { claimsUseCase.getDocumentsByClaimId(claimId) }
-            .handleResponse { emitState(DocumentsState.SetupDocumentByCurrentClaim(it.items)) }
+            .handleResponse {
+                emitState(DocumentsState.SetupDocumentByCurrentClaim(it.items))
+            }
     }
 
     init {
-        withLoading {
-            safeCall { claimsUseCase.getAllClaims() }
-                .handleResponse { claims ->
-                    val claims = claims.items
-                    if (claims.isEmpty()){
-                        emitState(DocumentsState.SetupEmptyState())
-                    }else{
-                        safeCall { claimsUseCase.getDocumentsByClaimId(claims.first().id) }
-                            .handleResponse {  documents ->
-                                emitState(DocumentsState.SetupDocumentsAndClaims(
-                                    claims.map { it.id },
-                                    documents.items
-                                    )
-                                )
-                            }
-
-                    }
-                }
-        }
+        getClaims()
     }
 
+    fun getClaims() = withLoading {
+        safeCall { claimsUseCase.getAllClaims() }
+            .handleResponse { response ->
+                val claims = response.items
+                if (claims.isEmpty()) {
+                    emitState(DocumentsState.SetupDocumentsAndClaims(emptyList(), emptyList()))
+                } else {
+                    currentClaimId = claims.first().id
+                    safeCall { claimsUseCase.getDocumentsByClaimId(claims.first().id) }
+                        .handleResponse { documents ->
+                            emitState(
+                                DocumentsState.SetupDocumentsAndClaims(
+                                    claims.map { it.id },
+                                    documents.items
+                                )
+                            )
+                        }
+                }
+            }
+    }
+
+    fun getCurrentClaimId() = currentClaimId
 }

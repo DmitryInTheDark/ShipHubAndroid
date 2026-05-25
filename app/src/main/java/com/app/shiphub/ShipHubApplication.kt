@@ -17,8 +17,14 @@ class ShipHubApplication : Application(){
 
     override fun onCreate() {
         super.onCreate()
+        instance = this
         initTimber()
     }
 
     private fun initTimber() = Timber.plant(debugTree)
+
+    companion object {
+        lateinit var instance: ShipHubApplication
+            private set
+    }
 }

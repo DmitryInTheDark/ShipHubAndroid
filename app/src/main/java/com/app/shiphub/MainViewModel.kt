@@ -7,10 +7,14 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
-    userRepository: UserRepository
+    private val userRepository: UserRepository
 ): BaseViewModel<MainUIState>(MainUIState.InitScreen()) {
 
     init {
+        check()
+    }
+
+    fun check(){
         withLoading {
             if (userRepository.isUserAuthorized()) emitState(MainUIState.SkipLogin())
             else emitState(MainUIState.ShowLoginScreen())

@@ -37,10 +37,14 @@ abstract class BasePagingViewModel<T, S : BaseState, M : BaseHolderModel>(initia
                 emitPagingState(BasePagingState.OnItemsLoad(currentItems.map { map(it) }))
             }
         }catch (e: Exception){
-            emitSimpleState(SimpleStates.Error(e.handleError()))
+            emitPagingState(BasePagingState.OnLoadError(e.handleError()))
         }finally {
             isLoading = false
         }
+    }
+
+    protected open suspend fun onLoadError(e: Exception){
+        emitSimpleState(SimpleStates.Error(e.handleError()))
     }
 
     open fun loadFirstPage() {

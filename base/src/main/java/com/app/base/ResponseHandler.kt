@@ -17,6 +17,7 @@ inline fun <T> safeCall(action: () -> T): Result<T> {
 }
 
 fun Throwable.handleError(): String {
+    printStackTrace()
     return when (this) {
         is UnknownHostException,
         is SocketTimeoutException -> {

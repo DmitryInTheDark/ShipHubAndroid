@@ -99,4 +99,8 @@ object NetworkModule {
     @Provides
     @Singleton
     fun provideClaimsApi(retrofit: Retrofit): ClaimsApi = retrofit.create(ClaimsApi::class.java)
+
+    @Provides
+    @Singleton
+    fun provideUserApi(retrofit: Retrofit): com.app.data.api.UserApi = retrofit.create(com.app.data.api.UserApi::class.java)
 }

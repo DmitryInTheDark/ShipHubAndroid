@@ -94,21 +94,21 @@
             android:textSize="24sp"
             tools:ignore="LabelFor" />
 
-        <EditText
-            android:id="@+id/etOtp5"
-            android:layout_width="56dp"
-            android:layout_height="72dp"
-            android:layout_margin="8dp"
-            android:background="@drawable/bg_otp_box"
-            android:gravity="center"
-            android:importantForAutofill="no"
-            android:inputType="text"
-            android:maxLength="1"
-            android:textAllCaps="true"
-            android:textColor="@color/black"
-            android:textCursorDrawable="@null"
-            android:textSize="24sp"
-            tools:ignore="LabelFor" />
+<!--        <EditText-->
+<!--            android:id="@+id/etOtp5"-->
+<!--            android:layout_width="56dp"-->
+<!--            android:layout_height="72dp"-->
+<!--            android:layout_margin="8dp"-->
+<!--            android:background="@drawable/bg_otp_box"-->
+<!--            android:gravity="center"-->
+<!--            android:importantForAutofill="no"-->
+<!--            android:inputType="text"-->
+<!--            android:maxLength="1"-->
+<!--            android:textAllCaps="true"-->
+<!--            android:textColor="@color/black"-->
+<!--            android:textCursorDrawable="@null"-->
+<!--            android:textSize="24sp"-->
+<!--            tools:ignore="LabelFor" />-->
 
     </LinearLayout>
 

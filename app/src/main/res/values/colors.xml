@@ -17,5 +17,6 @@
     <color name="claim_button_stroke_color">#D1D1D1</color>
     <color name="green">#16A34A</color>
     <color name="turquoise">#14B8A6</color>
+    <color name="red">#FF0F00</color>
     <color name="purple">#7C3AED</color>
 </resources>

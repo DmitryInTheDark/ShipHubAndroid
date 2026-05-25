@@ -4,9 +4,8 @@ import com.app.base.models.BaseListResponse
 import com.app.data.models.domain.Claim
 import com.app.data.models.domain.Document
 import com.app.data.models.enums.ClaimStatus
-import retrofit2.http.GET
-import retrofit2.http.Path
-import retrofit2.http.Query
+import okhttp3.MultipartBody
+import retrofit2.http.*
 
 interface ClaimsApi {
 
@@ -39,5 +38,16 @@ interface ClaimsApi {
 
     @GET("/claims")
     suspend fun getAllClaims(): BaseListResponse<Claim>
+
+    @Multipart
+    @POST("/claims/create_with_photos")
+    suspend fun createClaimWithPhotos(
+        @Part claim: MultipartBody.Part,
+        @Part photos: List<MultipartBody.Part>,
+        @Part documents: List<MultipartBody.Part>,
+        @Part("document_type1") documentType1: String? = null,
+        @Part("document_type2") documentType2: String? = null,
+        @Part("document_type3") documentType3: String? = null
+    ): Claim
 
 }

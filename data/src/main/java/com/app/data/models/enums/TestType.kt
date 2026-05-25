@@ -1,5 +1,8 @@
 package com.app.data.models.enums
 
+import kotlinx.serialization.Serializable
+
+@Serializable
 enum class TestType(val displayName: String) {
 
     SECURITY("Испытания на безопасность"),
