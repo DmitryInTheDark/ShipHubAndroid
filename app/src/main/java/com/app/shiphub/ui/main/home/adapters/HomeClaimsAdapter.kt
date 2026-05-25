@@ -6,20 +6,34 @@ import com.app.base.BaseAdapter
 import com.app.base.BaseDiffUtilCallback
 import com.app.shiphub.databinding.HomeClaimHolderBinding
 
-class HomeClaimsAdapter: BaseAdapter<HomeClaimHolderModel, HomeClaimViewHolder>(
+class HomeClaimsAdapter(
+    private val callback: HomeClaimCallback
+): BaseAdapter<HomeClaimHolderModel, HomeClaimViewHolder>(
     BaseDiffUtilCallback()
 ) {
+
+    fun interface HomeClaimCallback {
+        fun onClick(claimId: Long)
+    }
+
     override fun onCreateViewHolder(
         parent: ViewGroup,
         position: Int
     ): HomeClaimViewHolder {
-        return HomeClaimViewHolder(HomeClaimHolderBinding.inflate(LayoutInflater.from(parent.context)))
+        return HomeClaimViewHolder(
+            HomeClaimHolderBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            ),
+            callback
+        )
     }
 
     override fun onBindViewHolder(
         viewHolder: HomeClaimViewHolder,
         position: Int
     ) {
-        viewHolder.bind(currentList[position])
+        viewHolder.bind(getItem(position))
     }
 }

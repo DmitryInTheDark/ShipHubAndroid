@@ -23,6 +23,9 @@ viewModel="2.10.0"
 swiperefreshlayout = "1.2.0"
 core = "1.18.0"
 coil = "2.7.0"
+grpc = "1.81.0"
+protobuf = "4.35.0"
+protobufPlugin = "0.10.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -55,10 +58,18 @@ timber = { module = "com.jakewharton.timber:timber", version.ref = "timber" }
 androidx-swiperefreshlayout = { group = "androidx.swiperefreshlayout", name = "swiperefreshlayout", version.ref = "swiperefreshlayout" }
 androidx-core = { group = "androidx.core", name = "core", version.ref = "core" }
 coil = { module = "io.coil-kt:coil", version.ref = "coil" }
+grpc-android = { module = "io.grpc:grpc-android", version.ref = "grpc" }
+grpc-okhttp = { module = "io.grpc:grpc-okhttp", version.ref = "grpc" }
+grpc-protobuf-lite = { module = "io.grpc:grpc-protobuf-lite", version.ref = "grpc" }
+grpc-stub = { module = "io.grpc:grpc-stub", version.ref = "grpc" }
+grpc-kotlin-stub = { module = "io.grpc:grpc-kotlin-stub", version = "1.5.0" }
+protobuf-kotlin-lite = { module = "com.google.protobuf:protobuf-kotlin-lite", version.ref = "protobuf" }
+protobuf-protoc = { module = "com.google.protobuf:protoc", version.ref = "protobuf" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 android-library = { id = "com.android.library", version.ref = "agp" }
 jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "jetbrainsKotlinJvm" }
 androidx-navigation-safeargs = { id = "androidx.navigation.safeargs.kotlin", version.ref = "navigation" }
+protobuf = { id = "com.google.protobuf", version.ref = "protobufPlugin" }
 

@@ -4,6 +4,8 @@ import com.app.data.UserRepository
 import com.app.data.api.AuthApi
 import com.app.data.api.ClaimsApi
 import com.app.shiphub.BuildConfig
+import io.grpc.*
+import io.grpc.okhttp.OkHttpChannelBuilder
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -103,4 +105,42 @@ object NetworkModule {
     @Provides
     @Singleton
     fun provideUserApi(retrofit: Retrofit): com.app.data.api.UserApi = retrofit.create(com.app.data.api.UserApi::class.java)
+
+    @Provides
+    @Singleton
+    fun provideGrpcChannel(userRepository: UserRepository): ManagedChannel {
+        val url = BuildConfig.BASE_URL.removePrefix("http://").removePrefix("https://").removeSuffix("/")
+        val parts = url.split(":")
+        val host = parts[0]
+        
+        // В Spring Boot gRPC по умолчанию работает на порту 9090, 
+        // в то время как REST на 8080.
+        val grpcPort = 9090
+
+        val authInterceptor = object : ClientInterceptor {
+            override fun <ReqT : Any, RespT : Any> interceptCall(
+                method: MethodDescriptor<ReqT, RespT>,
+                callOptions: CallOptions,
+                next: Channel
+            ): ClientCall<ReqT, RespT> {
+                return object : ForwardingClientCall.SimpleForwardingClientCall<ReqT, RespT>(
+                    next.newCall(method, callOptions)
+                ) {
+                    override fun start(responseListener: Listener<RespT>, headers: Metadata) {
+                        val jwt = userRepository.getJwt()
+                        if (jwt.isNotEmpty()) {
+                            val authKey = Metadata.Key.of("Authorization", Metadata.ASCII_STRING_MARSHALLER)
+                            headers.put(authKey, "Bearer $jwt")
+                        }
+                        super.start(responseListener, headers)
+                    }
+                }
+            }
+        }
+
+        return OkHttpChannelBuilder.forAddress(host, grpcPort)
+            .usePlaintext()
+            .intercept(authInterceptor)
+            .build()
+    }
 }

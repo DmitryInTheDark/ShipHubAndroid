@@ -26,6 +26,9 @@ class ClaimFragment: BaseFragment<FragmentClaimBinding, ClaimUIState, ClaimViewM
         binding.ibBack.setOnClickListener {
             navigateBack()
         }
+        binding.bChat.setOnClickListener {
+            navigate(ClaimFragmentDirections.actionClaimFragmentToChatFragment(args.claimId))
+        }
     }
 
     override fun setupUI() {

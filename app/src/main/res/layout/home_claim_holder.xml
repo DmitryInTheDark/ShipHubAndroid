@@ -21,7 +21,7 @@
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tvServiceType"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:text="@string/service_type"
         android:textSize="16sp"
@@ -39,7 +39,7 @@
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tvLastUpdate"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         style="@style/NormalTextView"
         android:layout_height="wrap_content"
         tools:text="@string/last_update"

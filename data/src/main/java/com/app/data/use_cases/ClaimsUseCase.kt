@@ -5,12 +5,16 @@ import com.app.data.api.ClaimsApi
 import com.app.data.models.domain.Claim
 import com.app.data.models.domain.Document
 import com.app.data.models.enums.ClaimStatus
+import com.app.data.models.response.MessageResponse
 import okhttp3.MultipartBody
 import javax.inject.Inject
 
 class ClaimsUseCase @Inject constructor(
-    private val claimsApi: ClaimsApi
+    private val claimsApi: ClaimsApi,
+    private val userRepository: com.app.data.UserRepository
 ) {
+
+    fun getCurrentUserId(): Long = userRepository.getUser().id
 
     suspend fun getClaims(
         pageNumber: Int,
@@ -38,6 +42,10 @@ class ClaimsUseCase @Inject constructor(
 
     suspend fun getAllClaims(): BaseListResponse<Claim> {
         return claimsApi.getAllClaims()
+    }
+
+    suspend fun getMessagesByClaim(claimId: Long): BaseListResponse<MessageResponse> {
+        return claimsApi.getMessagesByClaim(claimId)
     }
 
     suspend fun createClaimWithPhotos(

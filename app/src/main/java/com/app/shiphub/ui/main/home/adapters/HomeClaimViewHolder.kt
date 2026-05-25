@@ -6,7 +6,8 @@ import com.app.shiphub.R
 import com.app.shiphub.databinding.HomeClaimHolderBinding
 
 class HomeClaimViewHolder(
-    private val binding: HomeClaimHolderBinding
+    private val binding: HomeClaimHolderBinding,
+    private val callback: HomeClaimsAdapter.HomeClaimCallback
 ): BaseViewHolder(binding) {
 
     fun bind(holder: HomeClaimHolderModel) = with(binding){
@@ -16,6 +17,9 @@ class HomeClaimViewHolder(
         tvLastUpdate.apply {
             isVisible = holder.lastUpdate.isNotBlank()
             text = context.getString(R.string.last_update, holder.lastUpdate)
+        }
+        root.setOnClickListener {
+            callback.onClick(holder.id)
         }
     }
 

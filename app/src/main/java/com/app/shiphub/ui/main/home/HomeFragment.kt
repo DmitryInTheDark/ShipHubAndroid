@@ -2,13 +2,11 @@ package com.app.shiphub.ui.main.home
 
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.app.base.BaseAdapter
 import com.app.base.BasePagingFragment
 import com.app.data.models.domain.Claim
-import com.app.shiphub.MainActivity
 import com.app.shiphub.R
 import com.app.shiphub.databinding.FragmentHomeBinding
 import com.app.shiphub.databinding.HolderHomeNotificationBinding
@@ -17,7 +15,6 @@ import com.app.shiphub.ui.main.home.adapters.HomeClaimViewHolder
 import com.app.shiphub.ui.main.home.adapters.HomeClaimsAdapter
 import com.app.shiphub.util.HorizontalSpaceItemDecoration
 import dagger.hilt.android.AndroidEntryPoint
-import kotlin.math.abs
 
 @AndroidEntryPoint
 class HomeFragment : BasePagingFragment<FragmentHomeBinding, Claim, HomeClaimHolderModel, HomeClaimViewHolder, HomeUIState, HomeViewModel>() {
@@ -26,7 +23,10 @@ class HomeFragment : BasePagingFragment<FragmentHomeBinding, Claim, HomeClaimHol
 
     override fun initializeBinding() = FragmentHomeBinding.inflate(layoutInflater)
 
-    override fun initAdapterAndRecyclerView(): Pair<BaseAdapter<HomeClaimHolderModel, HomeClaimViewHolder>, RecyclerView> = HomeClaimsAdapter() to binding.rvClaims
+    override fun initAdapterAndRecyclerView(): Pair<BaseAdapter<HomeClaimHolderModel, HomeClaimViewHolder>, RecyclerView> =
+        HomeClaimsAdapter { claimId ->
+            navigate(HomeFragmentDirections.actionHomeFragmentToClaimFragment2(claimId))
+        } to binding.rvClaims
 
     override fun setLightLoading(isLoading: Boolean) {
         binding.srlHome.isRefreshing = isLoading
@@ -35,35 +35,31 @@ class HomeFragment : BasePagingFragment<FragmentHomeBinding, Claim, HomeClaimHol
     override fun setupListeners() {
         with(binding){
             btnCreateClaimFirst.setOnClickListener {
-                findNavController().navigate(R.id.createClaimFragment)
+                navigate(R.id.createClaimFragment)
             }
             btnCreateClaimSecond.setOnClickListener {
-                findNavController().navigate(R.id.createClaimFragment)
+                navigate(R.id.createClaimFragment)
             }
             srlHome.setOnRefreshListener{
                 viewModel.loadFirstPage()
             }
             btnMyRequests.setOnClickListener {
-                (requireActivity() as MainActivity)
+                navigate(HomeFragmentDirections.actionHomeFragmentToGraphClaims())
             }
-            rvClaims.apply {
-                addItemDecoration(HorizontalSpaceItemDecoration(16.dpToPx().toInt()))
-                addOnScrollListener(object : RecyclerView.OnScrollListener(){
-                    override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                        (layoutManager as LinearLayoutManager).let {
-                            val lastVisibleItemPosition = it.findLastVisibleItemPosition()
-                            val totalItemsCount = it.itemCount
-                            if (dx> 0 && lastVisibleItemPosition >= abs(totalItemsCount - 2)) {
-                                viewModel.loadNextPage()
-                            }
-                        }
-                    }
-                })
+            btnToDocuments.setOnClickListener {
+                navigate(HomeFragmentDirections.actionHomeFragmentToDocumentsFragment())
             }
         }
     }
 
-    override fun setupUI(){}
+    override fun setupUI() {
+        with(binding){
+            rvClaims.apply {
+                layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+                addItemDecoration(HorizontalSpaceItemDecoration(16.dpToPx().toInt()))
+            }
+        }
+    }
 
     override fun setLoadingState(isLoading: Boolean) {
         super.setLoadingState(isLoading)

@@ -9,7 +9,17 @@
         android:id="@+id/homeFragment"
         android:name="com.app.shiphub.ui.main.home.HomeFragment"
         android:label="HomeFragment"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_graph_claims"
+            app:destination="@id/graph_claims" />
+        <action
+            android:id="@+id/action_homeFragment_to_documentsFragment"
+            app:destination="@id/documentsFragment"/>
+        <action
+            android:id="@+id/action_homeFragment_to_claimFragment2"
+            app:destination="@id/claimFragment2" />
+    </fragment>
     <include app:graph="@navigation/graph_claims" />
     <fragment
         android:id="@+id/infoFragment"
@@ -28,5 +38,14 @@
         android:name="com.app.shiphub.ui.main.create_claim.CreateClaimFragment"
         android:label="CreateClaimFragment"
         tools:layout="@layout/fragment_create_claim" />
+    <fragment
+        android:id="@+id/claimFragment2"
+        android:name="com.app.shiphub.ui.main.claims.claim.ClaimFragment"
+        android:label="ClaimFragment">
+        <argument
+            android:name="claimId"
+            app:argType="long"
+            app:nullable="false"/>
+    </fragment>
 
 </navigation>

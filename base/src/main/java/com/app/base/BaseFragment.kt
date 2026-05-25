@@ -131,7 +131,7 @@ abstract class BaseFragment<VB : ViewBinding, S : BaseState, VM : BaseViewModel<
         .show()
 //    protected fun showToast(@StringRes stringId: Int) = Toast.makeText(requireContext(), stringId, Toast.LENGTH_SHORT).show()
 
-    //    protected fun navigate(destination: Int) = findNavController().navigate(destination)
+        protected fun navigate(destination: Int) = findNavController().navigate(destination)
     protected fun navigate(direction: NavDirections) = findNavController().navigate(direction)
     protected fun navigateBack() = findNavController().navigateUp()
 

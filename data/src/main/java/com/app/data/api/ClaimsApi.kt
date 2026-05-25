@@ -4,6 +4,7 @@ import com.app.base.models.BaseListResponse
 import com.app.data.models.domain.Claim
 import com.app.data.models.domain.Document
 import com.app.data.models.enums.ClaimStatus
+import com.app.data.models.response.MessageResponse
 import okhttp3.MultipartBody
 import retrofit2.http.*
 
@@ -38,6 +39,11 @@ interface ClaimsApi {
 
     @GET("/claims")
     suspend fun getAllClaims(): BaseListResponse<Claim>
+
+    @GET("/messages")
+    suspend fun getMessagesByClaim(
+        @Query("claim_id") claimId: Long
+    ): BaseListResponse<MessageResponse>
 
     @Multipart
     @POST("/claims/create_with_photos")

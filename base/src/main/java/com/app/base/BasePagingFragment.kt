@@ -5,6 +5,7 @@ import android.view.View
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 import kotlinx.coroutines.launch
@@ -27,6 +28,20 @@ abstract class BasePagingFragment<VB: ViewBinding, T, M: BaseHolderModel, VH: Ba
             _recyclerView = second
         }
         recyclerView.adapter = adapter
+        recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                if (dx <= 0 && dy <= 0) return
+
+                val layoutManager = recyclerView.layoutManager as? LinearLayoutManager ?: return
+                val lastVisibleItemPosition = layoutManager.findLastVisibleItemPosition()
+                val totalItemCount = layoutManager.itemCount
+
+                if (lastVisibleItemPosition >= totalItemCount - 3) {
+                    viewModel.loadNextPage()
+                }
+            }
+        })
         viewModel.loadFirstPage()
     }
 
