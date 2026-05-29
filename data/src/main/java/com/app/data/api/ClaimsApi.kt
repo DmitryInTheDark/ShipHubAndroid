@@ -56,4 +56,11 @@ interface ClaimsApi {
         @Part("document_type3") documentType3: String? = null
     ): Claim
 
+    @Multipart
+    @POST("/claims/{claimId}/attach_documents")
+    suspend fun attachDocuments(
+        @Path("claimId") claimId: Long,
+        @Part documents: List<MultipartBody.Part>,
+        @Part("document_types") documentTypesJson: List<String>   // JSON-массив строк
+    ): Map<String, String>
 }

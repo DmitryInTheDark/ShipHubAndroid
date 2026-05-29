@@ -76,7 +76,7 @@ class EmailFragment : BaseFragment<FragmentEmailBinding, EmailUIState, EmailView
     }
 
     private fun validateCode() {
-        binding.btnConfirm.isEnabled = code.length == 5
+        binding.btnConfirm.isEnabled = code.length == 4
     }
 
     override fun setupUI() = with(binding){

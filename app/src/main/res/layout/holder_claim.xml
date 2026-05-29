@@ -79,7 +79,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:textSize="16sp"
-            app:layout_constraintEnd_toStartOf="@+id/materialButton"
+            app:layout_constraintEnd_toEndOf="@+id/tvStatus"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvStatus"
             tools:text="Последнее обновление: 12.03.2026" />
@@ -92,7 +92,6 @@
             android:backgroundTint="@color/main_background"
             android:text="@string/open"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/materialButton"
             app:layout_constraintTop_toTopOf="parent"
             app:strokeColor="@color/claim_button_stroke_color"
             app:strokeWidth="1dp" />
@@ -105,21 +104,8 @@
             android:backgroundTint="@color/main_background"
             android:text="@string/chat"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/materialButton"
+            app:layout_constraintStart_toStartOf="@+id/bOpenClaim"
             app:layout_constraintTop_toBottomOf="@+id/bOpenClaim"
-            app:strokeColor="@color/claim_button_stroke_color"
-            app:strokeWidth="1dp" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/materialButton"
-            style="@style/NormalTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/main_background"
-            android:text="@string/available"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/materialButton2"
             app:strokeColor="@color/claim_button_stroke_color"
             app:strokeWidth="1dp" />
 

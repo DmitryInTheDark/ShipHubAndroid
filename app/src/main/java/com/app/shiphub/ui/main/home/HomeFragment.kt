@@ -77,7 +77,8 @@ class HomeFragment : BasePagingFragment<FragmentHomeBinding, Claim, HomeClaimHol
         cvCreateClaim.isVisible = false
         btnCreateClaimSecond.isVisible = false
         rvClaims.isVisible = true
-        super.setupList(items)
+        val testItems = items.map { it.copy(lastUpdate = "25 мая") }
+        super.setupList(testItems)
     }
 
     override fun setErrorPlaceholder(error: String) = with(binding){
@@ -85,10 +86,6 @@ class HomeFragment : BasePagingFragment<FragmentHomeBinding, Claim, HomeClaimHol
         cvCreateClaim.isVisible = true
         btnCreateClaimSecond.isVisible = false
         tvCreateClaim.text = getString(R.string.claims_get_error)
-    }
-
-    override fun onStart() {
-        super.onStart()
     }
 
     override fun handleState(state: HomeUIState) {

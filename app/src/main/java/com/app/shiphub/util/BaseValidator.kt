@@ -96,7 +96,7 @@ object BaseValidator {
 
     fun validateEmailCode(code: String): List<String>{
         val errors = mutableListOf<String>()
-        if (code.length < 5) errors.add("Код должен состоять из 5 символов")
+        if (code.length != 4) errors.add("Код должен состоять из 4 символов")
         if (code.toCharArray().filter { !digitRegex.matches(it.toString()) }.any{ !it.isUpperCase() }) errors.add("Код должен быть только из символов заглавного регистра")
         if (!codeRegex.matches(code)) errors.add("Код содержит недопустимые символы")
         return errors

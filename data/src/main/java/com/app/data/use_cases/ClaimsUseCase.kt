@@ -63,4 +63,21 @@ class ClaimsUseCase @Inject constructor(
             documentType3 = docTypes.getOrNull(2)
         )
     }
+
+    suspend fun attachDocuments(
+        claimId: Long,
+        documentParts: List<MultipartBody.Part>,
+        documentTypes: List<String>
+    ): Map<String, String> {
+
+        if (documentParts.isEmpty()) {
+            return emptyMap()
+        }
+
+        return claimsApi.attachDocuments(
+            claimId = claimId,
+            documents = documentParts,
+            documentTypesJson = documentTypes
+        )
+    }
 }

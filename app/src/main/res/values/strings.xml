@@ -56,7 +56,7 @@
     <string name="claims_search">По № или названию</string>
     <string name="open">Открыть</string>
     <string name="chat">Чат</string>
-    <string name="available">Доступны</string>
+    <string name="available">Доступные документы</string>
 
     <!--  Claim info  -->
     <string name="claim_number">Номер заявки №%d</string>
@@ -155,6 +155,10 @@
     <string name="equipment_info">Информация об оборудовании</string>
     <string name="attach_photos">Прикрепить фото (макс. 3)</string>
     <string name="attach_documents">Прикрепить документы</string>
+    <string name="attach_agreement">Прикрепить договор</string>
+    <string name="attach_act">Прикрепить акт</string>
+    <string name="attach_info">Прикрепить информационный документ</string>
+    <string name="attach_check">Прикрепить счёт</string>
     <string name="send_claim">Отправить заявку</string>
     <string name="select_test_type">Выберите тип испытаний</string>
     <string name="manufacturer">Производитель</string>
@@ -164,4 +168,5 @@
     <string name="equipment_type_on_create">Тип оборудования</string>
     <string name="photos">Фотографии</string>
     <string name="photo">Фото</string>
+    <string name="upload_documents">Загрузить документы</string>
 </resources>
