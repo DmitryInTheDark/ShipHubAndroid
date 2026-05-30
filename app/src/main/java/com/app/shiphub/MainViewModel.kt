@@ -16,7 +16,10 @@ class MainViewModel @Inject constructor(
 
     fun check(){
         withLoading {
-            if (userRepository.isUserAuthorized()) emitState(MainUIState.SkipLogin())
+            if (userRepository.isUserAuthorized()) {
+                val user = userRepository.getUser()
+                emitState(MainUIState.SkipLogin(user.type))
+            }
             else emitState(MainUIState.ShowLoginScreen())
         }
     }

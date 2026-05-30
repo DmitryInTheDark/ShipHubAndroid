@@ -12,17 +12,15 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val claimsUseCase: ClaimsUseCase,
-    userUseCase: UserUseCase
+    private val userUseCase: UserUseCase
 ) : BasePagingViewModel<Claim, HomeUIState, HomeClaimHolderModel>(
     HomeUIState.InitUserInfo(userUseCase.getUser(), emptyList())
 ){
 
-    override suspend fun getPage(page: Int): BaseListResponse<Claim> {
-        return claimsUseCase.getActiveClaims(page, 20)
-    }
+    fun getUser() = userUseCase.getUser()
 
-    override fun loadPage(page: Int) {
-        super.loadPage(page)
+    override suspend fun getPage(page: Int): BaseListResponse<Claim> {
+        return claimsUseCase.getActiveClaims(page, 20).copy(items = emptyList())
     }
 
     override suspend fun onLoadError(e: Exception) {

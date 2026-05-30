@@ -45,6 +45,7 @@
     <string name="notifications">Уведомления</string>
     <string name="notifications_is_empty">Уведомлений пока нет</string>
     <string name="claims_get_error">Ошибка получения заявок</string>
+    <string name="no_claims">Заявок на сегодня нет</string>
 
     <!--  Claims  -->
     <string name="number_of_claim">Номер заявки: №%d</string>

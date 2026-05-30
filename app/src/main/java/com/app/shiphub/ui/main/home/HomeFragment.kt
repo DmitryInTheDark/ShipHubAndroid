@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.app.base.BaseAdapter
 import com.app.base.BasePagingFragment
 import com.app.data.models.domain.Claim
+import com.app.data.models.domain.User
+import com.app.data.models.enums.UserType
 import com.app.shiphub.R
 import com.app.shiphub.databinding.FragmentHomeBinding
 import com.app.shiphub.databinding.HolderHomeNotificationBinding
@@ -20,6 +22,10 @@ import dagger.hilt.android.AndroidEntryPoint
 class HomeFragment : BasePagingFragment<FragmentHomeBinding, Claim, HomeClaimHolderModel, HomeClaimViewHolder, HomeUIState, HomeViewModel>() {
 
     override val viewModel: HomeViewModel by viewModels()
+    private val currentUser: User
+        get() = viewModel.getUser()
+    private val isManager: Boolean
+        get() = currentUser.type == UserType.MANAGER
 
     override fun initializeBinding() = FragmentHomeBinding.inflate(layoutInflater)
 
@@ -69,8 +75,9 @@ class HomeFragment : BasePagingFragment<FragmentHomeBinding, Claim, HomeClaimHol
     override fun showEmptyPlaceholder() = with(binding){
         rvClaims.isVisible = false
         cvCreateClaim.isVisible = true
-        btnCreateClaimSecond.isVisible = true
-        tvCreateClaim.text = getString(R.string.create_your_first_claim)
+        btnCreateClaimSecond.isVisible = true && !isManager
+        tvCreateClaim.text = if (isManager) getString(R.string.no_claims)
+            else getString(R.string.create_your_first_claim)
     }
 
     override fun setupList(items: List<HomeClaimHolderModel>) = with(binding){

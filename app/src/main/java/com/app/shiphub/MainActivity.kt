@@ -1,8 +1,10 @@
 package com.app.shiphub
 
+import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.navigation.fragment.NavHostFragment
 import com.app.base.BaseActivity
+import com.app.data.models.enums.UserType
 import com.app.shiphub.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -30,7 +32,10 @@ class MainActivity : BaseActivity<MainUIState, MainViewModel, ActivityMainBindin
     override fun handleState(state: MainUIState) {
         when(state){
             is MainUIState.SkipLogin -> {
-                navController.setGraph(R.navigation.graph_main_container)
+                val isManager = state.userType == UserType.MANAGER
+                val graphId = if (isManager) R.navigation.graph_manager_container else R.navigation.graph_main_container
+                val args = Bundle().apply { putBoolean("isManager", isManager) }
+                navController.setGraph(graphId, args)
             }
             is MainUIState.ShowLoginScreen -> {
                 navController.setGraph(R.navigation.graph_auth)
@@ -38,5 +43,4 @@ class MainActivity : BaseActivity<MainUIState, MainViewModel, ActivityMainBindin
             is MainUIState.InitScreen -> {}
         }
     }
-
 }

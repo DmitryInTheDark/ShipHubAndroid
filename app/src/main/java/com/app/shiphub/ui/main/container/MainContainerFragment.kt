@@ -26,6 +26,15 @@ class MainContainerFragment : BaseFragment<FragmentMainContainerBinding, SimpleS
     private fun setupBottomNavigation() {
         val navHostFragment = childFragmentManager.findFragmentById(R.id.nav_host_fragment_main) as NavHostFragment
         val navController = navHostFragment.navController
+        val isManager = arguments?.getBoolean("isManager") ?: false
+        if (isManager) {
+            binding.bottomNavigation.inflateMenu(R.menu.bottom_nav_menu_manager)
+            navController.setGraph(R.navigation.graph_manager)
+        } else {
+            binding.bottomNavigation.inflateMenu(R.menu.bottom_nav_menu)
+            navController.setGraph(R.navigation.graph_main)
+        }
+
         binding.bottomNavigation.setupWithNavController(navController)
     }
 
