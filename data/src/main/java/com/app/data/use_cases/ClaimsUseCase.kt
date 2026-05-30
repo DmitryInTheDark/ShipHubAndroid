@@ -92,12 +92,16 @@ class ClaimsUseCase @Inject constructor(
     suspend fun updateClaimStatus(claimId: Long, status: ClaimStatus): Claim {
         val dto = UpdateClaimDTO(
             status = status,
-            updateInfo = "Статус заявки №${claimId} изменён на ${status.displayName}"
+            updateInfo = "Статус заявки изменён на ${status.displayName}"
         )
         return claimsApi.updateClaim(claimId, dto)
     }
 
     suspend fun getNotifications(): List<NotificationDTO> {
         return claimsApi.getNotifications()
+    }
+
+    suspend fun markNotificationRead(id: Long) {
+        claimsApi.markNotificationRead(id)
     }
 }

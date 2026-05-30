@@ -7,4 +7,5 @@ import com.app.data.models.response.NotificationDTO
 sealed class HomeUIState: BaseState() {
     class InitUserInfo(val user: User, val notifications: List<NotificationDTO>): HomeUIState()
     class ShowNotifications(val notifications: List<NotificationDTO>): HomeUIState()
+    open class Init(): HomeUIState()
 }

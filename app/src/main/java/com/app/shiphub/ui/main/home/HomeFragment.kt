@@ -67,6 +67,7 @@ class HomeFragment : BasePagingFragment<FragmentHomeBinding, Claim, HomeClaimHol
 
     override fun setupUI() {
         with(binding){
+            tvWelcome.text = getString(R.string.welcome, viewModel.getUser().username)
             rvClaims.apply {
                 layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
                 addItemDecoration(HorizontalSpaceItemDecoration(16.dpToPx().toInt()))
@@ -133,6 +134,8 @@ class HomeFragment : BasePagingFragment<FragmentHomeBinding, Claim, HomeClaimHol
                 is HomeUIState.ShowNotifications -> {
                     setupNotifications(state.notifications)
                 }
+
+                is HomeUIState.Init -> {}
             }
         }
     }
@@ -149,6 +152,7 @@ class HomeFragment : BasePagingFragment<FragmentHomeBinding, Claim, HomeClaimHol
                 val notifBinding = HolderHomeNotificationBinding.inflate(layoutInflater).apply {
                     tvNotifText.text = notification.lastUpdateText
                     root.setOnClickListener {
+                        viewModel.markNotificationRead(notification.claimId)
                         navigate(HomeFragmentDirections.actionHomeFragmentToClaimFragment2(notification.claimId))
                     }
                 }

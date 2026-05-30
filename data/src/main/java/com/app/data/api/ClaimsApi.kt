@@ -81,4 +81,7 @@ interface ClaimsApi {
 
     @GET("claims/notifications")
     suspend fun getNotifications(): List<NotificationDTO>
+
+    @POST("/claims/{id}/notification/read")
+    suspend fun markNotificationRead(@Path("id") id: Long): retrofit2.Response<Unit>
 }
