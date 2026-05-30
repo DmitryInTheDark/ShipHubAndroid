@@ -57,7 +57,6 @@ class ProfileViewModel @Inject constructor(
             safeCall { userUseCase.updateUser(currentUser.id, request) }
                 .handleResponse {
                     emitState(ProfileState.SuccessSave(it))
-                    emitState(ProfileState.Init())
                 }
         }
     }
