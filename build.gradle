@@ -8,7 +8,7 @@ plugins {
 }
 
 ext {
-    base_url = "\"http://192.168.1.103:8080/\""
-    base_domain = "\"192.168.1.103:8080\""
+    base_url = "\"http://10.242.53.64:8080/\""
+    base_domain = "\"10.242.53.64:8080\""
     base_local_url = "\"http://10.0.2.2:8080/\""
 }

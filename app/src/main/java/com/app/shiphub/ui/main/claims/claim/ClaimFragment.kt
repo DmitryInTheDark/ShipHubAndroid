@@ -146,7 +146,9 @@ class ClaimFragment: BaseFragment<FragmentClaimBinding, ClaimUIState, ClaimViewM
                 tv.setTypeface(null, Typeface.NORMAL)
             }
         }
-        tvEquipmentType.text = getString(R.string.equipment_type, claim.equipment.equipmentType.displayName)
+        if(claim.equipment.equipmentType != null){
+            tvEquipmentType.text = getString(R.string.equipment_type, claim.equipment.equipmentType.displayName)
+        }
         tvEquipmentModel.text = getString(R.string.equipment_name, claim.equipment.name)
         tvSerialNumber.text = getString(R.string.serial_number, claim.equipment.serialNumber)
         tvServiceType.text = getString(R.string.service_type, claim.testType.displayName)
