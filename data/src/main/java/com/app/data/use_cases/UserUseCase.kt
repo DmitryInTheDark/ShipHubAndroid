@@ -3,6 +3,7 @@ package com.app.data.use_cases
 import com.app.data.UserRepository
 import com.app.data.api.UserApi
 import com.app.data.models.domain.User
+import com.app.data.models.enums.UserType
 import com.app.data.models.request.UpdateUserRequest
 import javax.inject.Inject
 
@@ -23,4 +24,6 @@ class UserUseCase @Inject constructor(
     fun exit(){
         userRepository.clearData()
     }
+
+    fun isManager() = userRepository.getUser().type == UserType.MANAGER
 }

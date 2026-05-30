@@ -8,6 +8,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import com.app.base.BaseFragment
 import com.app.base.FileUtils
+import com.app.base.SimpleStates
 import com.app.data.models.domain.Document
 import com.app.data.models.enums.DocumentType
 import com.app.shiphub.R
@@ -25,6 +26,16 @@ class DocumentsFragment : BaseFragment<FragmentDocumentsBinding, DocumentsState,
     override val viewModel: DocumentsViewModel by viewModels()
     private val adapter by lazy { ClaimIdsAdapter(this) }
     private var isExpanded = false
+        set(value) = with(binding){
+            if (field == value) return
+            val image = AppCompatResources.getDrawable(
+                requireContext(),
+                if (value) R.drawable.arrow_down else R.drawable.arrow_left
+            )
+            ivExpand.setImageDrawable(image)
+            rvClaimsIds.isVisible = value
+            field = value
+        }
 
     private val documentPicker = registerForActivityResult(ActivityResultContracts.OpenDocument()) { uri ->
         uri?.let { handleDocumentPicked(it) }
@@ -37,14 +48,7 @@ class DocumentsFragment : BaseFragment<FragmentDocumentsBinding, DocumentsState,
     override fun setupListeners() = with(binding) {
         cvClaims.setOnClickListener {
             isExpanded = !isExpanded
-            val image = AppCompatResources.getDrawable(
-                requireContext(),
-                if (isExpanded) R.drawable.arrow_down else R.drawable.arrow_left
-            )
-            ivExpand.setImageDrawable(image)
-            rvClaimsIds.isVisible = isExpanded
         }
-
         // Кнопки выбора типа документа
         btnAddAgreement.setOnClickListener {
             selectedDocumentType = DocumentType.AGREEMENT
@@ -70,6 +74,11 @@ class DocumentsFragment : BaseFragment<FragmentDocumentsBinding, DocumentsState,
         btnUploadDocuments.setOnClickListener {
             viewModel.uploadPendingDocuments()
         }
+        srlMain.setOnRefreshListener {
+            viewModel.getCurrentClaimId().let {
+                viewModel.getClaims()
+            }
+        }
     }
 
     private fun handleDocumentPicked(uri: Uri) {
@@ -81,6 +90,11 @@ class DocumentsFragment : BaseFragment<FragmentDocumentsBinding, DocumentsState,
 
     override fun setupUI() = with(binding) {
         rvClaimsIds.adapter = adapter
+        viewModel.isManager().let {
+            btnAddAgreement.isVisible = it
+            btnAddAct.isVisible = it
+            btnAddCheck.isVisible = it
+        }
     }
 
     private fun setupClaimsAndDocuments(
@@ -90,7 +104,7 @@ class DocumentsFragment : BaseFragment<FragmentDocumentsBinding, DocumentsState,
     ) = with(binding) {
         adapter.submitList(claimsIds.map { ClaimIdHolderModel(it) })
         setupDocuments(documents, pending)
-        binding.tvDocumentsAndClaimsNotFound.isVisible = claimsIds.isEmpty() && documents.isEmpty()
+        tvDocumentsAndClaimsNotFound.isVisible = claimsIds.isEmpty() && documents.isEmpty()
     }
 
     private fun setupDocumentSection(
@@ -202,7 +216,7 @@ class DocumentsFragment : BaseFragment<FragmentDocumentsBinding, DocumentsState,
                 setupClaimsAndDocuments(
                     claimsIds = state.claimsIds,
                     documents = state.currentDocuments,
-                    pending = state.pendingDocuments   // ← Исправлено
+                    pending = state.pendingDocuments
                 )
             }
 
@@ -215,10 +229,30 @@ class DocumentsFragment : BaseFragment<FragmentDocumentsBinding, DocumentsState,
                 }
                 setupDocuments(state.documents, state.pendingDocuments)
             }
+
+            is DocumentsState.SetupClaims -> {
+                setupClaims(state.claimsIds)
+            }
+        }
+    }
+
+    private fun setupClaims(claimsIds: List<Long>) {
+        adapter.submitList(claimsIds.map { ClaimIdHolderModel(it) })
+    }
+
+    override fun handleSimpleState(state: SimpleStates) {
+        when(state){
+            is SimpleStates.Error -> setErrorState(state.message)
+            is SimpleStates.Init -> {}
+            is SimpleStates.Loading -> {
+                if (state.isLoading) loadingDialog.show() else loadingDialog.dismiss()
+                binding.srlMain.isRefreshing = state.isLoading
+            }
         }
     }
 
     override fun onClick(claimId: Long) {
         viewModel.getDocuments(claimId)
+        isExpanded = false
     }
 }

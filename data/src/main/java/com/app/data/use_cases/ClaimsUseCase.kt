@@ -56,8 +56,12 @@ class ClaimsUseCase @Inject constructor(
     ): Claim {
         return claimsApi.createClaimWithPhotos(
             claim = claimPart,
-            photos = photoParts,
-            documents = documentParts,
+            photo1 =photoParts.getOrNull(0),
+            photo2 =photoParts.getOrNull(1),
+            photo3 =photoParts.getOrNull(2),
+            document1 = documentParts.getOrNull(0),
+            document2 = documentParts.getOrNull(1),
+            document3 = documentParts.getOrNull(2),
             documentType1 = docTypes.getOrNull(0),
             documentType2 = docTypes.getOrNull(1),
             documentType3 = docTypes.getOrNull(2)

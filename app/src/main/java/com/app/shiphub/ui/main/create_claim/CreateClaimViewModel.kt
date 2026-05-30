@@ -3,6 +3,7 @@ package com.app.shiphub.ui.main.create_claim
 import android.net.Uri
 import androidx.lifecycle.viewModelScope
 import com.app.base.BaseViewModel
+import com.app.data.models.enums.DocumentType
 import com.app.data.models.enums.EquipmentType
 import com.app.data.models.enums.TestType
 import com.app.data.models.requests.ClaimRequest
@@ -198,7 +199,7 @@ class CreateClaimViewModel @Inject constructor(
                 val docTypes = mutableListOf<String?>()
                 val docParts = content.documents.mapIndexed { index, uri ->
                     val file = uriToFile(context, uri, "document${index + 1}")
-                    docTypes.add("ACT")
+                    docTypes.add(DocumentType.INFO.toString())
                     val mimeType = com.app.base.FileUtils.getMimeType(context, uri)
                     val requestFile = file.asRequestBody(mimeType?.toMediaTypeOrNull())
                     MultipartBody.Part.createFormData("document${index + 1}", file.name, requestFile)

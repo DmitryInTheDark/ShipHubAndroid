@@ -49,8 +49,12 @@ interface ClaimsApi {
     @POST("/claims/create_with_photos")
     suspend fun createClaimWithPhotos(
         @Part claim: MultipartBody.Part,
-        @Part photos: List<MultipartBody.Part>,
-        @Part documents: List<MultipartBody.Part>,
+        @Part photo1: MultipartBody.Part? = null,
+        @Part photo2: MultipartBody.Part? = null,
+        @Part photo3: MultipartBody.Part? = null,
+        @Part document1: MultipartBody.Part? = null,
+        @Part document2: MultipartBody.Part? = null,
+        @Part document3: MultipartBody.Part? = null,
         @Part("document_type1") documentType1: String? = null,
         @Part("document_type2") documentType2: String? = null,
         @Part("document_type3") documentType3: String? = null

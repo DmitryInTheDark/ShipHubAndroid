@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/srlMain"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -9,346 +10,353 @@
     android:clipChildren="false"
     android:clipToPadding="false">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:clipChildren="false"
-        android:clipToPadding="false">
+        android:layout_height="wrap_content">
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tvTitle"
-            android:layout_width="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/TitleTextView"
-            android:text="@string/documents"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="20dp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            android:clipChildren="false"
+            android:clipToPadding="false">
 
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/cvClaims"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:cardBackgroundColor="@color/white"
-            app:cardCornerRadius="8dp"
-            app:contentPadding="3dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginBottom="20dp"
-            android:layout_marginTop="20dp"
-            app:layout_constraintTop_toBottomOf="@+id/tvTitle"
-            app:layout_constraintStart_toStartOf="parent"
-            android:translationZ="1dp">
-
-            <LinearLayout
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginStart="3dp"
-                android:gravity="center_vertical">
+                style="@style/TitleTextView"
+                android:text="@string/documents"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="20dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
 
-            <LinearLayout
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cvClaims"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginStart="3dp"
-                android:gravity="center_vertical">
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="8dp"
+                app:contentPadding="3dp"
+                android:maxHeight="120dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="20dp"
+                app:layout_constraintTop_toBottomOf="@+id/tvTitle"
+                app:layout_constraintStart_toStartOf="parent"
+                android:translationZ="1dp">
 
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/tvCurrentClaim"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    style="@style/NormalTextView"
-                    android:text="@string/claim"
-                    android:textSize="18sp"/>
+                    android:orientation="vertical"
+                    android:layout_marginStart="3dp"
+                    android:gravity="center_vertical">
 
-                <ImageView
-                    android:id="@+id/ivExpand"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:importantForAccessibility="no"
-                    android:src="@drawable/arrow_left"
-                    tools:src="@drawable/arrow_down"/>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginStart="3dp"
+                        android:gravity="center_vertical">
 
-            </LinearLayout>
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/tvCurrentClaim"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            style="@style/NormalTextView"
+                            android:text="@string/claim"
+                            android:textSize="18sp"/>
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rvClaimsIds"
-                    android:layout_width="match_parent"
-                    android:layout_height="120dp"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    tools:listitem="@layout/holder_text"
-                    tools:itemCount="3"
-                    android:visibility="gone"
-                    tools:visibility="visible"
-                    android:scrollbars="vertical"/>
-            </LinearLayout>
+                        <ImageView
+                            android:id="@+id/ivExpand"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:importantForAccessibility="no"
+                            android:src="@drawable/arrow_left"
+                            tools:src="@drawable/arrow_down"/>
 
-        </com.google.android.material.card.MaterialCardView>
+                    </LinearLayout>
 
-        <View
-            android:id="@+id/vTop"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/black"
-            android:layout_marginTop="20dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cvClaims" />
+                    <com.app.base.MaxHeightRecyclerView
+                        android:id="@+id/rvClaimsIds"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:maxHeight="120dp"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        tools:listitem="@layout/holder_text"
+                        tools:itemCount="3"
+                        android:visibility="gone"
+                        tools:visibility="visible"
+                        android:scrollbars="vertical"/>
+                </LinearLayout>
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tvContracts"
-            style="@style/TitleTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:text="@string/contracts"
-            android:layout_marginTop="20dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/vTop"/>
+            </com.google.android.material.card.MaterialCardView>
 
-        <LinearLayout
-            android:id="@+id/llContracts"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="20dp"
-            android:orientation="vertical"
-            android:layout_marginBottom="20dp"
-            android:layout_marginTop="20dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvContracts"/>
+            <View
+                android:id="@+id/vTop"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/black"
+                android:layout_marginTop="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cvClaims" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnAddAgreement"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/attach_agreement"
-            android:textAllCaps="false"
-            android:textColor="@color/brown"
-            app:icon="@android:drawable/ic_menu_save"
-            app:iconTint="@color/brown"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginVertical="20dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/llContracts"
-            app:strokeColor="@color/brown" />
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvContracts"
+                style="@style/TitleTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:text="@string/contracts"
+                android:layout_marginTop="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/vTop"/>
 
-        <View
-            android:id="@+id/vContracts"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/black"
-            android:layout_marginTop="10dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnAddAgreement" />
+            <LinearLayout
+                android:id="@+id/llContracts"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="20dp"
+                android:orientation="vertical"
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="20dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvContracts"/>
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tvActs"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            style="@style/TitleTextView"
-            android:text="@string/acts"
-            android:layout_marginBottom="20dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/vContracts"/>
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnAddAgreement"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/attach_agreement"
+                android:textAllCaps="false"
+                android:textColor="@color/brown"
+                app:icon="@android:drawable/ic_menu_save"
+                app:iconTint="@color/brown"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginVertical="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/llContracts"
+                app:strokeColor="@color/brown" />
 
-        <LinearLayout
-            android:id="@+id/llActs"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="20dp"
-            android:orientation="vertical"
-            android:layout_marginBottom="20dp"
-            android:layout_marginTop="20dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvActs"/>
+            <View
+                android:id="@+id/vContracts"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/black"
+                android:layout_marginTop="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btnAddAgreement" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnAddAct"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginVertical="20dp"
-            android:text="@string/attach_act"
-            android:textAllCaps="false"
-            android:textColor="@color/brown"
-            app:icon="@android:drawable/ic_menu_save"
-            app:iconTint="@color/brown"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/llActs"
-            app:strokeColor="@color/brown" />
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvActs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/TitleTextView"
+                android:text="@string/acts"
+                android:layout_marginBottom="20dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/vContracts"/>
 
-        <View
-            android:id="@+id/vActs"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/black"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="10dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnAddAct" />
+            <LinearLayout
+                android:id="@+id/llActs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="20dp"
+                android:orientation="vertical"
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="20dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvActs"/>
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tvChecks"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            style="@style/TitleTextView"
-            android:text="@string/checks"
-            android:layout_marginBottom="20dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/vActs"/>
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnAddAct"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginVertical="20dp"
+                android:text="@string/attach_act"
+                android:textAllCaps="false"
+                android:textColor="@color/brown"
+                app:icon="@android:drawable/ic_menu_save"
+                app:iconTint="@color/brown"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/llActs"
+                app:strokeColor="@color/brown" />
 
-        <LinearLayout
-            android:id="@+id/llChecks"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="20dp"
-            android:orientation="vertical"
-            android:layout_marginBottom="20dp"
-            android:layout_marginTop="20dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvChecks"/>
+            <View
+                android:id="@+id/vActs"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btnAddAct" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnAddCheck"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginVertical="20dp"
-            android:text="@string/attach_check"
-            android:textAllCaps="false"
-            android:textColor="@color/brown"
-            app:icon="@android:drawable/ic_menu_save"
-            app:iconTint="@color/brown"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/llChecks"
-            app:strokeColor="@color/brown" />
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvChecks"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/TitleTextView"
+                android:text="@string/checks"
+                android:layout_marginBottom="20dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/vActs"/>
 
-        <View
-            android:id="@+id/vChecks"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/black"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="10dp"
-            app:layout_constraintTop_toBottomOf="@+id/btnAddCheck" />
+            <LinearLayout
+                android:id="@+id/llChecks"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="20dp"
+                android:orientation="vertical"
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="20dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvChecks"/>
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tvInfo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            style="@style/TitleTextView"
-            android:text="@string/info_docs"
-            android:layout_marginBottom="20dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/vChecks"/>
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnAddCheck"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginVertical="20dp"
+                android:text="@string/attach_check"
+                android:textAllCaps="false"
+                android:textColor="@color/brown"
+                app:icon="@android:drawable/ic_menu_save"
+                app:iconTint="@color/brown"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/llChecks"
+                app:strokeColor="@color/brown" />
 
-        <LinearLayout
-            android:id="@+id/llInfo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="20dp"
-            android:orientation="vertical"
-            android:layout_marginBottom="20dp"
-            android:layout_marginTop="20dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvInfo"/>
+            <View
+                android:id="@+id/vChecks"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="10dp"
+                app:layout_constraintTop_toBottomOf="@+id/btnAddCheck" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnAddInfo"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginVertical="20dp"
-            android:text="@string/attach_info"
-            android:textAllCaps="false"
-            android:textColor="@color/brown"
-            app:icon="@android:drawable/ic_menu_save"
-            app:iconTint="@color/brown"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/llInfo"
-            app:strokeColor="@color/brown" />
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvInfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/TitleTextView"
+                android:text="@string/info_docs"
+                android:layout_marginBottom="20dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/vChecks"/>
 
-        <View
-            android:id="@+id/vInfo"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@color/black"
-            android:layout_marginBottom="20dp"
-            android:layout_marginTop="20dp"
-            app:layout_constraintTop_toBottomOf="@id/btnAddInfo"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            <LinearLayout
+                android:id="@+id/llInfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="20dp"
+                android:orientation="vertical"
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="20dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvInfo"/>
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnUploadDocuments"
-            style="@style/Widget.MaterialComponents.Button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginTop="8dp"
-            android:text="@string/upload_documents"
-            android:textAllCaps="false"
-            android:backgroundTint="@color/brown"
-            android:textColor="@color/white"
-            app:icon="@android:drawable/ic_menu_upload"
-            app:iconTint="@color/white"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/vInfo" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnAddInfo"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginVertical="20dp"
+                android:text="@string/attach_info"
+                android:textAllCaps="false"
+                android:textColor="@color/brown"
+                app:icon="@android:drawable/ic_menu_save"
+                app:iconTint="@color/brown"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/llInfo"
+                app:strokeColor="@color/brown" />
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tvDocumentsNotFound"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/documents_not_found"
-            style="@style/TitleTextView"
-            android:gravity="center"
-            android:visibility="gone"
-            android:layout_marginTop="20dp"
-            app:layout_constraintTop_toBottomOf="@id/vInfo"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            <View
+                android:id="@+id/vInfo"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/black"
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="20dp"
+                app:layout_constraintTop_toBottomOf="@id/btnAddInfo"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tvDocumentsAndClaimsNotFound"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/documents_and_claims_not_found"
-            style="@style/TitleTextView"
-            android:gravity="center"
-            android:visibility="gone"
-            android:layout_marginTop="20dp"
-            app:layout_constraintTop_toBottomOf="@id/tvDocumentsNotFound"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnUploadDocuments"
+                style="@style/Widget.MaterialComponents.Button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/upload_documents"
+                android:textAllCaps="false"
+                android:backgroundTint="@color/brown"
+                android:textColor="@color/white"
+                app:icon="@android:drawable/ic_menu_upload"
+                app:iconTint="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/vInfo" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvDocumentsNotFound"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/documents_not_found"
+                style="@style/TitleTextView"
+                android:gravity="center"
+                android:visibility="gone"
+                android:layout_marginTop="20dp"
+                app:layout_constraintTop_toBottomOf="@id/vInfo"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
 
-</ScrollView>
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvDocumentsAndClaimsNotFound"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/documents_and_claims_not_found"
+                style="@style/TitleTextView"
+                android:gravity="center"
+                android:visibility="gone"
+                android:layout_marginTop="20dp"
+                app:layout_constraintTop_toBottomOf="@id/tvDocumentsNotFound"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

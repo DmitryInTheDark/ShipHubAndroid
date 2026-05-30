@@ -14,6 +14,8 @@ sealed class DocumentsState : BaseState() {
         val pendingDocuments: Map<DocumentType, List<Uri>> = emptyMap()
     ) : DocumentsState()
 
+    data class SetupClaims(val claimsIds: List<Long>): DocumentsState()
+
     data class SetupDocumentByCurrentClaim(
         val documents: List<Document>,
         val pendingDocuments: Map<DocumentType, List<Uri>> = emptyMap()
