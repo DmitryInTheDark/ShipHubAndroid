@@ -50,7 +50,7 @@ class ClaimFragment: BaseFragment<FragmentClaimBinding, ClaimUIState, ClaimViewM
             navigateBack()
         }
         binding.bChat.setOnClickListener {
-            navigate(ClaimFragmentDirections.actionClaimFragmentToChatFragment(args.claimId))
+            navigate(ClaimFragmentDirections.actionClaimFragmentToChat(args.claimId))
         }
         binding.bChangeStatus.setOnClickListener {
             showStatusSelectionDialog()
@@ -173,6 +173,9 @@ class ClaimFragment: BaseFragment<FragmentClaimBinding, ClaimUIState, ClaimViewM
             if (index < photoImageViews.size) {
                 val url = "${BuildConfig.BASE_URL}photos/$photoId"
                 photoImageViews[index].loadPhoto(url)
+                photoImageViews[index].setOnClickListener {
+                    navigate(ClaimFragmentDirections.actionClaimFragmentToPhoto(url))
+                }
             }
         }
 
