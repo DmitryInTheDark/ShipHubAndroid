@@ -6,6 +6,7 @@ import com.app.data.models.domain.Document
 import com.app.data.models.enums.ClaimStatus
 import com.app.data.models.request.UpdateClaimDTO
 import com.app.data.models.response.MessageResponse
+import com.app.data.models.response.NotificationDTO
 import okhttp3.MultipartBody
 import retrofit2.http.*
 
@@ -77,4 +78,7 @@ interface ClaimsApi {
         @Path("id") id: Long,
         @Body dto: UpdateClaimDTO
     ): Claim
+
+    @GET("claims/notifications")
+    suspend fun getNotifications(): List<NotificationDTO>
 }

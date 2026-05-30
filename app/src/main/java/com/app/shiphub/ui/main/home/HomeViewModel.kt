@@ -2,7 +2,9 @@ package com.app.shiphub.ui.main.home
 
 import com.app.base.BasePagingViewModel
 import com.app.base.models.BaseListResponse
+import com.app.base.safeCall
 import com.app.data.models.domain.Claim
+import com.app.data.models.response.NotificationDTO
 import com.app.data.use_cases.ClaimsUseCase
 import com.app.data.use_cases.UserUseCase
 import com.app.shiphub.ui.main.home.adapters.HomeClaimHolderModel
@@ -16,6 +18,16 @@ class HomeViewModel @Inject constructor(
 ) : BasePagingViewModel<Claim, HomeUIState, HomeClaimHolderModel>(
     HomeUIState.InitUserInfo(userUseCase.getUser(), emptyList())
 ){
+
+    init {
+        loadNotifications()
+    }
+
+    fun loadNotifications() = withLoading {
+        safeCall { claimsUseCase.getNotifications() }.handleResponse {
+            emitState(HomeUIState.ShowNotifications(it))
+        }
+    }
 
     fun getUser() = userUseCase.getUser()
 

@@ -7,6 +7,7 @@ import com.app.data.models.domain.Document
 import com.app.data.models.enums.ClaimStatus
 import com.app.data.models.request.UpdateClaimDTO
 import com.app.data.models.response.MessageResponse
+import com.app.data.models.response.NotificationDTO
 import okhttp3.MultipartBody
 import javax.inject.Inject
 
@@ -91,8 +92,12 @@ class ClaimsUseCase @Inject constructor(
     suspend fun updateClaimStatus(claimId: Long, status: ClaimStatus): Claim {
         val dto = UpdateClaimDTO(
             status = status,
-            updateInfo = "Статус заявки изменён на ${status.displayName}"
+            updateInfo = "Статус заявки №${claimId} изменён на ${status.displayName}"
         )
         return claimsApi.updateClaim(claimId, dto)
+    }
+
+    suspend fun getNotifications(): List<NotificationDTO> {
+        return claimsApi.getNotifications()
     }
 }

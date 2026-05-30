@@ -10,6 +10,7 @@ import com.app.data.models.domain.Claim
 import com.app.data.models.domain.User
 import com.app.data.models.enums.ClaimStatus
 import com.app.data.models.enums.UserType
+import com.app.data.models.response.NotificationDTO
 import com.app.shiphub.R
 import com.app.shiphub.databinding.FragmentHomeBinding
 import com.app.shiphub.databinding.HolderHomeNotificationBinding
@@ -49,6 +50,7 @@ class HomeFragment : BasePagingFragment<FragmentHomeBinding, Claim, HomeClaimHol
             }
             srlHome.setOnRefreshListener{
                 viewModel.loadFirstPage()
+                viewModel.loadNotifications()
             }
             btnMyRequests.setOnClickListener {
                 navigate(HomeFragmentDirections.actionHomeFragmentToGraphClaims())
@@ -126,23 +128,31 @@ class HomeFragment : BasePagingFragment<FragmentHomeBinding, Claim, HomeClaimHol
             when(state){
                 is HomeUIState.InitUserInfo -> {
                     tvWelcome.text = getString(R.string.welcome, state.user.username)
-                    llNotifications.removeAllViews()
-                    if (state.notifications.isEmpty()) {
-                        val notifBinding = HolderHomeNotificationBinding.inflate(layoutInflater).apply {
-                            tvNotifText.text = getString(R.string.notifications_is_empty)
-                        }
-                        llNotifications.addView(notifBinding.root)
-                    }
+                    setupNotifications(state.notifications)
                 }
                 is HomeUIState.ShowNotifications -> {
-                    llNotifications.removeAllViews()
-                    if (state.notifications.isEmpty()) {
-                        val notifBinding = HolderHomeNotificationBinding.inflate(layoutInflater).apply {
-                            tvNotifText.text = getString(R.string.notifications_is_empty)
-                        }
-                        llNotifications.addView(notifBinding.root)
+                    setupNotifications(state.notifications)
+                }
+            }
+        }
+    }
+
+    private fun setupNotifications(notifications: List<NotificationDTO>) = with(binding) {
+        llNotifications.removeAllViews()
+        if (notifications.isEmpty()) {
+            val notifBinding = HolderHomeNotificationBinding.inflate(layoutInflater).apply {
+                tvNotifText.text = getString(R.string.notifications_is_empty)
+            }
+            llNotifications.addView(notifBinding.root)
+        } else {
+            notifications.forEach { notification ->
+                val notifBinding = HolderHomeNotificationBinding.inflate(layoutInflater).apply {
+                    tvNotifText.text = notification.lastUpdateText
+                    root.setOnClickListener {
+                        navigate(HomeFragmentDirections.actionHomeFragmentToClaimFragment2(notification.claimId))
                     }
                 }
+                llNotifications.addView(notifBinding.root)
             }
         }
     }
