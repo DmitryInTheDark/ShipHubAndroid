@@ -4,6 +4,7 @@ import com.app.base.models.BaseListResponse
 import com.app.data.models.domain.Claim
 import com.app.data.models.domain.Document
 import com.app.data.models.enums.ClaimStatus
+import com.app.data.models.request.UpdateClaimDTO
 import com.app.data.models.response.MessageResponse
 import okhttp3.MultipartBody
 import retrofit2.http.*
@@ -67,4 +68,13 @@ interface ClaimsApi {
         @Part documents: List<MultipartBody.Part>,
         @Part("document_types") documentTypesJson: List<String>   // JSON-массив строк
     ): Map<String, String>
+
+    @GET("claims/documents/{id}/file")
+    suspend fun downloadDocument(@Path("id") id: Long): retrofit2.Response<okhttp3.ResponseBody>
+
+    @PATCH("/claims/{id}/update")
+    suspend fun updateClaim(
+        @Path("id") id: Long,
+        @Body dto: UpdateClaimDTO
+    ): Claim
 }

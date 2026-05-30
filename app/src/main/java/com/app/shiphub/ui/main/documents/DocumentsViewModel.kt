@@ -128,7 +128,8 @@ class DocumentsViewModel @Inject constructor(
     private fun uriToFile(context: android.content.Context, uri: Uri, fileNamePrefix: String): File {
         val inputStream = context.contentResolver.openInputStream(uri)
         val fileName = com.app.base.FileUtils.getFileName(context, uri) ?: fileNamePrefix
-        val file = File(context.cacheDir, fileName)
+        val safeFileName = com.app.base.FileUtils.getSafeFileName(fileName)
+        val file = File(context.cacheDir, safeFileName)
         val outputStream = FileOutputStream(file)
         inputStream?.copyTo(outputStream)
         inputStream?.close()
@@ -148,6 +149,30 @@ class DocumentsViewModel @Inject constructor(
                 else -> {
                     // fallback
                 }
+            }
+        }
+    }
+
+    fun downloadDocument(documentId: Long, isDownloadOnly: Boolean = false) = withLoading {
+        safeCall { claimsUseCase.downloadDocument(documentId) }.handleResponse { response ->
+            val body = response.body()
+            if (response.isSuccessful && body != null) {
+                val contentDisposition = response.headers()["Content-Disposition"]
+                val fileName = contentDisposition?.let {
+                    val match = Regex("filename=\"(.+)\"").find(it)
+                    match?.groupValues?.get(1)
+                } ?: "document_$documentId"
+
+                val safeFileName = com.app.base.FileUtils.getSafeFileName(fileName)
+                val file = File(ShipHubApplication.instance.cacheDir, safeFileName)
+                body.byteStream().use { input ->
+                    file.outputStream().use { output ->
+                        input.copyTo(output)
+                    }
+                }
+                emitState(DocumentsState.DocumentDownloaded(file, isDownloadOnly))
+            } else {
+                emitSimpleState(SimpleStates.Error("Ошибка загрузки документа"))
             }
         }
     }

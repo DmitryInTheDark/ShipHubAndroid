@@ -6,6 +6,6 @@ enum class ClaimStatus(val displayName: String) {
     APPROVED("Принята"),
     IN_PROGRESS("В работе"),
     TESTS_COMPLETED("Тесты завершены"),
-    DOCUMENTS_DELIVERED("Документы доставлены")
-
+    DOCUMENTS_DELIVERED("Документы доставлены"),
+    ENDED("Выполнена")
 }

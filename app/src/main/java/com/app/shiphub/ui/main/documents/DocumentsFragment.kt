@@ -1,9 +1,11 @@
 package com.app.shiphub.ui.main.documents
 
+import android.content.Intent
 import android.net.Uri
 import android.widget.LinearLayout
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.content.res.AppCompatResources
+import androidx.core.content.FileProvider
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import com.app.base.BaseFragment
@@ -17,7 +19,7 @@ import com.app.shiphub.databinding.HolderDocumentBinding
 import com.app.shiphub.ui.main.documents.adapter.ClaimIdHolderModel
 import com.app.shiphub.ui.main.documents.adapter.ClaimIdsAdapter
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
+import java.io.File
 
 @AndroidEntryPoint
 class DocumentsFragment : BaseFragment<FragmentDocumentsBinding, DocumentsState, DocumentsViewModel>(),
@@ -146,8 +148,12 @@ class DocumentsFragment : BaseFragment<FragmentDocumentsBinding, DocumentsState,
                     uri?.let { viewModel.removePendingDocument(it, type!!) }
                 }
             } else {
-                ibDownload.setOnClickListener { Timber.i("Download $documentId") }
-                ibShow.setOnClickListener { Timber.i("Show $documentId") }
+                ibDownload.setOnClickListener {
+                    documentId?.let { viewModel.downloadDocument(it, isDownloadOnly = true) }
+                }
+                ibShow.setOnClickListener {
+                    documentId?.let { viewModel.downloadDocument(it, isDownloadOnly = false) }
+                }
             }
         }
         ll.addView(holder.root)
@@ -233,6 +239,22 @@ class DocumentsFragment : BaseFragment<FragmentDocumentsBinding, DocumentsState,
             is DocumentsState.SetupClaims -> {
                 setupClaims(state.claimsIds)
             }
+
+            is DocumentsState.DocumentDownloaded -> {
+                if (!state.isProcessed) {
+                    state.isProcessed = true
+                    if (state.isDownloadOnly) {
+                        val uri = FileUtils.saveFileToDownloads(requireContext(), state.file, state.file.name)
+                        if (uri != null) {
+                            showToast("Файл сохранен в Загрузки")
+                        } else {
+                            showToast("Ошибка при сохранении файла")
+                        }
+                    } else {
+                        openFile(state.file)
+                    }
+                }
+            }
         }
     }
 
@@ -254,5 +276,22 @@ class DocumentsFragment : BaseFragment<FragmentDocumentsBinding, DocumentsState,
     override fun onClick(claimId: Long) {
         viewModel.getDocuments(claimId)
         isExpanded = false
+    }
+
+    private fun openFile(file: File) {
+        val uri = FileProvider.getUriForFile(
+            requireContext(),
+            "${requireContext().packageName}.provider",
+            file
+        )
+        val intent = Intent(Intent.ACTION_VIEW).apply {
+            setDataAndType(uri, FileUtils.getMimeType(requireContext(), uri) ?: "*/*")
+            addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+        }
+        try {
+            startActivity(intent)
+        } catch (e: Exception) {
+            showToast("Нет приложения для открытия этого типа файла")
+        }
     }
 }

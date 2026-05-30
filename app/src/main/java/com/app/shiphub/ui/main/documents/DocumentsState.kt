@@ -20,4 +20,10 @@ sealed class DocumentsState : BaseState() {
         val documents: List<Document>,
         val pendingDocuments: Map<DocumentType, List<Uri>> = emptyMap()
     ) : DocumentsState()
+
+    data class DocumentDownloaded(
+        val file: java.io.File,
+        val isDownloadOnly: Boolean = false,
+        var isProcessed: Boolean = false
+    ) : DocumentsState()
 }

@@ -46,6 +46,8 @@
     <string name="notifications_is_empty">Уведомлений пока нет</string>
     <string name="claims_get_error">Ошибка получения заявок</string>
     <string name="no_claims">Заявок на сегодня нет</string>
+    <string name="incoming_to_verify">Входящие на проверку</string>
+    <string name="claims_for_today">Заявки на сегодня</string>
 
     <!--  Claims  -->
     <string name="number_of_claim">Номер заявки: №%d</string>
@@ -57,6 +59,7 @@
     <string name="claims_search">По № или названию</string>
     <string name="open">Открыть</string>
     <string name="chat">Чат</string>
+    <string name="chat_with_client">Чат с клиентом</string>
     <string name="available">Доступные документы</string>
 
     <!--  Claim info  -->
@@ -74,6 +77,7 @@
     <string name="serial_number">Серийный номер: %s</string>
     <string name="selected_services">Выбранная услуга</string>
     <string name="chat_with_manager">Чат с менеджером</string>
+    <string name="chat_for_claim">Чат по заявке №%d</string>
     <string name="go_to_documents">Перейти в документы</string>
 
     <!--  Documents  -->
@@ -170,4 +174,7 @@
     <string name="photos">Фотографии</string>
     <string name="photo">Фото</string>
     <string name="upload_documents">Загрузить документы</string>
+    <string name="select_new_status">Выберите новый статус</string>
+    <string name="cancel">Отмена</string>
+    <string name="change_status">Изменить статус</string>
 </resources>

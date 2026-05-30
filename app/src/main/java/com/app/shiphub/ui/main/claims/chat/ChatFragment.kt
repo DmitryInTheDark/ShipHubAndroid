@@ -53,7 +53,7 @@ class ChatFragment : BaseFragment<FragmentChatBinding, ChatUIState, ChatViewMode
             stackFromEnd = true
         }
         binding.rvMessages.adapter = adapter
-        binding.tvTitle.text = getString(R.string.chat_with_manager)
+        binding.tvTitle.text = getString(R.string.chat_for_claim, args.claimId)
         viewModel.initChat(args.claimId)
     }
 

@@ -30,7 +30,8 @@ ClaimsAdapter.ClaimsAdapterCallback{
     }
 
     override fun setErrorPlaceholder(error: String) {
-
+        showToast(error)
+        setupList(emptyList())
     }
 
     override val viewModel: ClaimsViewModel by viewModels()
@@ -38,7 +39,7 @@ ClaimsAdapter.ClaimsAdapterCallback{
     override fun initializeBinding() = FragmentClaimsBinding.inflate(layoutInflater)
 
     override fun setupListeners() = with(binding){
-
+        srlClaims.setOnRefreshListener { viewModel.loadFirstPage() }
     }
 
     override fun setupList(items: List<ClaimHolders>) {
@@ -73,6 +74,10 @@ ClaimsAdapter.ClaimsAdapterCallback{
         navigate(
             ClaimsFragmentDirections.actionClaimsFragmentToClaimFragment(claimId)
         )
+    }
+
+    override fun onChatOpenClicked(claimId: Long) {
+        navigate(ClaimsFragmentDirections.actionClaimsFragmentToChatFragment(claimId))
     }
 
 }

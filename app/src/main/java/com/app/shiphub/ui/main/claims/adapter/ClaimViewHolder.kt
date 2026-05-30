@@ -20,6 +20,7 @@ class ClaimViewHolder(
             text = context.getString(R.string.last_update, holder.lastUpdate)
         }
         bOpenClaim.setOnClickListener { callback.onOpenClaimClicked(holder.id) }
+        bChat.setOnClickListener { callback.onChatOpenClicked(holder.id) }
     }
 
 }

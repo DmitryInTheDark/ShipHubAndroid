@@ -40,7 +40,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:textSize="16sp"
-            app:layout_constraintEnd_toStartOf="@+id/materialButton2"
+            app:layout_constraintEnd_toStartOf="@+id/bChat"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvClaimNumber"
@@ -53,7 +53,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:textSize="16sp"
-            app:layout_constraintEnd_toStartOf="@+id/materialButton2"
+            app:layout_constraintEnd_toStartOf="@+id/bChat"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvTestType"
@@ -66,7 +66,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:textSize="16sp"
-            app:layout_constraintEnd_toStartOf="@+id/materialButton2"
+            app:layout_constraintEnd_toStartOf="@+id/bChat"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvEquipmentName"
@@ -97,7 +97,7 @@
             app:strokeWidth="1dp" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/materialButton2"
+            android:id="@+id/bChat"
             style="@style/NormalTextView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

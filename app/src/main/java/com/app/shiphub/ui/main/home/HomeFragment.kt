@@ -8,6 +8,7 @@ import com.app.base.BaseAdapter
 import com.app.base.BasePagingFragment
 import com.app.data.models.domain.Claim
 import com.app.data.models.domain.User
+import com.app.data.models.enums.ClaimStatus
 import com.app.data.models.enums.UserType
 import com.app.shiphub.R
 import com.app.shiphub.databinding.FragmentHomeBinding
@@ -53,7 +54,11 @@ class HomeFragment : BasePagingFragment<FragmentHomeBinding, Claim, HomeClaimHol
                 navigate(HomeFragmentDirections.actionHomeFragmentToGraphClaims())
             }
             btnToDocuments.setOnClickListener {
-                navigate(HomeFragmentDirections.actionHomeFragmentToDocumentsFragment())
+                if (isManager) {
+                    navigate(HomeFragmentDirections.actionHomeFragmentToGraphClaims(ClaimStatus.CREATED.name))
+                } else {
+                    navigate(HomeFragmentDirections.actionHomeFragmentToDocumentsFragment())
+                }
             }
         }
     }
@@ -63,6 +68,27 @@ class HomeFragment : BasePagingFragment<FragmentHomeBinding, Claim, HomeClaimHol
             rvClaims.apply {
                 layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
                 addItemDecoration(HorizontalSpaceItemDecoration(16.dpToPx().toInt()))
+            }
+            if (isManager) {
+                btnCreateClaimFirst.isVisible = false
+                btnMyRequests.apply {
+                    text = getString(R.string.claims_for_today)
+                    backgroundTintList = requireContext()
+                        .getColorStateList(R.color.orange)
+                    setTextColor(
+                        requireContext()
+                        .getColorStateList(R.color.white)
+                    )
+                }
+                btnToDocuments.apply {
+                    text = getString(R.string.incoming_to_verify)
+                    backgroundTintList = requireContext()
+                        .getColorStateList(R.color.orange)
+                    setTextColor(
+                        requireContext()
+                            .getColorStateList(R.color.white)
+                    )
+                }
             }
         }
     }

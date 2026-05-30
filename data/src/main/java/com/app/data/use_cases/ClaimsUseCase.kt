@@ -5,6 +5,7 @@ import com.app.data.api.ClaimsApi
 import com.app.data.models.domain.Claim
 import com.app.data.models.domain.Document
 import com.app.data.models.enums.ClaimStatus
+import com.app.data.models.request.UpdateClaimDTO
 import com.app.data.models.response.MessageResponse
 import okhttp3.MultipartBody
 import javax.inject.Inject
@@ -83,5 +84,15 @@ class ClaimsUseCase @Inject constructor(
             documents = documentParts,
             documentTypesJson = documentTypes
         )
+    }
+
+    suspend fun downloadDocument(id: Long) = claimsApi.downloadDocument(id)
+
+    suspend fun updateClaimStatus(claimId: Long, status: ClaimStatus): Claim {
+        val dto = UpdateClaimDTO(
+            status = status,
+            updateInfo = "Статус заявки изменён на ${status.displayName}"
+        )
+        return claimsApi.updateClaim(claimId, dto)
     }
 }

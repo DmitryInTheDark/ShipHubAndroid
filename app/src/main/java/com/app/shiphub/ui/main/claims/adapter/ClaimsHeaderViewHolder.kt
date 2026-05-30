@@ -19,26 +19,28 @@ class ClaimsHeaderViewHolder(
         cgStatuses.setOnCheckedStateChangeListener(null)
         if (cgStatuses.isEmpty()) {
             ClaimStatus.entries.forEachIndexed { index, status ->
-                val chip = Chip(root.context).apply {
-                    id = index
-                    text = status.displayName
-                    chipStrokeWidth = 1.dpToPx(context)
-                    chipStrokeColor = ContextCompat.getColorStateList(
-                        context, R.color.chip_stroke_color_selector
-                    )
-                    isCheckable = true
-                    isClickable = true
-                    chipBackgroundColor = ContextCompat.getColorStateList(
-                        context, R.color.chip_background_selector
-                    )
-                    setTextColor(
-                        ContextCompat.getColorStateList(
-                            context, R.color.chip_text_selector
+                if (status != ClaimStatus.ENDED) {
+                    val chip = Chip(root.context).apply {
+                        id = index
+                        text = status.displayName
+                        chipStrokeWidth = 1.dpToPx(context)
+                        chipStrokeColor = ContextCompat.getColorStateList(
+                            context, R.color.chip_stroke_color_selector
                         )
-                    )
-                    tag = status
+                        isCheckable = true
+                        isClickable = true
+                        chipBackgroundColor = ContextCompat.getColorStateList(
+                            context, R.color.chip_background_selector
+                        )
+                        setTextColor(
+                            ContextCompat.getColorStateList(
+                                context, R.color.chip_text_selector
+                            )
+                        )
+                        tag = status
+                    }
+                    cgStatuses.addView(chip)
                 }
-                cgStatuses.addView(chip)
             }
         }
 

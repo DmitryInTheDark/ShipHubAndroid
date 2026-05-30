@@ -18,6 +18,7 @@ class ClaimsAdapter(
         fun onStatusChange(status: ClaimStatus?)
         fun onScroll(scrollX: Int)
         fun onOpenClaimClicked(claimId: Long)
+        fun onChatOpenClicked(claimId: Long)
     }
 
     override fun getItemViewType(position: Int): Int {

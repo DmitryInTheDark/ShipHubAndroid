@@ -20,7 +20,7 @@ class HomeViewModel @Inject constructor(
     fun getUser() = userUseCase.getUser()
 
     override suspend fun getPage(page: Int): BaseListResponse<Claim> {
-        return claimsUseCase.getActiveClaims(page, 20).copy(items = emptyList())
+        return claimsUseCase.getActiveClaims(page, 20)
     }
 
     override suspend fun onLoadError(e: Exception) {

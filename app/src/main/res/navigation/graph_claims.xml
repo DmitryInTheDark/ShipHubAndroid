@@ -1,13 +1,23 @@
-<?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/graph_claims"
     app:startDestination="@id/claimsFragment">
 
+    <argument
+        android:name="status"
+        app:argType="string"
+        app:nullable="true"
+        android:defaultValue="@null" />
+
     <fragment
         android:id="@+id/claimsFragment"
         android:name="com.app.shiphub.ui.main.claims.ClaimsFragment"
         android:label="ClaimsFragment" >
+        <argument
+            android:name="status"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null" />
         <action
             android:id="@+id/action_claimsFragment_to_claimFragment"
             app:destination="@id/claimFragment">
@@ -15,6 +25,16 @@
                 android:name="claimId"
                 app:argType="long"
                 app:nullable="false"/>
+        </action>
+        <action
+            android:id="@+id/action_claimsFragment_to_chatFragment"
+            app:destination="@id/chatFragment">
+
+            <argument
+                app:argType="long"
+                app:nullable="false"
+                android:name="claimId"/>
+
         </action>
     </fragment>
     <fragment
