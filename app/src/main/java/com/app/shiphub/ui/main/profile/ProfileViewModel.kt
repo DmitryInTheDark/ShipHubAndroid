@@ -18,9 +18,10 @@ class ProfileViewModel @Inject constructor(
         loadUser()
     }
 
-    private fun loadUser() = withLoading{
-        val user = userUseCase.getUser()
-        emitState(ProfileState.Content(user))
+    fun loadUser() = withLoading{
+        safeCall { userUseCase.getUserFromServer() }.handleResponse {
+            emitState(ProfileState.Content(it))
+        }
     }
 
     fun exit() = withLoading{
@@ -56,6 +57,7 @@ class ProfileViewModel @Inject constructor(
             safeCall { userUseCase.updateUser(currentUser.id, request) }
                 .handleResponse {
                     emitState(ProfileState.SuccessSave(it))
+                    emitState(ProfileState.Init())
                 }
         }
     }

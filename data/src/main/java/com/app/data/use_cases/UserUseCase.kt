@@ -15,6 +15,12 @@ class UserUseCase @Inject constructor(
 
     fun getUser(): User = userRepository.getUser()
 
+    suspend fun getUserFromServer(): User {
+        val user = userApi.getUser()
+        userRepository.saveUser(user)
+        return getUser()
+    }
+
     suspend fun updateUser(id: Long, request: UpdateUserRequest): User {
         val updatedUser = userApi.updateUser(id, request)
         userRepository.saveUser(updatedUser)

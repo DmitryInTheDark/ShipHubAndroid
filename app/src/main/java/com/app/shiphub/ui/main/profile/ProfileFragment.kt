@@ -14,6 +14,7 @@ import com.app.shiphub.databinding.FragmentProfileBinding
 import com.app.shiphub.util.BaseValidator
 import com.redmadrobot.inputmask.MaskedTextChangedListener
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 
 @AndroidEntryPoint
 class ProfileFragment: BaseFragment<FragmentProfileBinding, ProfileState, ProfileViewModel>() {
@@ -42,6 +43,9 @@ class ProfileFragment: BaseFragment<FragmentProfileBinding, ProfileState, Profil
             ){
                 viewModel.exit()
             }
+        }
+        srlMain.setOnRefreshListener {
+            viewModel.loadUser()
         }
     }
 
@@ -77,6 +81,11 @@ class ProfileFragment: BaseFragment<FragmentProfileBinding, ProfileState, Profil
             }
             else -> {}
         }
+    }
+
+    override fun setLoadingState(isLoading: Boolean) = with(binding){
+        super.setLoadingState(isLoading)
+        srlMain.isRefreshing = isLoading
     }
 
     private fun validateFields(): Boolean {
@@ -221,7 +230,8 @@ class ProfileFragment: BaseFragment<FragmentProfileBinding, ProfileState, Profil
         llLegal.isVisible = false
 
         etName.setText(user.username)
-        etEmail.setText(user.email)
+        Timber.i(user.email)
+        etManagerEmail.setText(user.email)
     }
 
     override fun setupUI() = with(binding){
