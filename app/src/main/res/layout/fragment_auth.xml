@@ -23,7 +23,7 @@
         android:layout_marginBottom="18dp">
 
         <com.google.android.material.textview.MaterialTextView
-            android:layout_width="75dp"
+            android:layout_width="90dp"
             android:layout_height="wrap_content"
             android:text="@string/login"
             android:textSize="20sp"
@@ -32,10 +32,11 @@
             style="@style/DefaultStyle"/>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:padding="0dp"
+            android:layout_weight="1"
             style="@style/TextInputStyle">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -58,7 +59,7 @@
             android:layout_marginBottom="6dp">
 
             <com.google.android.material.textview.MaterialTextView
-                android:layout_width="75dp"
+                android:layout_width="90dp"
                 android:layout_height="wrap_content"
                 android:text="@string/password"
                 android:textSize="20sp"
@@ -68,12 +69,14 @@
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/tilPassword"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:padding="0dp"
                     style="@style/TextInputStyle"
                     app:endIconMode="custom"
+                    android:layout_weight="1"
+                    app:endIconTint="@color/black"
                     app:endIconDrawable="@drawable/password_is_visible">
 
                     <com.google.android.material.textfield.TextInputEditText
