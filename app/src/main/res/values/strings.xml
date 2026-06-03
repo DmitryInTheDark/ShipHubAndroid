@@ -38,6 +38,15 @@
     <string name="create_claim">Создать заявку</string>
     <string name="send_code_again">Отправить код повторно</string>
 
+    <!-- Restore Password -->
+    <string name="restore_password_title">Введите почту</string>
+    <string name="restore_password_btn">Восстановить пароль</string>
+    <string name="new_password_title">Новый пароль</string>
+    <string name="new_password">Новый пароль</string>
+    <string name="repeat_password">Повторите пароль</string>
+    <string name="apply_new_password">Применить новый пароль</string>
+    <string name="passwords_dont_match">Пароли не совпадают</string>
+
     <!-- HomeFragment -->
     <string name="welcome">Добро пожаловать, %1$s</string>
     <string name="actual_now">Актуально сейчас</string>

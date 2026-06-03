@@ -257,15 +257,11 @@ class ProfileFragment: BaseFragment<FragmentProfileBinding, ProfileState, Profil
                 validateUserByType(state.user)
                 showToast(getString(R.string.success_save))
             }
-            is ProfileState.Init -> {}
-            is ProfileState.Exit -> {
-                exit()
+            ProfileState.Init -> {}
+            ProfileState.Exit -> {
+                (requireActivity() as MainActivity).exit()
             }
         }
-    }
-
-    private fun exit(){
-        (requireActivity() as MainActivity).exit()
     }
 
     private fun validateUserByType(user: User) {

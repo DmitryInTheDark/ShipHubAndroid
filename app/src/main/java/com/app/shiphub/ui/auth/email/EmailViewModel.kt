@@ -17,4 +17,11 @@ class EmailViewModel @Inject constructor(
         }
     }
 
+    fun verifyRestorePasswordCode(email: String, code: String) = withLoading {
+        safeCall { authUseCase.verifyRestorePasswordCode(email, code) }.handleResponse {
+            _state.value = EmailUIState.RestoreCodeVerified(email, it.token)
+        }
+    }
+
 }
+

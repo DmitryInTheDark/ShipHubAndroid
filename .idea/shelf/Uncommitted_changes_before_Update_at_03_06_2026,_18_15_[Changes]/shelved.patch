@@ -1,0 +1,82 @@
+Index: app/build.gradle
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>plugins {\n    alias(libs.plugins.android.application)\n    id 'org.jetbrains.kotlin.plugin.serialization' version '2.3.21'\n    id 'com.google.devtools.ksp'\n    id 'com.google.dagger.hilt.android'\n    id 'androidx.navigation.safeargs.kotlin'\n}\n\nandroid {\n    namespace 'com.app.shiphub'\n    compileSdk {\n        version = release(37)\n    }\n\n    defaultConfig {\n        applicationId \"com.app.shiphub\"\n        minSdk 28\n        targetSdk 37\n        versionCode 1\n        versionName \"1.0\"\n\n        testInstrumentationRunner \"androidx.test.runner.AndroidJUnitRunner\"\n    }\n\n    flavorDimensions \"default\"\n    productFlavors{\n        emulator{\n            buildConfigField \"String\", \"BASE_URL\", base_local_url\n        }\n        dev{\n            buildConfigField \"String\", \"BASE_URL\", base_url\n        }\n    }\n\n    buildTypes {\n        release {\n            minifyEnabled false\n            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'\n        }\n        debug {}\n    }\n    compileOptions {\n        sourceCompatibility JavaVersion.VERSION_11\n        targetCompatibility JavaVersion.VERSION_11\n    }\n    buildFeatures{\n        viewBinding true\n        buildConfig true\n    }\n}\n\ndependencies {\n    implementation(project(\":base\"))\n    implementation(project(\":data\"))\n    //Hilt\n    implementation libs.hilt.android\n    implementation libs.androidx.core\n    ksp libs.hilt.compiler\n    //Coroutines\n    implementation libs.kotlinx.coroutines.android\n    //Room\n    implementation libs.androidx.room.runtime\n    ksp libs.androidx.room.compiler\n    //View Model\n    implementation libs.androidx.lifecycle.viewmodel.ktx\n    implementation libs.androidx.lifecycle.livedata.ktx\n    implementation libs.androidx.lifecycle.viewmodel.savedstate\n    implementation libs.androidx.lifecycle.viewmodel.navigation3\n    ksp libs.androidx.lifecycle.compiler\n    //Navigation\n    implementation libs.androidx.navigation.fragment\n    implementation libs.androidx.navigation.ui\n    implementation libs.androidx.navigation.dynamic.features.fragment\n    implementation libs.kotlinx.serialization.json\n    //Masked Edit Text\n    implementation libs.input.mask.android\n    //Retrofit\n    implementation libs.retrofit\n    implementation libs.converter.gson\n    implementation libs.logging.interceptor\n    //Timber\n    implementation libs.timber\n    //Base\n    implementation libs.androidx.swiperefreshlayout\n    implementation libs.androidx.core.ktx\n    implementation libs.androidx.appcompat\n    implementation libs.material\n    implementation libs.coil\n    implementation libs.androidx.activity\n    implementation libs.androidx.constraintlayout\n    testImplementation libs.junit\n    androidTestImplementation libs.androidx.junit\n    androidTestImplementation libs.androidx.espresso.core\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/build.gradle b/app/build.gradle
+--- a/app/build.gradle	(revision 294b67e5f892c3bd5346285a6c3306f813c59a3e)
++++ b/app/build.gradle	(date 1780499679001)
+@@ -1,6 +1,6 @@
+ plugins {
+     alias(libs.plugins.android.application)
+-    id 'org.jetbrains.kotlin.plugin.serialization' version '2.3.21'
++    id 'org.jetbrains.kotlin.plugin.serialization' version '2.4.0'
+     id 'com.google.devtools.ksp'
+     id 'com.google.dagger.hilt.android'
+     id 'androidx.navigation.safeargs.kotlin'
+Index: gradle/libs.versions.toml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>[versions]\nagp = \"9.2.1\"\ncoreKtx = \"1.18.0\"\nhilt = \"2.59.2\"\ninputMaskAndroid = \"7.2.4\"\njunit = \"4.13.2\"\njunitVersion = \"1.3.0\"\nespressoCore = \"3.7.0\"\nappcompat = \"1.7.1\"\ncoroutines = \"1.11.0\"\nloggingInterceptor = \"5.3.2\"\nserializationJson = \"1.11.0\"\nlifecycleViewmodelNavigation3 = \"2.11.0-beta02\"\nmaterial = \"1.14.0\"\nactivity = \"1.13.0\"\nconstraintlayout = \"2.2.1\"\nretrofit = \"3.0.0\"\nnavigation = \"2.9.8\"\njetbrainsKotlinJvm = \"2.3.21\"\nroom = \"2.8.4\"\ntimber = \"5.0.1\"\nviewModel=\"2.10.0\"\nswiperefreshlayout = \"1.2.0\"\ncore = \"1.18.0\"\ncoil = \"2.7.0\"\ngrpc = \"1.81.0\"\nprotobuf = \"4.35.0\"\nprotobufPlugin = \"0.10.0\"\n\n[libraries]\nandroidx-core-ktx = { group = \"androidx.core\", name = \"core-ktx\", version.ref = \"coreKtx\" }\nandroidx-lifecycle-compiler = { module = \"androidx.lifecycle:lifecycle-compiler\", version.ref = \"viewModel\" }\nandroidx-lifecycle-livedata-ktx = { module = \"androidx.lifecycle:lifecycle-livedata-ktx\", version.ref = \"viewModel\" }\nandroidx-lifecycle-viewmodel-ktx = { module = \"androidx.lifecycle:lifecycle-viewmodel-ktx\", version.ref = \"viewModel\" }\nandroidx-lifecycle-viewmodel-navigation3 = { module = \"androidx.lifecycle:lifecycle-viewmodel-navigation3\", version.ref = \"lifecycleViewmodelNavigation3\" }\nandroidx-lifecycle-viewmodel-savedstate = { module = \"androidx.lifecycle:lifecycle-viewmodel-savedstate\", version.ref = \"viewModel\" }\nandroidx-navigation-dynamic-features-fragment = { module = \"androidx.navigation:navigation-dynamic-features-fragment\", version.ref = \"navigation\" }\nandroidx-navigation-fragment = { module = \"androidx.navigation:navigation-fragment\", version.ref = \"navigation\" }\nandroidx-navigation-ui = { module = \"androidx.navigation:navigation-ui\", version.ref = \"navigation\" }\nandroidx-room-compiler = { module = \"androidx.room:room-compiler\", version.ref = \"room\" }\nandroidx-room-runtime = { module = \"androidx.room:room-runtime\", version.ref = \"room\" }\nconverter-gson = { module = \"com.squareup.retrofit2:converter-gson\", version.ref = \"retrofit\" }\nhilt-android = { module = \"com.google.dagger:hilt-android\", version.ref = \"hilt\" }\nhilt-compiler = { module = \"com.google.dagger:hilt-compiler\", version.ref = \"hilt\" }\ninput-mask-android = { module = \"com.redmadrobot:input-mask-android\", version.ref = \"inputMaskAndroid\" }\njunit = { group = \"junit\", name = \"junit\", version.ref = \"junit\" }\nandroidx-junit = { group = \"androidx.test.ext\", name = \"junit\", version.ref = \"junitVersion\" }\nandroidx-espresso-core = { group = \"androidx.test.espresso\", name = \"espresso-core\", version.ref = \"espressoCore\" }\nandroidx-appcompat = { group = \"androidx.appcompat\", name = \"appcompat\", version.ref = \"appcompat\" }\nkotlinx-coroutines-android = { module = \"org.jetbrains.kotlinx:kotlinx-coroutines-android\", version.ref = \"coroutines\" }\nkotlinx-serialization-json = { module = \"org.jetbrains.kotlinx:kotlinx-serialization-json\", version.ref = \"serializationJson\" }\nlogging-interceptor = { module = \"com.squareup.okhttp3:logging-interceptor\", version.ref = \"loggingInterceptor\" }\nmaterial = { group = \"com.google.android.material\", name = \"material\", version.ref = \"material\" }\nandroidx-activity = { group = \"androidx.activity\", name = \"activity\", version.ref = \"activity\" }\nandroidx-constraintlayout = { group = \"androidx.constraintlayout\", name = \"constraintlayout\", version.ref = \"constraintlayout\" }\nretrofit = { module = \"com.squareup.retrofit2:retrofit\", version.ref = \"retrofit\" }\ntimber = { module = \"com.jakewharton.timber:timber\", version.ref = \"timber\" }\nandroidx-swiperefreshlayout = { group = \"androidx.swiperefreshlayout\", name = \"swiperefreshlayout\", version.ref = \"swiperefreshlayout\" }\nandroidx-core = { group = \"androidx.core\", name = \"core\", version.ref = \"core\" }\ncoil = { module = \"io.coil-kt:coil\", version.ref = \"coil\" }\ngrpc-android = { module = \"io.grpc:grpc-android\", version.ref = \"grpc\" }\ngrpc-okhttp = { module = \"io.grpc:grpc-okhttp\", version.ref = \"grpc\" }\ngrpc-protobuf-lite = { module = \"io.grpc:grpc-protobuf-lite\", version.ref = \"grpc\" }\ngrpc-stub = { module = \"io.grpc:grpc-stub\", version.ref = \"grpc\" }\ngrpc-kotlin-stub = { module = \"io.grpc:grpc-kotlin-stub\", version = \"1.5.0\" }\nprotobuf-kotlin-lite = { module = \"com.google.protobuf:protobuf-kotlin-lite\", version.ref = \"protobuf\" }\nprotobuf-protoc = { module = \"com.google.protobuf:protoc\", version.ref = \"protobuf\" }\n\n[plugins]\nandroid-application = { id = \"com.android.application\", version.ref = \"agp\" }\nandroid-library = { id = \"com.android.library\", version.ref = \"agp\" }\njetbrains-kotlin-jvm = { id = \"org.jetbrains.kotlin.jvm\", version.ref = \"jetbrainsKotlinJvm\" }\nandroidx-navigation-safeargs = { id = \"androidx.navigation.safeargs.kotlin\", version.ref = \"navigation\" }\nprotobuf = { id = \"com.google.protobuf\", version.ref = \"protobufPlugin\" }\n\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/gradle/libs.versions.toml b/gradle/libs.versions.toml
+--- a/gradle/libs.versions.toml	(revision 294b67e5f892c3bd5346285a6c3306f813c59a3e)
++++ b/gradle/libs.versions.toml	(date 1780499747498)
+@@ -16,7 +16,7 @@
+ constraintlayout = "2.2.1"
+ retrofit = "3.0.0"
+ navigation = "2.9.8"
+-jetbrainsKotlinJvm = "2.3.21"
++jetbrainsKotlinJvm = "2.4.0"
+ room = "2.8.4"
+ timber = "5.0.1"
+ viewModel="2.10.0"
+@@ -69,7 +69,5 @@
+ [plugins]
+ android-application = { id = "com.android.application", version.ref = "agp" }
+ android-library = { id = "com.android.library", version.ref = "agp" }
+-jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "jetbrainsKotlinJvm" }
+-androidx-navigation-safeargs = { id = "androidx.navigation.safeargs.kotlin", version.ref = "navigation" }
+ protobuf = { id = "com.google.protobuf", version.ref = "protobufPlugin" }
+ 
+Index: build.gradle
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>plugins {\n    alias(libs.plugins.android.application) apply false\n    alias(libs.plugins.androidx.navigation.safeargs) apply false\n    id 'com.google.devtools.ksp' version '2.3.6' apply false\n    id 'com.google.dagger.hilt.android' version '2.59.2' apply false\n    alias(libs.plugins.android.library) apply false\n    alias(libs.plugins.jetbrains.kotlin.jvm) apply false\n}\n\next {\n    base_url = \"\\\"http://192.168.1.103:8080/\\\"\"\n    base_domain = \"\\\"192.168.1.103:8080\\\"\"\n    base_local_url = \"\\\"http://10.0.2.2:8080/\\\"\"\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/build.gradle b/build.gradle
+--- a/build.gradle	(revision 294b67e5f892c3bd5346285a6c3306f813c59a3e)
++++ b/build.gradle	(date 1780485274963)
+@@ -8,7 +8,7 @@
+ }
+ 
+ ext {
+-    base_url = "\"http://192.168.1.103:8080/\""
++    base_url = "\"http://192.168.11.244:8080/\""
+     base_domain = "\"192.168.1.103:8080\""
+     base_local_url = "\"http://10.0.2.2:8080/\""
+ }
+\ No newline at end of file
+Index: gradle/wrapper/gradle-wrapper.properties
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>#Mon May 25 12:10:47 MSK 2026\ndistributionBase=GRADLE_USER_HOME\ndistributionPath=wrapper/dists\ndistributionSha256Sum=2ab2958f2a1e51120c326cad6f385153bb11ee93b3c216c5fccebfdfbb7ec6cb\ndistributionUrl=https\\://services.gradle.org/distributions/gradle-9.5.1-bin.zip\nnetworkTimeout=10000\nvalidateDistributionUrl=true\nzipStoreBase=GRADLE_USER_HOME\nzipStorePath=wrapper/dists\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>ISO-8859-1
+===================================================================
+diff --git a/gradle/wrapper/gradle-wrapper.properties b/gradle/wrapper/gradle-wrapper.properties
+--- a/gradle/wrapper/gradle-wrapper.properties	(revision 294b67e5f892c3bd5346285a6c3306f813c59a3e)
++++ b/gradle/wrapper/gradle-wrapper.properties	(date 1780135599221)
+@@ -6,4 +6,4 @@
+ networkTimeout=10000
+ validateDistributionUrl=true
+ zipStoreBase=GRADLE_USER_HOME
+-zipStorePath=wrapper/dists
++zipStorePath=wrapper/dists
+\ No newline at end of file

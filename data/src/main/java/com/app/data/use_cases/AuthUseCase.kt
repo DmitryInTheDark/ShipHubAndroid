@@ -7,9 +7,13 @@ import com.app.data.models.domain.BaseUserInfo
 import com.app.data.models.domain.LegalInfo
 import com.app.data.models.domain.PhysicalInfo
 import com.app.data.models.request.RegistrationRequest
+import com.app.data.models.request.RestorePasswordDTO
+import com.app.data.models.request.RestorePasswordEmailRequestDTO
 import com.app.data.models.request.VerifyCodeRequest
+import com.app.data.models.request.VerifyRestorePasswordCodeDTO
 import com.app.data.models.response.AuthResponse
 import com.app.data.models.response.RegistrationResponse
+import com.app.data.models.response.TokenResponse
 import javax.inject.Inject
 
 class AuthUseCase @Inject constructor(
@@ -59,6 +63,21 @@ class AuthUseCase @Inject constructor(
         val response = authApi.verifyCode(
             VerifyCodeRequest(code, email)
         )
+        userRepository.saveUser(response.user)
+        userRepository.updateJWT(response.token)
+        return response
+    }
+
+    suspend fun restorePasswordRequest(email: String) {
+        authApi.restorePasswordRequest(RestorePasswordEmailRequestDTO(email))
+    }
+
+    suspend fun verifyRestorePasswordCode(email: String, code: String): TokenResponse {
+        return authApi.verifyRestorePasswordCode(VerifyRestorePasswordCodeDTO(email, code))
+    }
+
+    suspend fun restorePassword(dto: RestorePasswordDTO): AuthResponse {
+        val response = authApi.restorePassword(dto)
         userRepository.saveUser(response.user)
         userRepository.updateJWT(response.token)
         return response

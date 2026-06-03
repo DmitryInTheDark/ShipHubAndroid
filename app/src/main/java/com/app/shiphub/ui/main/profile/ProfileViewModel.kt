@@ -12,7 +12,7 @@ import javax.inject.Inject
 @HiltViewModel
 class ProfileViewModel @Inject constructor(
     private val userUseCase: UserUseCase
-): BaseViewModel<ProfileState>(ProfileState.Init()) {
+): BaseViewModel<ProfileState>(ProfileState.Init) {
 
     init {
         loadUser()
@@ -26,7 +26,7 @@ class ProfileViewModel @Inject constructor(
 
     fun exit() = withLoading{
         userUseCase.exit()
-        emitState(ProfileState.Exit())
+        emitState(ProfileState.Exit)
     }
 
     fun saveChanges(

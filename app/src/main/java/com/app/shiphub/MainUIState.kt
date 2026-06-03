@@ -5,8 +5,8 @@ import com.app.data.models.enums.UserType
 
 sealed class MainUIState: BaseState() {
 
-    class InitScreen(): MainUIState()
+    object InitScreen : MainUIState()
     class SkipLogin(val userType: UserType): MainUIState()
-    class ShowLoginScreen(): MainUIState()
+    object ShowLoginScreen : MainUIState()
 
 }

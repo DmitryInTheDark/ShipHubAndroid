@@ -7,5 +7,6 @@ sealed class EmailUIState: BaseState() {
 
     class InitScreen(): EmailUIState()
     class EmailVerified(): EmailUIState()
+    data class RestoreCodeVerified(val email: String, val token: String) : EmailUIState()
 
 }

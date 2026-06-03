@@ -70,7 +70,13 @@ class EmailFragment : BaseFragment<FragmentEmailBinding, EmailUIState, EmailView
 
         btnConfirm.setOnClickListener {
             BaseValidator.validateEmailCode(code).apply {
-                if (isEmpty()) viewModel.verifyCode(code, args.email) else showToast(first())
+                if (isEmpty()) {
+                    if (args.isRestore) {
+                        viewModel.verifyRestorePasswordCode(args.email, code)
+                    } else {
+                        viewModel.verifyCode(code, args.email)
+                    }
+                } else showToast(first())
             }
         }
     }
@@ -87,6 +93,12 @@ class EmailFragment : BaseFragment<FragmentEmailBinding, EmailUIState, EmailView
         when(state){
             is EmailUIState.EmailVerified -> navigate(
                 EmailFragmentDirections.actionEmailFragmentToGraphMainContainer()
+            )
+            is EmailUIState.RestoreCodeVerified -> navigate(
+                EmailFragmentDirections.actionEmailFragmentToRestorePasswordFinishFragment(
+                    email = state.email,
+                    token = state.token
+                )
             )
             is EmailUIState.InitScreen -> {}
         }

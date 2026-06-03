@@ -33,6 +33,9 @@ class AuthFragment : BaseFragment<FragmentAuthBinding, AuthUIState, AuthViewMode
         tvRegistration.setOnClickListener {
             navigate(AuthFragmentDirections.actionAuthFragmentToRegistrationFragment())
         }
+        tvRestorePassword.setOnClickListener {
+            navigate(AuthFragmentDirections.actionAuthFragmentToRestorePasswordEmailFragment())
+        }
         tilPassword.setEndIconOnClickListener {
 
             val passwordIsVisible =

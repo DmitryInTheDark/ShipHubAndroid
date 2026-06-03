@@ -10,6 +10,9 @@
         <action
             android:id="@+id/action_authFragment_to_registrationFragment"
             app:destination="@id/registrationFragment" />
+        <action
+            android:id="@+id/action_authFragment_to_restorePasswordEmailFragment"
+            app:destination="@id/restorePasswordEmailFragment" />
     </fragment>
     <fragment
         android:id="@+id/registrationFragment"
@@ -17,13 +20,7 @@
         android:label="RegistrationFragment" >
         <action
             android:id="@+id/action_registrationFragment_to_emailFragment"
-            app:destination="@id/emailFragment" >
-            <argument
-                app:nullable="false"
-                app:argType="string"
-                android:name="email"
-                android:defaultValue=""/>
-        </action>
+            app:destination="@id/emailFragment" />
     </fragment>
     <fragment
         android:id="@+id/emailFragment"
@@ -34,8 +31,39 @@
             app:argType="string"
             android:name="email"
             android:defaultValue=""/>
+        <argument
+            android:name="isRestore"
+            app:argType="boolean"
+            android:defaultValue="false" />
         <action
             android:id="@+id/action_emailFragment_to_graph_main_container"
+            app:destination="@id/graph_main_container" />
+        <action
+            android:id="@+id/action_emailFragment_to_restorePasswordFinishFragment"
+            app:destination="@id/restorePasswordFinishFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/restorePasswordEmailFragment"
+        android:name="com.app.shiphub.ui.auth.restore.RestorePasswordEmailFragment"
+        android:label="RestorePasswordEmailFragment" >
+        <action
+            android:id="@+id/action_restorePasswordEmailFragment_to_emailFragment"
+            app:destination="@id/emailFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/restorePasswordFinishFragment"
+        android:name="com.app.shiphub.ui.auth.restore.RestorePasswordFinishFragment"
+        android:label="RestorePasswordFinishFragment" >
+        <argument
+            android:name="email"
+            app:argType="string" />
+        <argument
+            android:name="token"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_restorePasswordFinishFragment_to_graph_main_container"
             app:destination="@id/graph_main_container" />
     </fragment>
 

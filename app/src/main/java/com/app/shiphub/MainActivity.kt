@@ -12,10 +12,8 @@ import dagger.hilt.android.AndroidEntryPoint
 class MainActivity : BaseActivity<MainUIState, MainViewModel, ActivityMainBinding>() {
 
     override val viewModel: MainViewModel by viewModels()
-    private val navController by lazy {
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.main) as NavHostFragment
-        navHostFragment.navController
-    }
+    private val navController
+        get() = (supportFragmentManager.findFragmentById(R.id.main) as NavHostFragment).navController
 
     override fun initializeBinding() = ActivityMainBinding.inflate(layoutInflater)
 
